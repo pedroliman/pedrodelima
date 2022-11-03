@@ -69,7 +69,8 @@ params:
   #   textAlign: right # default: left
 
   # color preference
-  # color:
+  color:
+    primaryColor: "#639"
   #   textColor:
   #   secondaryTextColor:
   #   backgroundColor:
@@ -105,19 +106,25 @@ params:
     intro: "Hi, my name is"
     title: "Pedro."
     subtitle: "I use models to inform policy"
-    content: "A PhD in Policy Analysis and Engineer at RAND, I spend my days using data, models and computing to inform policy decisions."
+    content: "A PhD in Policy Analysis and Engineer at RAND Corporation, I use data, models and computing to inform policy decisions."
     image: /images/pedro.jpg
     button:
       enable: true
       name: "CV"
-      url: "#"
+      url: "PedroNdeLimaCV.pdf"
       download: true
     socialLinks:
       fontAwesomeIcons:
-        - icon: fab fa-github
-          url: https://github.com/pedroliman
+        - icon: fas fa-envelope
+          url: mailto:plima@rand.org
         - icon: fab fa-twitter
           url: https://twitter.com/PedroNdeLima
+        - icon: fab fa-linkedin
+          url: https://www.linkedin.com/in/pedro-nascimento-de-lima/
+        - icon: fas fa-graduation-cap
+          url: https://scholar.google.com/citations?user=VOlVFVYAAAAJ&hl=en
+        - icon: fab fa-github
+          url: https://github.com/pedroliman
       #customIcons:
       #  - icon: /fav.png
       #    url: "https://example.com"
@@ -259,19 +266,25 @@ params:
     enable: true
     title: "Select Publications"
     items:
-      - title: "Reopening California: Seeking Robust, Non-Dominated COVID-19 strategies"
-        content: "A stress-test of California's COVID-19 reopening strategy"
-        url: https://example.com
-      - title: Facebook Hackathon Winner
-        content: Developed a product using Artificial Intelligence.
-      - title: Hugo Profile
-        content: Developed a theme and getting 1K+ downloads per month.
+      - title: "Reopening California"
+        content: "Seeking Robust, Non-Dominated COVID-19 strategies"
+        url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0259166
+      - title: "Too Good to Be True?"
+        content: "Evaluation of Colonoscopy Sensitivity Assumptions Used in Policy Models"
+        url: https://doi.org/10.1158/1055-9965.EPI-21-1001
+      - title: Reopening Under Uncertainty
+        content: Stress-Testing California's COVID-19 Exit Strategy
+        url: https://www.rand.org/pubs/perspectives/PEA1080-1.html
         url: "https://github.com/gurusabarish/hugo-profile"
-      - title: Microsoft Imagine Runner
-        content: We are developed a product which can help others.
-      - title: Google Summer of Code
-        content: Contributed to a open source project.
-        url: https://example.com
+      - title: "The Health and Economic Impacts of NPIs to Address COVID-19"
+        content: "A Decision Support Tool for State and Local Policymakers"
+        url: https://www.rand.org/pubs/tools/TLA173-1.html
+      - title: "Modeling Infectious Behaviors"
+        content: "The Need to Account for Behavioral Adaptation in COVID-19 Models"
+        url: https://policyandcomplexsystems.files.wordpress.com/2021/09/modeling-infectious-behaviors.pdf
+      - title: More Publications
+        content: Find more publications on my RAND profile
+        url: https://www.rand.org/about/people/l/lima_pedro_nascimento_de.html
 
   # projects
   projects:
@@ -327,7 +340,7 @@ params:
   contact:
     enable: true
     #title: "Custom name"
-    content: My inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!
+    content: My inbox is always open. Whether you have a question or just want to say hi, get in touch!
     email: plima@rand.org
     btnName: Mail me
 
