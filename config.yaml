@@ -4,8 +4,8 @@ title: "Pedro Nascimento de Lima"
 theme: "hugo-profile"
 
 Paginate: 3
-disqusShortname: gurusabarish
-googleAnalytics: G-DWJJVE27WD
+#disqusShortname: gurusabarish
+googleAnalytics: UA-88356256-3
 
 markup:
   goldmark:
