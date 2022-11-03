@@ -137,10 +137,6 @@ params:
     content: |-
       
       I am an [Engineer](https://www.rand.org/about/people/l/lima_pedro_nascimento_de.html) at [RAND](https://www.rand.org), a research organization dedicated to improving policy and decisionmaking through research and analysis. My [research](#achievements) uses modeling to inform policy decisions.
-
-      I am an Engineer and a PhD in Policy Analysis. 
-      
-      Prior to joining Pardee RAND, I was a lecturer at UNISINOS, where I taught simulation modeling and other quantitative courses.
       
     skills:
       enable: false
@@ -275,7 +271,6 @@ params:
       - title: Reopening Under Uncertainty
         content: Stress-Testing California's COVID-19 Exit Strategy
         url: https://www.rand.org/pubs/perspectives/PEA1080-1.html
-        url: "https://github.com/gurusabarish/hugo-profile"
       - title: "The Health and Economic Impacts of NPIs to Address COVID-19"
         content: "A Decision Support Tool for State and Local Policymakers"
         url: https://www.rand.org/pubs/tools/TLA173-1.html
