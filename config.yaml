@@ -106,7 +106,7 @@ params:
     title: "Pedro."
     subtitle: "I use models to inform policy"
     content: "A PhD in Policy Analysis and Engineer at RAND, I spend my days using data, models and computing to inform policy decisions."
-    image: /images/hero.svg
+    image: /images/pedro.jpg
     button:
       enable: true
       name: "CV"
@@ -126,11 +126,15 @@ params:
   about:
     enable: true
     title: "About Me"
-    image: "/images/me.png"
+    #image: "/images/pedro.jpg"
     content: |-
-      I am a software developer with a passion for web development. I have a background in computer science and mathematics, and I have a strong interest in the intersection of technology and art. I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. 
+      
+      I am an [Engineer](https://www.rand.org/about/people/l/lima_pedro_nascimento_de.html) at [RAND](https://www.rand.org), a research organization dedicated to improving policy and decisionmaking through research and analysis. My [research](#achievements) uses modeling to inform policy decisions.
 
-      I am currently working on a project that will be used to help people find the best way to get around the city.
+      I am an Engineer and a PhD in Policy Analysis. 
+      
+      Prior to joining Pardee RAND, I was a lecturer at UNISINOS, where I taught simulation modeling and other quantitative courses.
+      
     skills:
       enable: false
       title: "Here are a few technologies I've been working with recently:"
