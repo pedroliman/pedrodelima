@@ -1,12 +1,19 @@
 
 /* Default font for body prev */
 body {
-    font-family: "Arvo", serif !important;
+    font-family: "Roboto Slab", serif !important;
 }
 
+/* Google Options
+Original: Arvo
+/ * Serif: Roboto Slab, Merriweather, Lora, PT Serif, LIbre Bakersville Noto Serif, EB Garamond, Crimson Text, Bree Serif, Spectral, Martel, Amiri, Aleo, Baskerville
+
+Sans Serif: 
+Open Sans, Lato, Montserrat, Ubuntu, Fira Sans, IBM Plex Sans, Cairo
+*/
 /* secondary font */
 .secondary-font, #secondary-font {
-    font-family: "Arvo", serif;
+    font-family: "Roboto", serif;
 }
 
 /* primary font */
@@ -17,4 +24,20 @@ body {
 /* Default font */
 .default-font, #default-font {
     font-family: "Roboto", sans-serif;
+}
+
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    /*font-size: 30px !important;
+    /*opacity: 0.95;
+    */
+}
+
+.card-text {
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-style: italic;
+  
 }

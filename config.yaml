@@ -45,8 +45,8 @@ markup:
     #   weight: 2
 
 params:
-  title: "Pedro Nascimento de Lima"
-  description: TPedro Nascimento de Lima is an Associate Engineer at RAND and a PhD in Policy Analysis.
+  title: "Pedro Nascimento de Lima, Ph.D."
+  description: Pedro Nascimento de Lima is an Associate Engineer at RAND and a PhD in Policy Analysis.
   # staticPath: ""  # The path to serve the static files from
   #favicon: "/fav.png"
 
@@ -63,7 +63,7 @@ params:
     defaultTheme: "dark" # dark or light
 
   font:
-    fontSize: 1.25rem # default: 1rem
+    fontSize: 1.4rem # default: 1rem
     fontWeight: 500 # default: 400
     lineHeight: 1 # default: 1.5
   #   textAlign: right # default: left
@@ -103,10 +103,10 @@ params:
   # Hero
   hero:
     enable: true
-    intro: "Hi, my name is"
-    title: "Pedro."
-    subtitle: "I use models to inform policy"
-    content: "A PhD in Policy Analysis and Engineer at RAND Corporation, I use data, models and computing to inform policy decisions."
+    intro: "Hello, my name is"
+    title: "Pedro"
+    subtitle: "Nascimento de Lima"
+    content: "I use data and computational models to inform public policy"
     image: /images/pedro.jpg
     button:
       enable: true
@@ -136,7 +136,11 @@ params:
     #image: "/images/pedro.jpg"
     content: |-
       
-      I am an [Engineer](https://www.rand.org/about/people/l/lima_pedro_nascimento_de.html) at [RAND](https://www.rand.org), a research organization dedicated to improving policy and decisionmaking through research and analysis. My [research](#achievements) uses modeling to inform policy decisions.
+      I am an Associate [Engineer](https://www.rand.org/about/people/l/lima_pedro_nascimento_de.html) at [RAND](https://www.rand.org), a research organization dedicated to improving policy and decisionmaking through research and analysis.
+      
+      My [research](#achievements) uses computational models to inform public policy when decision-makers face difficult dillemas and there's no clear best-choice due to uncertainty or conflicting objectives.
+      
+      I investigated strategies to  minimize [COVID-19 deaths](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0259166). I also work on other health policy areas, such as [cancer prevention](https://doi.org/10.1158/1055-9965.EPI-21-1001) and I am generally intereted in working at the intersection of modeling, decision-making under uncertainty and policy analysis.
       
     skills:
       enable: false
