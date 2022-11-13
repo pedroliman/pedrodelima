@@ -13,12 +13,12 @@ markup:
       unsafe: true
 
 # Menus:
-#  main:
-  #  - identifier: blog
-  #    name: Blog
-  #    title: Blog posts
-  #   url: /blogs
-  #    weight: 1
+main:
+  - identifier: blog
+    name: Blog
+    title: Blog posts
+    url: /blogs
+    weight: 1
 
   #  - identifier: gallery
   #    name: Gallery
@@ -289,53 +289,52 @@ params:
 
   # projects
   projects:
-    enable: false
-    # title: "Custom Name"
+    enable: true
+    title: "Software & Tools"
     items:
-      - title: Hugo Profile
-        content: A highly customizable and mobile first Hugo template for personal portfolio and blog.
-        image: /images/projects/profile.png
+      - title: crcrdm
+        content: Robust Decision Making tools for Cancer Screening Models
+        image: /images/projects/crcrdm.png
         featured:
-          name: Demo
-          link: https://hugo-profile.netlify.app
-        # badges:
-        #   - "Hugo"
-        #   - "Bootstrap"
-        #   - "Javascript"
-        links:
-          - icon: fa fa-envelope
-            url: mailto:?subject=Hugo%20Profile%20Template&body=Check%20it%20out:%20https%3a%2f%2fhugo-profile.netlify.app%2fblog%2fmarkdown-syntax%2f
-          - icon: fab fa-github
-            url: https://github.com/gurusabarish/hugo-profile
-          - icon: fab fa-twitter
-            url: https://twitter.com/intent/tweet?text=Check+it+out:&url=https%3A%2F%2Fgithub.com%2Fgurusabarish%2Fhugo-profile
-
-      - title: Image Converter
-        content: A web app to convert image to pdf, png to jpg, png to jpg and png to webp without database using django.
-        image: /images/projects/converter.jpg
-        featured:
-          name: Demo
-          link: https://django-converter.herokuapp.com
-        # badges:
-        #   - "Django"
-        #   - "Bootstrap"
-        links:
-          - icon: fab fa-github
-            url: https://github.com/gurusabarish/converter
-
-      - title: Hugo Profile V2
-        content: A clean and simple Hugo template for personal portfolio and blog.
-        image: /images/projects/profile2.jpg
-        featured:
-          name: Demo V2
-          link: https://hugo-profile-2.netlify.app
-        # badges:
-        #   - "Hugo"
-        #   - "Bootstrap"
+          name: Package Website
+          link: https://c-rutter.github.io/crcrdm/
+        badges:
+           - "R Package"
         #   - "Javascript"
         links:
           - icon: fab fa-github
-            url: https://github.com/gurusabarish/HugoProfileV2
+            url: https://github.com/c-rutter/crcrdm
+        #  - icon: fa fa-envelope
+        #    url: mailto:?subject=Hugo%20Profile%20Template&body=Check%20it%20out:%20https%3a%2f%2fhugo-profile.netlify.app%2fblog%2fmarkdown-syntax%2f
+        #  - icon: fab fa-twitter
+        #    url: https://twitter.com/intent/tweet?text=Check+it+out:&url=https%3A%2F%2Fgithub.com%2Fgurusabarish%2Fhugo-profile
+
+      - title: COVID-19 Decision Support Tool
+        content: A Decision Support Tool to help US states respond to the COVID-19 Pandemic.
+        image: /images/projects/covid-19-tool.jpg
+        featured:
+          name: Tool
+          link: https://www.rand.org/pubs/tools/TLA173-1.html
+        badges:
+           - "Web Tool"
+        #   - "Bootstrap"
+        #links:
+        #  - icon: fab fa-github
+        #    url: https://github.com/gurusabarish/converter
+
+      - title: Reopening California Code Repository
+        content: Code Repository for our paper stress-testing California's Reopening strategy.
+        image: /images/projects/code.jpg
+        featured:
+          name: Code
+          link: https://github.com/RANDCorporation/covid-19-reopening-california
+        badges:
+           - "Code Repository"
+        #   - "Bootstrap"
+        #   - "Javascript"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/RANDCorporation/covid-19-reopening-california
 
   #Contact
   contact:
@@ -345,8 +344,8 @@ params:
     email: plima@rand.org
     btnName: Mail me
 
-  footer:
-     recentPosts: false
+footer:
+  recentPosts: false
     #socialNetworks:
     #  github: https://github.com
     #  linkedin: https://linkedin.com

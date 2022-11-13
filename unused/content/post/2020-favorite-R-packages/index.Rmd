@@ -1,0 +1,36 @@
+---
+title: "My favorite R packages in 2022"
+author: "Pedro Nascimento de Lima"
+date: 2022-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Packages", "R", "programming"]
+description: "Some R packages are so useful that knowing them and not sharing is a sin."
+toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+# It's 2022, and R still rocks
+
+It is no secret to close friends that I am a big fan of the `R` ecosystem. R is great, not necessarily as a language, but as a community.
+
+I've used R for almost 10 years now, and the R community continues to crank out a serious amount of utility-maximizing tools for its users. Here are some of the packages that I've started to use recently.
+
+## `showtext`
+
+if you are using `ggplot` and you don't use `showtext`, *you are missing out*. Ever wanted to use some non-standard fonts, but struggled? Look no further for pixel-perfect figures.
+
+For example, I use showtext with the `randplot` R package to create some cute figures.
+
+```{r}
+library(showtext)
+```
+
+
+## `ggdensity`
+
+Have you ever had to present results of multivariate distributions (i.e., prediction intervals) and used ggplot's `geom_density`? Well, 2-dimensional density functions are not very interpretable, particularly by human beings. 
+
+Instead, use highest-density regions (HDR) plots, and tell your audience "95% of those points are in that region, and any point in that region is more likely than any point outside of it".

@@ -1,0 +1,26 @@
+---
+title: Getting Started with HPC and R
+author: Pedro Nascimento de Lima
+date: '2022-12-30'
+slug: []
+categories:
+  - R
+  - HPC
+tags:
+  - R
+  - HPC
+  - Swift-T
+  - Slurm
+draft: yes
+image: ~
+description: ~
+toc: ~
+---
+
+# Getting Started
+
+# Things to Learn
+
+# Minimal Examples
+
+# Other Resources
