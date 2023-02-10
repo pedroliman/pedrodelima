@@ -272,24 +272,27 @@ params:
     enable: true
     title: "Select Publications"
     items:
+      - title: "Optimal non-pharmaceutical pandemic response strategies"
+        content: "Optimal non-pharmaceutical pandemic response strategies depend critically on time horizons and costs (Nature Scientific Reports)."
+        url: https://www.nature.com/articles/s41598-023-28936-y
       - title: "Overcoming Compound Racial Inequity"
-        content: "Policies and Costs for Closing the Black-White Wealth Gap"
+        content: "Policies and Costs for Closing the Black-White Wealth Gap (RAND Report)"
         url: https://www.rand.org/pubs/research_reports/RRA1259-2.html
       - title: "Reopening California"
-        content: "Seeking Robust, Non-Dominated COVID-19 strategies"
+        content: "Seeking Robust, Non-Dominated COVID-19 strategies (PLoS One)"
         url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0259166
       - title: "Too Good to Be True?"
-        content: "Evaluation of Colonoscopy Sensitivity Assumptions Used in Policy Models"
+        content: "Evaluation of Colonoscopy Sensitivity Assumptions Used in Policy Models "
         url: https://doi.org/10.1158/1055-9965.EPI-21-1001
       - title: Reopening Under Uncertainty
-        content: Stress-Testing California's COVID-19 Exit Strategy
+        content: "Stress-Testing California's COVID-19 Exit Strategy"
         url: https://www.rand.org/pubs/perspectives/PEA1080-1.html
   #    - title: "The Health and Economic Impacts of NPIs to Address COVID-19"
   #      content: "A Decision Support Tool for State and Local Policymakers"
   #      url: https://www.rand.org/pubs/tools/TLA173-1.html
-      - title: "Modeling Infectious Behaviors"
-        content: "The Need to Account for Behavioral Adaptation in COVID-19 Models"
-        url: https://policyandcomplexsystems.files.wordpress.com/2021/09/modeling-infectious-behaviors.pdf
+  #    - title: "Modeling Infectious Behaviors"
+  #      content: "The Need to Account for Behavioral Adaptation in COVID-19 Models"
+  #      url: https://policyandcomplexsystems.files.wordpress.com/2021/09/modeling-infectious-behaviors.pdf
       - title: More Publications
         content: Find more publications on my RAND profile
         url: https://www.rand.org/about/people/l/lima_pedro_nascimento_de.html
