@@ -1,46 +1,46 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
-import PostPreview from '../components/PostPreview.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
 import siteConfig from '../data/site-config';
-import { sortItemsByDateDesc } from '../utils/data-utils';
+import { publications } from '../data/publications';
 
-const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
-const featuredPosts = posts.filter(({ data }) => data.isFeatured);
-
-const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
-const featuredProjects = projects.filter(({ data }) => data.isFeatured);
+// Filter publications to only show featured ones on the homepage
+const featuredPublications = publications.filter((pub) => pub.featured);
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
     <Hero />
-    {
-        featuredProjects?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Projects</h2>
-                {featuredProjects.map((project) => (
-                    <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/projects">View All Projects</Button>
+    <div class="mb-8 sm:mb-12">
+        <h2 class="mb-6 text-xl font-serif italic sm:mb-8 sm:text-2xl">Publications</h2>
+
+        {
+            featuredPublications.map((publication) => (
+                <div class="publication-item mb-4 border-b border-main/20 pb-4">
+                    <div class="publication-title font-medium mb-2">{publication.title}</div>
+                    <div class="text-base mb-2 leading-relaxed">
+                        <span class="italic">{publication.journal}</span>
+                        {publication.doi && (
+                            <span>
+                                {' '}
+                                |{' '}
+                                <a
+                                    href={`https://doi.org/${publication.doi}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                >
+                                    DOI
+                                </a>
+                            </span>
+                        )}
+                    </div>
                 </div>
-            </div>
-        )
-    }
-    {
-        featuredPosts?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Writing</h2>
-                {featuredPosts.map((post) => (
-                    <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/blog">View All Posts</Button>
-                </div>
-            </div>
-        )
-    }
+            ))
+        }
+
+        <div class="mt-6 sm:mt-8">
+            <Button href="/research">View All Publications</Button>
+        </div>
+    </div>
 </BaseLayout>

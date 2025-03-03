@@ -34,7 +34,7 @@ export type SiteConfig = {
 
 const siteConfig: SiteConfig = {
     title: 'Pedro Nascimento de Lima, PhD',
-    subtitle: 'Engineer at RAND Corporation',
+    subtitle: 'Engineer at RAND Corporation and Professor at Pardee RAND Gradutate School',
     description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
     image: {
         src: '/dante-preview.jpg',
@@ -46,16 +46,18 @@ const siteConfig: SiteConfig = {
             href: '/'
         },
         {
-            text: 'Projects',
-            href: '/projects'
+            text: 'Research',
+            href: '/research'
         },
+        /* Temporarily hiding Talks section
         {
-            text: 'Blog',
-            href: '/blog'
+            text: 'Talks',
+            href: '/talks'
         },
+        */
         {
-            text: 'Tags',
-            href: '/tags'
+            text: 'Contact',
+            href: '/contact'
         }
     ],
     footerNavLinks: [
@@ -66,14 +68,6 @@ const siteConfig: SiteConfig = {
         {
             text: 'Contact',
             href: '/contact'
-        },
-        {
-            text: 'Terms',
-            href: '/terms'
-        },
-        {
-            text: 'Download theme',
-            href: 'https://github.com/JustGoodUI/dante-astro-theme'
         }
     ],
     socialLinks: [
@@ -91,7 +85,7 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        title: 'Hi There!',
+        /*title: 'Hi There!',*/
         text: "I’m an associate engineer at RAND Corporation, a non-partisan research institution dedicated to improving policy through research and analysis. Trained as an engineer and as policy researcher, I work across disciplines to inform our most challenging policy decisions with quantitative models and data - even when uncertainty is deep and consensus seems out of reach.",
         image: {
             src: '/hero.jpeg',

@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { formatAuthors } from '../utils/publication-utils';
+import { publications } from '../data/publications';
+
+// Use all publications for the research page
+// Sort by year (newest first)
+const sortedPublications = [...publications].sort((a, b) => parseInt(b.year) - parseInt(a.year));
+
+// Group publications by year
+const publicationsByYear = sortedPublications.reduce((acc, pub) => {
+  const year = pub.year;
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<string, typeof publications>);
+
+// Get unique years in descending order
+const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+---
+
+<BaseLayout
+    title="Research"
+    description="Explore my research publications, focusing on policy analysis, decision making under uncertainty, and interdisciplinary approaches to solving complex policy problems."
+>
+    <section class="mb-16 sm:mb-24">
+        <h1 class="mb-6 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Research</h1>
+        <p class="mb-10 text-lg leading-relaxed">
+            My research focuses on developing and applying quantitative methods to inform policy decisions in complex environments, with an emphasis on decision
+            making under deep uncertainty, interdisciplinary approaches, and stakeholder engagement.
+        </p>
+
+        <h2 class="mb-8 text-2xl leading-tight font-serif font-medium">Publications</h2>
+
+        <!-- Publications from data file, grouped by year -->
+        <div class="publications">
+            {years.map((year) => (
+                <div class="year-section mb-10">
+                    <h3 class="text-xl font-serif font-medium mb-4">{year}</h3>
+                    
+                    {publicationsByYear[year].map((publication) => (
+                        <div class="publication-item mb-6 border-b border-main/20 pb-6">
+                            <div class="text-base mb-1 leading-relaxed font-medium">
+                                {publication.title}
+                            </div>
+                            <div class="text-base mb-2">
+                                {publication.author && formatAuthors(publication.author)}
+                            </div>
+                            <div class="text-base italic">
+                                <span>{publication.journal}</span> ({publication.year})
+                                {publication.doi && (
+                                    <span> · <a 
+                                        href={`https://doi.org/${publication.doi}`} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="text-main not-italic underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                    >
+                                        DOI
+                                    </a></span>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+
+        <div class="mt-12">
+            <p class="mb-4">
+                For a complete list of publications, including working papers and technical reports, please visit my <a
+                    href="https://www.rand.org/about/people/n/nascimento_de_lima_pedro.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">RAND profile</a
+                >
+                or <a
+                    href="https://scholar.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">Google Scholar</a
+                >.
+            </p>
+
+            <Button href="/publications.bib" download> Download BibTeX </Button>
+        </div>
+    </section>
+</BaseLayout>
