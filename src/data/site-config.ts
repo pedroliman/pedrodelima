@@ -35,10 +35,10 @@ export type SiteConfig = {
 const siteConfig: SiteConfig = {
     title: 'Pedro Nascimento de Lima, PhD',
     subtitle: 'Engineer at RAND Corporation and Professor at Pardee RAND Gradutate School',
-    description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
+    description: 'Personal website of Pedro Nascimento de Lima',
     image: {
         src: '/dante-preview.jpg',
-        alt: 'Dante - Astro.js and Tailwind CSS theme'
+        alt: 'Pedro Nascimento de Lima'
     },
     headerNavLinks: [
         {
@@ -82,10 +82,6 @@ const siteConfig: SiteConfig = {
         {
             text: 'LinkedIn',
             href: 'https://www.linkedin.com/in/pedro-nascimento-de-lima/'
-        },
-        {
-            text: 'Google Scholar',
-            href: 'https://scholar.google.com/citations?user=VOlVFVYAAAAJ&hl=en'
         },
         {
             text: 'RAND Profile',
