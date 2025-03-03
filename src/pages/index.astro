@@ -4,6 +4,7 @@ import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
 import siteConfig from '../data/site-config';
 import { publications } from '../data/publications';
+import { formatAuthorsLastNames } from '../utils/publication-utils';
 
 // Filter publications to only show featured ones on the homepage
 const featuredPublications = publications.filter((pub) => pub.featured);
@@ -18,31 +19,30 @@ const featuredPublications = publications.filter((pub) => pub.featured);
             featuredPublications.map((publication) => (
                 <div class="publication-item mb-4 border-b border-main/20 pb-4">
                     <div class="publication-title font-medium mb-2">{publication.title}</div>
-                    <div class="text-base mb-2 leading-relaxed">
-                        <span class="italic">{publication.journal}</span> ({publication.year})
-                        <div class="mt-2 text-sm flex gap-4">
-                            {publication.doi && (
-                                <a
-                                    href={`https://doi.org/${publication.doi}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
-                                >
-                                    Full Paper
-                                </a>
-                            )}
-                            {publication.code && (
+                    <div class="text-base mb-1">
+                        {publication.doi ? (
+                            <a href={`https://doi.org/${publication.doi}`} target="_blank" rel="noopener noreferrer" class="italic text-main">
+                                {publication.journal}
+                            </a>
+                        ) : (
+                            <span class="italic">{publication.journal}</span>
+                        )}
+
+                        {publication.code && (
+                            <>
+                                <span class="mx-2">•</span>
                                 <a
                                     href={publication.code}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
                                 >
-                                    Code
+                                    code
                                 </a>
-                            )}
-                        </div>
+                            </>
+                        )}
                     </div>
+                    <div class="text-sm text-main/75 mb-1">{publication.author && formatAuthorsLastNames(publication.author)}</div>
                 </div>
             ))
         }

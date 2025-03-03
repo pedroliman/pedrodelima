@@ -61,10 +61,10 @@ const siteConfig: SiteConfig = {
         }
     ],
     footerNavLinks: [
-        {
+        /*{
             text: 'About',
             href: '/about'
-        },
+        },*/
         {
             text: 'Contact',
             href: '/contact'

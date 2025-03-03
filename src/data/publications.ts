@@ -248,7 +248,7 @@ export const publications: Publication[] = [
   {
     id: 'NascimentodeLima2021b',
     title: `Reopening Under Uncertainty: Stress-Testing California's COVID-19 Exit Strategy`,
-    journal: 'PLOS One',
+    journal: 'RAND Perspective',
     year: 2021,
     authors: `Nascimento de Lima, Pedro and Vardavas, Raffaele and Baker, Lawrence and Ringel, Jeanne and Lempert, Robert J. and Rutter, Carolyn M and Ozik, Jonathan`,
     doi: '10.7249/PEA1080-1',

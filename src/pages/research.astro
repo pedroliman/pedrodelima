@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
-import { formatAuthors } from '../utils/publication-utils';
+import { formatAuthorsLastNames } from '../utils/publication-utils';
 import { publications } from '../data/publications';
 
 // Use all publications for the research page
@@ -48,32 +48,30 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                         {publicationsByYear[year].map((publication) => (
                             <div class="publication-item mb-6 border-b border-main/20 pb-6">
                                 <div class="text-base mb-1 leading-relaxed font-medium">{publication.title}</div>
-                                <div class="text-base mb-2">{publication.author && formatAuthors(publication.author)}</div>
-                                <div class="text-base italic">
-                                    <span>{publication.journal}</span> ({publication.year})
-                                    <div class="mt-2 text-sm flex gap-4">
-                                        {publication.doi && (
-                                            <a
-                                                href={`https://doi.org/${publication.doi}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="text-main not-italic underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
-                                            >
-                                                Full Paper
-                                            </a>
-                                        )}
-                                        {publication.code && (
+                                <div class="text-base mb-2">
+                                    {publication.doi ? (
+                                        <a href={`https://doi.org/${publication.doi}`} target="_blank" rel="noopener noreferrer" class="italic text-main">
+                                            {publication.journal}
+                                        </a>
+                                    ) : (
+                                        <span class="italic">{publication.journal}</span>
+                                    )}
+
+                                    {publication.code && (
+                                        <>
+                                            <span class="mx-2">•</span>
                                             <a
                                                 href={publication.code}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                class="text-main not-italic underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                                class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
                                             >
-                                                Code
+                                                code
                                             </a>
-                                        )}
-                                    </div>
+                                        </>
+                                    )}
                                 </div>
+                                <div class="text-sm text-main/75">{publication.author && formatAuthorsLastNames(publication.author)}</div>
                             </div>
                         ))}
                     </div>
