@@ -58,6 +58,10 @@ const siteConfig: SiteConfig = {
         {
             text: 'Contact',
             href: '/contact'
+        },
+        {
+            text: 'CV',
+            href: '/cv.pdf'
         }
     ],
     footerNavLinks: [
@@ -72,8 +76,16 @@ const siteConfig: SiteConfig = {
     ],
     socialLinks: [
         {
+            text: 'GitHub',
+            href: 'https://github.com/pedroliman'
+        },
+        {
             text: 'LinkedIn',
             href: 'https://www.linkedin.com/in/pedro-nascimento-de-lima/'
+        },
+        {
+            text: 'Google Scholar',
+            href: 'https://scholar.google.com/citations?user=VOlVFVYAAAAJ&hl=en'
         },
         {
             text: 'RAND Profile',
@@ -86,7 +98,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         /*title: 'Hi There!',*/
-        text: "I’m an associate engineer at RAND Corporation, a non-partisan research institution dedicated to improving policy through research and analysis. Trained as an engineer and as policy researcher, I work across disciplines to inform our most challenging policy decisions with quantitative models and data - even when uncertainty is deep and consensus seems out of reach.",
+        text: "I’m an associate engineer at RAND Corporation, a non-partisan research institution dedicated to improving policy through research and analysis. <br /><br />Trained as an engineer and as policy researcher, I work across disciplines to inform our most challenging policy decisions with quantitative models and data - even when uncertainty is deep and consensus seems out of reach.",
         image: {
             src: '/hero.jpeg',
             alt: 'Pedro Nascimento de Lima'

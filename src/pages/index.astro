@@ -13,7 +13,7 @@ const featuredPublications = publications.filter((pub) => pub.featured);
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
     <Hero />
     <div class="mb-8 sm:mb-12">
-        <h2 class="mb-6 text-xl font-serif italic sm:mb-8 sm:text-2xl">Publications</h2>
+        <h2 class="mb-6 text-xl font-serif italic sm:mb-8 sm:text-2xl">Research</h2>
 
         {
             featuredPublications.map((publication) => (
@@ -21,7 +21,12 @@ const featuredPublications = publications.filter((pub) => pub.featured);
                     <div class="publication-title font-medium mb-2">{publication.title}</div>
                     <div class="text-base mb-1">
                         {publication.doi ? (
-                            <a href={`https://doi.org/${publication.doi}`} target="_blank" rel="noopener noreferrer" class="italic text-main">
+                            <a
+                                href={`https://doi.org/${publication.doi}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                            >
                                 {publication.journal}
                             </a>
                         ) : (
@@ -30,7 +35,7 @@ const featuredPublications = publications.filter((pub) => pub.featured);
 
                         {publication.code && (
                             <>
-                                <span class="mx-2">•</span>
+                                <span class="mx-2 text-main/50">|</span>
                                 <a
                                     href={publication.code}
                                     target="_blank"

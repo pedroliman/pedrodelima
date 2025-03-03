@@ -84,8 +84,13 @@ export function formatAuthors(authorString: string): string {
  * This creates a more compact display with focus on other co-authors
  */
 export function formatAuthorsLastNames(authorString: string): string {
+  if (!authorString) return '';
+
+  // Special handling for the authors string in the format we have
+  // The format can be like "Author1 and Author2 and Author3" or "Author1, Author2, Author3"
+
   // Split the string into individual authors
-  const authors = authorString.split(/\s+and\s+|,\s+/);
+  const authors = authorString.split(/\s+and\s+|,\s+and\s+|,\s+/);
 
   // Filter out empty entries
   const validAuthors = authors.filter(author => author.trim() !== '');
@@ -97,6 +102,18 @@ export function formatAuthorsLastNames(authorString: string): string {
     // If this is Pedro, skip processing and return null (we'll filter it out)
     if (lowercaseAuthor.includes('pedro') && lowercaseAuthor.includes('nascimento de lima')) {
       return null;
+    }
+
+    // Handle complex names with special care
+    if (lowercaseAuthor.includes('van den') || lowercaseAuthor.includes('de ')) {
+      // For Dutch or Portuguese/Spanish names
+      const parts = author.trim().split(/\s+/);
+      if (parts.length >= 3 && (parts[parts.length - 3].toLowerCase() === 'van' ||
+        parts[parts.length - 3].toLowerCase() === 'de')) {
+        return `${parts[parts.length - 3]} ${parts[parts.length - 2]} ${parts[parts.length - 1]}`;
+      } else if (parts.length >= 2 && parts[parts.length - 2].toLowerCase() === 'de') {
+        return `${parts[parts.length - 2]} ${parts[parts.length - 1]}`;
+      }
     }
 
     // Otherwise, get the last name

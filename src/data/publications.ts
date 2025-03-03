@@ -47,7 +47,7 @@ export const publications: Publication[] = [
     journal: 'RAND Report',
     year: 2024,
     authors: `Vardavas, Raffaele and Armour, Philip and Katragadda, Sai Prathyush and Pujol-Mitchell, Toyya and Pedro Nascimento de Lima and Fateh, Baqir and Hernandez, Helin and Yi, Stacey and Rojas Aguilera, Javier and Gadwah-Meaden, Catria`,
-    doi: '',
+    doi: '10.7249/RRA2188-1',
     featured: false
   },
   {

@@ -31,12 +31,6 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
 >
     <section class="mb-16 sm:mb-24">
         <h1 class="mb-6 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Research</h1>
-        <p class="mb-10 text-lg leading-relaxed">
-            My research focuses on developing and applying quantitative methods to inform policy decisions in complex environments, with an emphasis on decision
-            making under deep uncertainty, interdisciplinary approaches, and stakeholder engagement.
-        </p>
-
-        <h2 class="mb-8 text-2xl leading-tight font-serif font-medium">Publications</h2>
 
         <!-- Publications from data file, grouped by year -->
         <div class="publications">
@@ -50,7 +44,12 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                                 <div class="text-base mb-1 leading-relaxed font-medium">{publication.title}</div>
                                 <div class="text-base mb-2">
                                     {publication.doi ? (
-                                        <a href={`https://doi.org/${publication.doi}`} target="_blank" rel="noopener noreferrer" class="italic text-main">
+                                        <a
+                                            href={`https://doi.org/${publication.doi}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                        >
                                             {publication.journal}
                                         </a>
                                     ) : (
@@ -59,7 +58,7 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
 
                                     {publication.code && (
                                         <>
-                                            <span class="mx-2">•</span>
+                                            <span class="mx-2 text-main/50">|</span>
                                             <a
                                                 href={publication.code}
                                                 target="_blank"
@@ -71,31 +70,12 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                                         </>
                                     )}
                                 </div>
-                                <div class="text-sm text-main/75">{publication.author && formatAuthorsLastNames(publication.author)}</div>
+                                <div class="text-sm text-main/75">{publication.author ? formatAuthorsLastNames(publication.author) : ''}</div>
                             </div>
                         ))}
                     </div>
                 ))
             }
-        </div>
-
-        <div class="mt-12">
-            <p class="mb-4">
-                For a complete list of publications, including working papers and technical reports, please visit my <a
-                    href="https://www.rand.org/about/people/n/nascimento_de_lima_pedro.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">RAND profile</a
-                >
-                or <a
-                    href="https://scholar.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">Google Scholar</a
-                >.
-            </p>
-
-            <Button href="/publications.bib" download> Download BibTeX </Button>
         </div>
     </section>
 </BaseLayout>
