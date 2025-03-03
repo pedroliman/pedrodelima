@@ -9,14 +9,17 @@ import { publications } from '../data/publications';
 const sortedPublications = [...publications].sort((a, b) => parseInt(b.year) - parseInt(a.year));
 
 // Group publications by year
-const publicationsByYear = sortedPublications.reduce((acc, pub) => {
-  const year = pub.year;
-  if (!acc[year]) {
-    acc[year] = [];
-  }
-  acc[year].push(pub);
-  return acc;
-}, {} as Record<string, typeof publications>);
+const publicationsByYear = sortedPublications.reduce(
+    (acc, pub) => {
+        const year = pub.year;
+        if (!acc[year]) {
+            acc[year] = [];
+        }
+        acc[year].push(pub);
+        return acc;
+    },
+    {} as Record<string, typeof publications>
+);
 
 // Get unique years in descending order
 const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parseInt(a));
@@ -37,35 +40,45 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
 
         <!-- Publications from data file, grouped by year -->
         <div class="publications">
-            {years.map((year) => (
-                <div class="year-section mb-10">
-                    <h3 class="text-xl font-serif font-medium mb-4">{year}</h3>
-                    
-                    {publicationsByYear[year].map((publication) => (
-                        <div class="publication-item mb-6 border-b border-main/20 pb-6">
-                            <div class="text-base mb-1 leading-relaxed font-medium">
-                                {publication.title}
+            {
+                years.map((year) => (
+                    <div class="year-section mb-10">
+                        <h3 class="text-xl font-serif font-medium mb-4">{year}</h3>
+
+                        {publicationsByYear[year].map((publication) => (
+                            <div class="publication-item mb-6 border-b border-main/20 pb-6">
+                                <div class="text-base mb-1 leading-relaxed font-medium">{publication.title}</div>
+                                <div class="text-base mb-2">{publication.author && formatAuthors(publication.author)}</div>
+                                <div class="text-base italic">
+                                    <span>{publication.journal}</span> ({publication.year})
+                                    <div class="mt-2 text-sm flex gap-4">
+                                        {publication.doi && (
+                                            <a
+                                                href={`https://doi.org/${publication.doi}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-main not-italic underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                            >
+                                                Full Paper
+                                            </a>
+                                        )}
+                                        {publication.code && (
+                                            <a
+                                                href={publication.code}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-main not-italic underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                            >
+                                                Code
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="text-base mb-2">
-                                {publication.author && formatAuthors(publication.author)}
-                            </div>
-                            <div class="text-base italic">
-                                <span>{publication.journal}</span> ({publication.year})
-                                {publication.doi && (
-                                    <span> · <a 
-                                        href={`https://doi.org/${publication.doi}`} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        class="text-main not-italic underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
-                                    >
-                                        DOI
-                                    </a></span>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            ))}
+                        ))}
+                    </div>
+                ))
+            }
         </div>
 
         <div class="mt-12">

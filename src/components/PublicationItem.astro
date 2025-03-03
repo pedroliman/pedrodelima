@@ -3,8 +3,8 @@ import type { Publication } from '../types/publication';
 import { getDoiUrl } from '../utils/bibtex-utils';
 
 interface Props {
-  publication: Publication;
-  class?: string;
+    publication: Publication;
+    class?: string;
 }
 
 const { publication, class: className } = Astro.props;
@@ -12,91 +12,111 @@ const { title, authors, year, journal, booktitle, volume, number, pages, doi, ur
 
 // Clean text of all LaTeX formatting and special characters
 function cleanText(text: string): string {
-  if (!text) return '';
-  return text
-    .replace(/\\textbf\{.*?\}/g, '') // Remove \textbf{}
-    .replace(/\\textit\{.*?\}/g, '')  // Remove \textit{}
-    .replace(/\\[a-z]+/g, '')        // Remove other LaTeX commands
-    .replace(/[{}]/g, '')            // Remove all braces
-    .replace(/\\([&%$#_{}])/g, '$1') // Handle escaped special chars
-    .replace(/\s+/g, ' ')            // Normalize whitespace
-    .trim();
+    if (!text) return '';
+    return text
+        .replace(/\\textbf\{.*?\}/g, '') // Remove \textbf{}
+        .replace(/\\textit\{.*?\}/g, '') // Remove \textit{}
+        .replace(/\\[a-z]+/g, '') // Remove other LaTeX commands
+        .replace(/[{}]/g, '') // Remove all braces
+        .replace(/\\([&%$#_{}])/g, '$1') // Handle escaped special chars
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .trim();
 }
 
 // Format Chicago style citation
 function formatChicagoCitation(): string {
-  if (!authors || !title || !year) return '';
-  
-  // Clean author names
-  const cleanedAuthors = authors.map(author => cleanText(author));
-  
-  // Process authors for Chicago style
-  let authorString = '';
-  
-  if (cleanedAuthors.length === 1) {
-    authorString = cleanedAuthors[0];
-  } else if (cleanedAuthors.length === 2) {
-    authorString = `${cleanedAuthors[0]} and ${cleanedAuthors[1]}`;
-  } else if (cleanedAuthors.length > 2) {
-    if (cleanedAuthors.length <= 3) {
-      authorString = `${cleanedAuthors[0]}, ${cleanedAuthors[1]}, and ${cleanedAuthors[2]}`;
+    if (!authors || !title || !year) return '';
+
+    // Clean author names
+    const cleanedAuthors = authors.map((author) => cleanText(author));
+
+    // Process authors for Chicago style
+    let authorString = '';
+
+    if (cleanedAuthors.length === 1) {
+        authorString = cleanedAuthors[0];
+    } else if (cleanedAuthors.length === 2) {
+        authorString = `${cleanedAuthors[0]} and ${cleanedAuthors[1]}`;
+    } else if (cleanedAuthors.length > 2) {
+        if (cleanedAuthors.length <= 3) {
+            authorString = `${cleanedAuthors[0]}, ${cleanedAuthors[1]}, and ${cleanedAuthors[2]}`;
+        } else {
+            authorString = `${cleanedAuthors[0]} et al.`;
+        }
+    }
+
+    // Build citation
+    const cleanTitle = cleanText(title);
+    let citation = `${authorString}. `;
+
+    // Add title in quotes
+    citation += `"${cleanTitle}." `;
+
+    // Add venue (journal or book)
+    if (journal) {
+        const cleanJournal = cleanText(journal);
+        citation += `<em>${cleanJournal}</em> `;
+
+        if (volume) {
+            citation += `${cleanText(volume)}`;
+            if (number) citation += `(${cleanText(number)})`;
+            citation += ` `;
+        }
+
+        if (pages) {
+            citation += `(${year}): ${cleanText(pages)}.`;
+        } else {
+            citation += `(${year}).`;
+        }
+    } else if (booktitle) {
+        const cleanBooktitle = cleanText(booktitle);
+        citation += `In <em>${cleanBooktitle}</em>`;
+
+        if (pages) {
+            citation += `, ${cleanText(pages)}`;
+        }
+
+        citation += ` (${year}).`;
     } else {
-      authorString = `${cleanedAuthors[0]} et al.`;
+        citation += `(${year}).`;
     }
-  }
-  
-  // Build citation
-  const cleanTitle = cleanText(title);
-  let citation = `${authorString}. `;
-  
-  // Add title in quotes
-  citation += `"${cleanTitle}." `;
-  
-  // Add venue (journal or book)
-  if (journal) {
-    const cleanJournal = cleanText(journal);
-    citation += `<em>${cleanJournal}</em> `;
-    
-    if (volume) {
-      citation += `${cleanText(volume)}`;
-      if (number) citation += `(${cleanText(number)})`;
-      citation += ` `;
-    }
-    
-    if (pages) {
-      citation += `(${year}): ${cleanText(pages)}.`;
-    } else {
-      citation += `(${year}).`;
-    }
-  } else if (booktitle) {
-    const cleanBooktitle = cleanText(booktitle);
-    citation += `In <em>${cleanBooktitle}</em>`;
-    
-    if (pages) {
-      citation += `, ${cleanText(pages)}`;
-    }
-    
-    citation += ` (${year}).`;
-  } else {
-    citation += `(${year}).`;
-  }
-  
-  return citation;
+
+    return citation;
 }
 
 // Generate citation and DOI link
 const citation = formatChicagoCitation();
 const doiLink = doi ? getDoiUrl(cleanText(doi)) : null;
+const codeLink = code ? cleanText(code) : null;
 ---
 
-<div class:list={["publication-item mb-8 border-b border-main/20 pb-6", className]}>
-  <div class="text-base mb-3 leading-relaxed" set:html={citation} />
-  
-  <div class="text-sm flex gap-4">
-    {doiLink && (
-      <a href={doiLink} target="_blank" rel="noopener noreferrer" class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">
-        DOI
-      </a>
-    )}
-  </div>
+<div class:list={['publication-item mb-8 border-b border-main/20 pb-6', className]}>
+    <div class="text-base mb-3 leading-relaxed" set:html={citation} />
+
+    <div class="text-sm flex gap-4">
+        {
+            doiLink && (
+                <a
+                    href={doiLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                >
+                    Full Paper
+                </a>
+            )
+        }
+        {
+            codeLink && (
+                <a
+                    href={codeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                >
+                    Code
+                </a>
+            )
+        }
+    </div>
 </div>

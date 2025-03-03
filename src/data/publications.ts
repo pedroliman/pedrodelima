@@ -6,6 +6,7 @@ export interface Publication {
   author: string;
   year: string;
   featured: boolean;
+  code?: string;
 }
 
 /**
@@ -74,7 +75,8 @@ export const publications: Publication[] = [
     year: 2024,
     authors: `Carlos Pineda-Antunez and Claudia Seguin and Luuk A. van Duuren and Amy B. Knudsen and Barak Davidi and Pedro Nascimento de Lima and Carolyn Rutter and Karen M. Kuntz and Iris Lansdorp-Vogelaar and Nicholson Collier and Jonathan Ozik and Fernando Alarid-Escudero`,
     doi: '10.1177/0272989X241255618',
-    featured: false
+    featured: false,
+    code: `https://github.com/NCI-CISNET-Colorectal/baycann_cisnet_crc`
   },
   {
     id: 'nascimentodelimaCharacteristicsCosteffectiveBlood2024',
@@ -91,8 +93,9 @@ export const publications: Publication[] = [
     journal: 'Scientific Reports',
     year: 2024,
     authors: `Pedro Nascimento de Lima and Karr, Sarah and Lim, Jing Zhi and Vardavas, Raffaele and Roberts, Derek and Kessler, Abigail and Awan, Jalal and Faherty, Laura J. and Willis, Henry H.`,
-    doi: '10.7249/WRA3263-1',
-    featured: true
+    doi: '10.1038/s41598-024-79952-5',
+    featured: true,
+    code: `https://github.com/RANDCorporation/value-of-env-surveillance`
   },
   {
     id: 'VANDENPUTTELAAR2024',
@@ -137,7 +140,8 @@ export const publications: Publication[] = [
     year: 2023,
     authors: `Nascimento de Lima and Lamb, Jonathan and Osoba, Osonde and Welburn, Jonathan`,
     doi: '10.1090/noti2743',
-    featured: false
+    featured: false,
+    code: `https://github.com/RANDCorporation/racial-wealth-gap`
   },
   {
     id: 'Griffin2023',
@@ -191,7 +195,8 @@ export const publications: Publication[] = [
     year: 2023,
     authors: `Nascimento de Lima, Pedro and van den Puttelaar, Rosita and Hahn, Anne I and Harlass, Matthias and Collier, Nicholson and Ozik, Jonathan and Zauber, Ann G and Lansdorp-Vogelaar, Iris and Rutter, Carolyn M`,
     doi: '10.7554/eLife.85264',
-    featured: false
+    featured: false,
+    code: `https://github.com/c-rutter/unequal-recovery-covid-19`
   },
   {
     id: 'Nowak2023',
@@ -205,7 +210,7 @@ export const publications: Publication[] = [
   {
     id: 'NascimentodeLima2022',
     title: `Robust Decision Making in Health Policy: Applications to COVID-19 and Colorectal Cancer`,
-    journal: 'Dissertation',
+    journal: 'Pardee RAND Dissertation',
     year: 2022,
     authors: `Nascimento de Lima, Pedro`,
     doi: '10.7249/RGSDA2531-1',
@@ -218,7 +223,8 @@ export const publications: Publication[] = [
     year: 2022,
     authors: `Welburn, Jonathan W. and Nascimento de Lima, Pedro and Kumar, Krishna B. and Osoba, Osonde A. and Lamb, Jonathan`,
     doi: '10.7249/RRA1259-2',
-    featured: false
+    featured: false,
+    code: `https://github.com/RANDCorporation/racial-wealth-gap`
   },
   {
     id: 'NascimentodeLima2021a',
@@ -227,7 +233,8 @@ export const publications: Publication[] = [
     year: 2021,
     authors: `Nascimento de Lima, Pedro and Lempert, Robert and Vardavas, Raffaele and Baker, Lawrence and Ringel, Jeanne and Rutter, Carolyn M and Ozik, Jonathan and Collier, Nicholson`,
     doi: '10.1371/journal.pone.0259166',
-    featured: false
+    featured: false,
+    code: `https://github.com/RANDCorporation/covid-19-reopening-california`
   },
   {
     id: 'Rutter2021',
