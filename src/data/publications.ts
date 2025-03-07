@@ -15,6 +15,27 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'optic-package',
+    title: `optic: Simulation Tool for Causal Inference Using Longitudinal Data`,
+    journal: 'R Package',
+    year: 2023,
+    authors: `Beth Ann Griffin, Pedro Nascimento de Lima, Max Griswold, Adam Scherling, Joseph D. Pane, Geoffrey E. Grimm`,
+    doi: '10.7249/TLA1975-2',
+    code: 'https://github.com/randcorporation/optic/',
+    featured: false
+  },
+  {
+    id: 'gerbil_package',
+    title: `gerbil: Generalized Efficient Regression-Based Imputation with Latent Processes`,
+    journal: 'R Package',
+    year: 2023,
+    authors: 'Michael Robbins [aut, cre], Max Griswold [ctb], Pedro Nascimento de Lima',
+    url: 'https://cran.r-project.org/web/packages/gerbil/index.html',
+    doi: '',
+    code: 'https://cran.r-project.org/web/packages/gerbil/index.html',
+    featured: false
+  },
+  {
     id: 'van_den_puttelaar_reply_2024',
     title: `Reply to Aziz et al and to Das et al`,
     journal: 'Gastroenterology',
@@ -323,7 +344,7 @@ export const publications: Publication[] = [
     journal: 'Unisinos',
     year: 2014,
     authors: `Rodrigues, Luis H. and Ahlert, Fabiano and Pacheco Lacerda, Daniel and Riehs Camargo, Luis Felipe and Nascimento de Lima, Pedro`,
-    doi: '',
+    url: 'https://www.unisinos.br/editora/pesquisa-operacional-programacao-linear-passo-a-passo',
     featured: false
   },
 ];

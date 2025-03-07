@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { publication, class: className } = Astro.props;
-const { title, authors, year, journal, booktitle, volume, number, pages, doi, url } = publication;
+const { title, authors, year, journal, booktitle, volume, number, pages, doi, url, code } = publication;
 
 // Clean text of all LaTeX formatting and special characters
 function cleanText(text: string): string {
@@ -84,9 +84,17 @@ function formatChicagoCitation(): string {
     return citation;
 }
 
-// Generate citation and DOI link
+// Generate citation and paper link (prioritizing DOI, then URL)
 const citation = formatChicagoCitation();
-const doiLink = doi ? getDoiUrl(cleanText(doi)) : null;
+// const paperLink = doi ? getDoiUrl(cleanText(doi)) : (url ? cleanText(url) : null);
+
+const paperLink: string | null =
+    doi && typeof doi === 'string' && doi.trim().length > 0
+        ? getDoiUrl(cleanText(doi))
+        : url && typeof url === 'string' && url.trim().length > 0
+          ? cleanText(url)
+          : null;
+
 const codeLink = code ? cleanText(code) : null;
 ---
 
@@ -95,9 +103,9 @@ const codeLink = code ? cleanText(code) : null;
 
     <div class="text-sm flex gap-4">
         {
-            doiLink && (
+            paperLink && (
                 <a
-                    href={doiLink}
+                    href={paperLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"

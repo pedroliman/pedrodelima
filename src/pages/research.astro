@@ -43,9 +43,18 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                             <div class="publication-item mb-6 border-b border-main/20 pb-6">
                                 <div class="text-base mb-1 leading-relaxed font-medium">{publication.title}</div>
                                 <div class="text-base mb-2">
-                                    {publication.doi ? (
+                                    {publication.doi && publication.doi.trim().length > 0 ? (
                                         <a
                                             href={`https://doi.org/${publication.doi}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                        >
+                                            {publication.journal}
+                                        </a>
+                                    ) : publication.url && publication.url.trim().length > 0 ? (
+                                        <a
+                                            href={publication.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
