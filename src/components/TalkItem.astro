@@ -11,19 +11,6 @@ interface Props {
 const { talk, class: className, showDetails = false } = Astro.props;
 const { id, title, date, venue, location, type, slideUrl, recordingUrl, description, slug } = talk;
 
-// Generate a badge based on talk type
-let typeBadge = '';
-if (type) {
-    const badgeClasses = {
-        conference: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100',
-        invited: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100',
-        workshop: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100',
-        seminar: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-100',
-        other: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
-    };
-
-    typeBadge = type in badgeClasses ? badgeClasses[type as keyof typeof badgeClasses] : badgeClasses.other;
-}
 ---
 
 <div class:list={['talk-item mb-8 border-b border-main/20 pb-6', className]}>
@@ -43,8 +30,6 @@ if (type) {
         <div class="text-sm">
             <FormattedDate date={date} />
         </div>
-
-        {type && <div class:list={['text-xs px-2 py-0.5 rounded-full', typeBadge]}>{type.charAt(0).toUpperCase() + type.slice(1)}</div>}
     </div>
 
     <div class="text-sm mb-2">

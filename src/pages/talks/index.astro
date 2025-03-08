@@ -36,19 +36,13 @@ const years = Object.keys(talksByYear)
             where available.
         </p>
 
-        <div class="flex flex-wrap gap-4 mb-12">
-            <a href="#conference" class="px-4 py-2 text-sm border border-main rounded-full hover:bg-main/5">Conference Talks</a>
-            <a href="#invited" class="px-4 py-2 text-sm border border-main rounded-full hover:bg-main/5">Invited Talks</a>
-            <a href="#workshop" class="px-4 py-2 text-sm border border-main rounded-full hover:bg-main/5">Workshops</a>
-            <a href="#seminar" class="px-4 py-2 text-sm border border-main rounded-full hover:bg-main/5">Seminars</a>
-        </div>
 
         {
             years.map((year) => (
                 <div class="mb-12">
                     <h2 class="mb-6 text-2xl leading-tight font-serif font-medium">{year}</h2>
                     {talksByYear[year].map((talk) => (
-                        <TalkItem talk={talk} id={talk.type} />
+                        <TalkItem talk={talk} />
                     ))}
                 </div>
             ))

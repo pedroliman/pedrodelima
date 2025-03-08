@@ -54,7 +54,7 @@ export const publications: Publication[] = [
     featured: false
   },
   {
-    id: 'nascimento_de_lima_cost-effectiveness_2025',
+    id: 'nascimento_de_lima_cost_effectiveness_2025',
     title: `Cost-Effectiveness of Noninvasive Colorectal Cancer Screening in Community Clinics`,
     journal: 'JAMA Network Open',
     year: 2025,

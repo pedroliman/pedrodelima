@@ -15,17 +15,17 @@ const relatedTalks = talks.filter((talk) => talk.relatedPublicationIds && talk.r
 
 {
     relatedTalks.length > 0 && (
-        <div class:list={['related-talks mt-4', className]}>
-            <h4 class="text-lg font-serif font-medium mb-2">Related Talks</h4>
-            <ul class="list-disc pl-5 space-y-2">
+        <div class:list={['related-talks mt-3', className]}>
+            <div class="text-sm text-main/80 mb-1">Related Talks:</div>
+            <div class="space-y-1">
                 {relatedTalks.map((talk) => (
-                    <li class="text-sm">
+                    <div class="text-sm pl-2 border-l-2 border-main/20">
                         <a href={`/talks/${talk.slug}`} class="text-main hover:underline hover:underline-offset-2">
-                            {talk.title} ({new Date(talk.date).getFullYear()})
+                            {talk.venue}, <span class="text-main/70">{new Date(talk.date).toLocaleDateString('en-US', {month: 'short', year: 'numeric'})}</span>
                         </a>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     )
 }

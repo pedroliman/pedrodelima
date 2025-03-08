@@ -30,7 +30,7 @@ const talks: Talk[] = [
     recordingUrl: "https://example.com/recordings/policy-uncertainty-2023.mp4",
     description: "Presented new methods for robust decision making in contexts with deep uncertainty, focusing on applications in climate policy.",
     pdfPresentation: "/presentations/policy-uncertainty-2023.pdf",
-    relatedPublicationIds: ['nascimentodelimaValueEnvironmentalSurveillance2024', 'NascimentodeLima2021a']
+    relatedPublicationIds: ['nascimento_de_lima_cost_effectiveness_2025', 'NascimentodeLima2021a']
   },
   {
     id: 'interdisciplinary-approaches-2023',
