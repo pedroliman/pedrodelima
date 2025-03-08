@@ -290,7 +290,7 @@ export const publications: Publication[] = [
     journal: 'Journal on Policy and Complex Systems',
     year: 2021,
     authors: `Vardavas, Raffaele and Nascimento de Lima, Pedro and Baker, Lawrence`,
-    doi: '10.18278/jpcs.7.1.8',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9109618/',
     featured: false
   },
   {
@@ -299,7 +299,7 @@ export const publications: Publication[] = [
     journal: 'Journal on Policy and Complex Systems',
     year: 2021,
     authors: `Vardavas, Raffaele and Nascimento de Lima, Pedro and Davis, Paul K and Parker, Andrew M and Baker, Lawrence`,
-    doi: '10.18278/jpcs.7.1.3',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9109616/',
     featured: false
   },
   {
