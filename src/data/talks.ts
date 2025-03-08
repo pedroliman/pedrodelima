@@ -42,7 +42,7 @@ const talks: Talk[] = [
     slideUrl: "/presentations/2024.05.17.Nascimento de Lima-DDW.pdf",
     description: "Research presentation on the conditions under which blood-based tests for colorectal cancer screening would be cost-effective compared to traditional screening methods.",
     pdfPresentation: "/presentations/2024.05.17.Nascimento de Lima-DDW.pdf",
-    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'VANDENPUTTELAAR2024']
+    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024']
   },
   {
     id: 'environmental-surveillance-value',
