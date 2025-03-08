@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
+import RelatedTalks from '../components/RelatedTalks.astro';
 import siteConfig from '../data/site-config';
 import { publications } from '../data/publications';
 import { formatAuthorsLastNames } from '../utils/publication-utils';
@@ -40,14 +41,18 @@ const featuredPublications = publications.filter((pub) => pub.featured);
                                     href={publication.code}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 hover:bg-green-200 dark:hover:bg-green-800"
                                 >
-                                    code
+                                    Code
                                 </a>
                             </>
                         )}
                     </div>
                     <div class="text-sm text-main/75 mb-1">{publication.author && formatAuthorsLastNames(publication.author)}</div>
+                    
+                    <div class="mt-2">
+                        <RelatedTalks publicationId={publication.id} />
+                    </div>
                 </div>
             ))
         }

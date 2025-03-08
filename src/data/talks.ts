@@ -19,70 +19,43 @@ import type { Talk } from '../types/talk';
 
 const talks: Talk[] = [
   {
-    id: 'policy-uncertainty-2023',
-    slug: 'policy-uncertainty-2023',
-    title: "Policy Analysis Under Deep Uncertainty: Methods and Applications",
-    date: new Date("2023-11-15"),
-    venue: "International Conference on Decision Making",
-    location: "Boston, MA",
-    type: "conference",
-    slideUrl: "https://example.com/slides/policy-uncertainty-2023.pdf",
-    recordingUrl: "https://example.com/recordings/policy-uncertainty-2023.mp4",
-    description: "Presented new methods for robust decision making in contexts with deep uncertainty, focusing on applications in climate policy.",
-    pdfPresentation: "/presentations/policy-uncertainty-2023.pdf",
-    relatedPublicationIds: ['nascimento_de_lima_cost_effectiveness_2025', 'NascimentodeLima2021a']
-  },
-  {
-    id: 'interdisciplinary-approaches-2023',
-    slug: 'interdisciplinary-approaches-2023',
-    title: "Interdisciplinary Approaches to Policy Research",
-    date: new Date("2023-09-22"),
-    venue: "Policy Research Institute Seminar Series",
-    location: "Washington, DC",
-    type: "invited",
-    slideUrl: "https://example.com/slides/interdisciplinary-approaches-2023.pdf",
-    description: "Discussed how cross-disciplinary methods can enhance policy research and lead to more robust recommendations.",
-    pdfPresentation: "/presentations/interdisciplinary-approaches-2023.pdf"
-  },
-  {
-    id: 'ml-policy-2023',
-    slug: 'ml-policy-2023',
-    title: "Machine Learning for Policy Analysis: Opportunities and Challenges",
-    date: new Date("2023-06-05"),
-    venue: "Workshop on AI and Public Policy",
+    id: 'health-policy-robustness-2025',
+    slug: 'health-policy-robustness-2025',
+    title: "Demonstrating Robustness in Health Policy Choices",
+    date: new Date("2024-11-25"),
+    venue: "DMDU in Health Symposium",
     location: "Virtual",
-    type: "workshop",
-    slideUrl: "https://example.com/slides/ml-policy-2023.pdf",
-    recordingUrl: "https://example.com/recordings/ml-policy-2023.mp4",
-    description: "Examined the potential of machine learning techniques to transform policy analysis while addressing key ethical and practical challenges.",
-    talk_html: "/presentations/ml-policy-2023.html",
-    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'NascimentodeLima2023AMS']
-  },
-  {
-    id: 'stakeholder-engagement-2022',
-    slug: 'stakeholder-engagement-2022',
-    title: "Stakeholder Engagement in Model Development",
-    date: new Date("2022-10-12"),
-    venue: "Annual Meeting of the Society for Policy Modeling",
-    location: "San Francisco, CA",
     type: "conference",
-    slideUrl: "https://example.com/slides/stakeholder-engagement-2022.pdf",
-    description: "Presented a framework for incorporating stakeholder input throughout the policy modeling process.",
-    pdfPresentation: "/presentations/stakeholder-engagement-2022.pdf"
+    slideUrl: "/presentations/2024.11.25.DMDU-Health-Symposium.pdf",
+    description: "Presentation on applying Robust Decision Making methods to health policy questions, covering colorectal cancer screening and pandemic response strategies.",
+    pdfPresentation: "/presentations/2024.11.25.DMDU-Health-Symposium.pdf",
+    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'nascimentodelimaValueEnvironmentalSurveillance2024']
   },
   {
-    id: 'engineering-policy-2022',
-    slug: 'engineering-policy-2022',
-    title: "Engineering Methods in Public Policy",
-    date: new Date("2022-03-18"),
-    venue: "University of California Policy Seminar",
-    location: "Los Angeles, CA",
-    type: "seminar",
-    slideUrl: "https://example.com/slides/engineering-policy-2022.pdf",
-    recordingUrl: "https://example.com/recordings/engineering-policy-2022.mp4",
-    description: "Discussed how engineering perspectives and methodologies can enhance the development and evaluation of public policy.",
-    talk_html: "/presentations/engineering-policy-2022.html",
-    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'SelectiveOpenessLima2023']
+    id: 'blood-test-crc-screening-2024',
+    slug: 'blood-test-crc-screening-2024',
+    title: "Characteristics of a cost-effective blood test for colorectal cancer screening",
+    date: new Date("2024-05-20"),
+    venue: "Digestive Disease Week (DDW)",
+    location: "Washington, D.C.",
+    type: "conference",
+    slideUrl: "/presentations/2024.05.17.Nascimento de Lima-DDW.pdf",
+    description: "Research presentation on the conditions under which blood-based tests for colorectal cancer screening would be cost-effective compared to traditional screening methods.",
+    pdfPresentation: "/presentations/2024.05.17.Nascimento de Lima-DDW.pdf",
+    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'VANDENPUTTELAAR2024']
+  },
+  {
+    id: 'environmental-surveillance-value',
+    slug: 'environmental-surveillance-value-pandemic-response',
+    title: "The Value of Environmental Surveillance for Pandemic Response",
+    date: new Date("2024-07-26"),
+    venue: "MIDAS Webinar",
+    location: "Virtual",
+    type: "webinar",
+    slideUrl: "/presentations/2024.07.26-Value-of-Environmental-Surveillance-MIDAS-talk.pdf",
+    description: "This presentation explores the economic value of environmental surveillance systems (ESS) in pandemic response using COVID-19 as a case study. It demonstrates how ESS can provide early warning, help mitigate slow policy decisions, and deliver meaningful benefits even if pandemics are rare events.",
+    pdfPresentation: "/presentations/2024.07.26-Value-of-Environmental-Surveillance-MIDAS-talk.pdf",
+    relatedPublicationIds: ['nascimentodelimaValueEnvironmentalSurveillance2024']
   }
 ];
 

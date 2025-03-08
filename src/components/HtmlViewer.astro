@@ -16,7 +16,7 @@ const { htmlPath, title, class: className } = Astro.props;
                 <a
                     href={htmlPath}
                     target="_blank"
-                    class="px-3 py-1.5 text-sm bg-main text-white rounded-md hover:bg-main/90 dark:bg-main/80 dark:hover:bg-main/70"
+                    class="px-3 py-1.5 text-sm border border-main rounded-md text-main hover:bg-main hover:text-white dark:text-white dark:bg-main/80 dark:hover:bg-main/70"
                 >
                     Open Full Screen
                 </a>
@@ -25,7 +25,7 @@ const { htmlPath, title, class: className } = Astro.props;
     }
 
     <div class="html-container border border-main/20 rounded-lg overflow-hidden">
-        <iframe src={htmlPath} class="w-full h-[70vh]" frameborder="0">
+        <iframe src={htmlPath} class="w-full h-[80vh]" frameborder="0">
             <p> Your browser doesn't support embedded content. <a href={htmlPath} target="_blank" rel="noopener noreferrer"> Click here to view the presentation
             </a>. </p>
         </iframe>
@@ -37,7 +37,7 @@ const { htmlPath, title, class: className } = Astro.props;
                 <a
                     href={htmlPath}
                     target="_blank"
-                    class="px-3 py-1.5 text-sm bg-main text-white rounded-md hover:bg-main/90 dark:bg-main/80 dark:hover:bg-main/70"
+                    class="px-3 py-1.5 text-sm border border-main rounded-md text-main hover:bg-main hover:text-white dark:text-white dark:bg-main/80 dark:hover:bg-main/70"
                 >
                     Open Full Screen
                 </a>
