@@ -1,0 +1,31 @@
+---
+import type { Talk } from '../types/talk';
+import talks from '../data/talks';
+
+interface Props {
+    publicationId: string;
+    class?: string;
+}
+
+const { publicationId, class: className } = Astro.props;
+
+// Find talks related to this publication
+const relatedTalks = talks.filter((talk) => talk.relatedPublicationIds && talk.relatedPublicationIds.includes(publicationId));
+---
+
+{
+    relatedTalks.length > 0 && (
+        <div class:list={['related-talks mt-4', className]}>
+            <h4 class="text-lg font-serif font-medium mb-2">Related Talks</h4>
+            <ul class="list-disc pl-5 space-y-2">
+                {relatedTalks.map((talk) => (
+                    <li class="text-sm">
+                        <a href={`/talks/${talk.slug}`} class="text-main hover:underline hover:underline-offset-2">
+                            {talk.title} ({new Date(talk.date).getFullYear()})
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}

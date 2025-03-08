@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TalkItem from '../../components/TalkItem.astro';
+import PdfViewer from '../../components/PdfViewer.astro';
+import HtmlViewer from '../../components/HtmlViewer.astro';
+import PublicationItem from '../../components/PublicationItem.astro';
+import Button from '../../components/Button.astro';
+import talks from '../../data/talks';
+import { publications } from '../../data/publications';
+
+export function getStaticPaths() {
+    return talks.map((talk) => ({
+        params: { slug: talk.slug },
+        props: { talk }
+    }));
+}
+
+const { talk } = Astro.props;
+const { title, description, pdfPresentation, talk_html, relatedPublicationIds } = talk;
+
+// Get related publications if any
+const relatedPublications = relatedPublicationIds ? publications.filter((pub) => relatedPublicationIds.includes(pub.id)) : [];
+---
+
+<BaseLayout title={title} description={description || `Details, slides, and recording for ${title}`}>
+    <div class="mb-10">
+        <a href="/talks" class="text-sm hover:underline">← Back to All Talks</a>
+    </div>
+
+    <TalkItem talk={talk} showDetails={true} class="mb-10 border-b-0" />
+
+    <div class="presentation-content my-8">
+        {pdfPresentation && <PdfViewer pdfPath={pdfPresentation} title="Presentation Slides" class="mb-8" />}
+
+        {talk_html && <HtmlViewer htmlPath={talk_html} title="Interactive Presentation" class="mb-8" />}
+
+        {
+            !pdfPresentation && !talk_html && (
+                <div class="my-10 p-6 bg-main/5 border border-main/20 rounded-lg text-center">
+                    <p class="mb-4">Presentation materials are not available for online viewing.</p>
+                    {talk.slideUrl && <Button href={talk.slideUrl}>Download Slides</Button>}
+                </div>
+            )
+        }
+    </div>
+
+    {
+        relatedPublications.length > 0 && (
+            <div class="related-publications mt-10 pt-6 border-t border-main/20">
+                <h2 class="text-2xl font-serif font-medium mb-6">Related Publications</h2>
+
+                {relatedPublications.map((publication) => (
+                    <PublicationItem publication={publication} showRelated={false} />
+                ))}
+            </div>
+        )
+    }
+</BaseLayout>

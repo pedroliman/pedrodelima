@@ -3,61 +3,90 @@ import type { Talk } from '../types/talk';
 import FormattedDate from './FormattedDate.astro';
 
 interface Props {
-  talk: Talk;
-  class?: string;
+    talk: Talk;
+    class?: string;
+    showDetails?: boolean;
 }
 
-const { talk, class: className } = Astro.props;
-const { title, date, venue, location, type, slideUrl, recordingUrl, description } = talk;
+const { talk, class: className, showDetails = false } = Astro.props;
+const { id, title, date, venue, location, type, slideUrl, recordingUrl, description, slug } = talk;
 
 // Generate a badge based on talk type
 let typeBadge = '';
 if (type) {
-  const badgeClasses = {
-    conference: 'bg-blue-100 text-blue-800',
-    invited: 'bg-purple-100 text-purple-800',
-    workshop: 'bg-green-100 text-green-800',
-    seminar: 'bg-amber-100 text-amber-800',
-    other: 'bg-gray-100 text-gray-800'
-  };
-  
-  typeBadge = type in badgeClasses ? badgeClasses[type as keyof typeof badgeClasses] : badgeClasses.other;
+    const badgeClasses = {
+        conference: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100',
+        invited: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100',
+        workshop: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100',
+        seminar: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-100',
+        other: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
+    };
+
+    typeBadge = type in badgeClasses ? badgeClasses[type as keyof typeof badgeClasses] : badgeClasses.other;
 }
 ---
 
-<div class:list={["talk-item mb-8 border-b border-main/20 pb-6", className]}>
-  <h3 class="text-lg font-serif font-medium leading-tight mb-2">{title}</h3>
-  
-  <div class="flex flex-wrap gap-2 mb-2">
-    <div class="text-sm">
-      <FormattedDate date={date} />
+<div class:list={['talk-item mb-8 border-b border-main/20 pb-6', className]}>
+    {
+        showDetails ? (
+            <h1 class="text-3xl font-serif font-medium leading-tight mb-3">{title}</h1>
+        ) : (
+            <h3 class="text-lg font-serif font-medium leading-tight mb-2">
+                <a href={`/talks/${slug}`} class="hover:underline hover:underline-offset-2">
+                    {title}
+                </a>
+            </h3>
+        )
+    }
+
+    <div class="flex flex-wrap gap-2 mb-2">
+        <div class="text-sm">
+            <FormattedDate date={date} />
+        </div>
+
+        {type && <div class:list={['text-xs px-2 py-0.5 rounded-full', typeBadge]}>{type.charAt(0).toUpperCase() + type.slice(1)}</div>}
     </div>
-    
-    {type && (
-      <div class:list={["text-xs px-2 py-0.5 rounded-full", typeBadge]}>
-        {type.charAt(0).toUpperCase() + type.slice(1)}
-      </div>
-    )}
-  </div>
-  
-  <div class="text-sm mb-2">
-    <strong>{venue}</strong>
-    {location && <span> | {location}</span>}
-  </div>
-  
-  {description && <p class="text-sm mb-3">{description}</p>}
-  
-  <div class="text-sm flex gap-4 mt-3">
-    {slideUrl && (
-      <a href={slideUrl} target="_blank" rel="noopener noreferrer" class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">
-        Slides
-      </a>
-    )}
-    
-    {recordingUrl && (
-      <a href={recordingUrl} target="_blank" rel="noopener noreferrer" class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">
-        Recording
-      </a>
-    )}
-  </div>
+
+    <div class="text-sm mb-2">
+        <strong>{venue}</strong>
+        {location && <span> | {location}</span>}
+    </div>
+
+    {description && <p class="text-sm mb-3">{description}</p>}
+
+    <div class="text-sm flex gap-4 mt-3">
+        {
+            slideUrl && (
+                <a
+                    href={slideUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                >
+                    Slides
+                </a>
+            )
+        }
+
+        {
+            recordingUrl && (
+                <a
+                    href={recordingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+                >
+                    Recording
+                </a>
+            )
+        }
+
+        {
+            !showDetails && (
+                <a href={`/talks/${slug}`} class="text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1">
+                    View Details
+                </a>
+            )
+        }
+    </div>
 </div>

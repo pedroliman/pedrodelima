@@ -49,12 +49,10 @@ const siteConfig: SiteConfig = {
             text: 'Research',
             href: '/research'
         },
-        /* Temporarily hiding Talks section
         {
             text: 'Talks',
             href: '/talks'
         },
-        */
         {
             text: 'Contact',
             href: '/contact'

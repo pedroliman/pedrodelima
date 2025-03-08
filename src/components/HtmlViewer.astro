@@ -1,0 +1,47 @@
+---
+interface Props {
+    htmlPath: string;
+    title?: string;
+    class?: string;
+}
+
+const { htmlPath, title, class: className } = Astro.props;
+---
+
+<div class:list={['html-viewer w-full', className]}>
+    {
+        title && (
+            <div class="mb-3 flex justify-between items-center">
+                <h3 class="text-lg font-medium">{title}</h3>
+                <a
+                    href={htmlPath}
+                    target="_blank"
+                    class="px-3 py-1.5 text-sm bg-main text-white rounded-md hover:bg-main/90 dark:bg-main/80 dark:hover:bg-main/70"
+                >
+                    Open Full Screen
+                </a>
+            </div>
+        )
+    }
+
+    <div class="html-container border border-main/20 rounded-lg overflow-hidden">
+        <iframe src={htmlPath} class="w-full h-[70vh]" frameborder="0">
+            <p> Your browser doesn't support embedded content. <a href={htmlPath} target="_blank" rel="noopener noreferrer"> Click here to view the presentation
+            </a>. </p>
+        </iframe>
+    </div>
+
+    {
+        !title && (
+            <div class="mt-3 flex justify-end">
+                <a
+                    href={htmlPath}
+                    target="_blank"
+                    class="px-3 py-1.5 text-sm bg-main text-white rounded-md hover:bg-main/90 dark:bg-main/80 dark:hover:bg-main/70"
+                >
+                    Open Full Screen
+                </a>
+            </div>
+        )
+    }
+</div>
