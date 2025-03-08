@@ -63,6 +63,15 @@ export const publications: Publication[] = [
     featured: true
   },
   {
+    id: 'hotton_frontiers_2025',
+    title: `Incorporating social determinants of health into agent-based models of HIV transmission: methodological challenges and future directions`,
+    journal: 'Frontiers in Epidemiology',
+    year: 2025,
+    authors: `Hotton, Anna L. and Nascimento de Lima, Pedro and Fadikar, Arindam and Collier, Nicholson T. and Khanna, Aditya S. and Motley, Darnell N. and Tatara, Eric and Rimer, Sara and Almirol, Ellen and Pollack, Harold A. and Schneider, John A. and Lempert, Robert J. and Ozik, Jonathan`,
+    doi: '10.3389/fepid.2025.1533119',
+    featured: false
+  },
+  {
     id: 'vardavasCostBenefitAnalysisComprehensive2024',
     title: `Cost-Benefit Analysis of Comprehensive Military Eye Examination Policies`,
     journal: 'RAND Report',
