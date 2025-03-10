@@ -53,6 +53,10 @@ const siteConfig: SiteConfig = {
             text: 'Talks',
             href: '/talks'
         },
+        /*{
+            text: 'Blog',
+            href: '/blog'
+        },*/
         {
             text: 'Contact',
             href: '/contact'

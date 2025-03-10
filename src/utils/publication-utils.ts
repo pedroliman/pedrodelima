@@ -80,6 +80,45 @@ export function formatAuthors(authorString: string): string {
 }
 
 /**
+ * Format authors with Nascimento de Lima in bold
+ */
+export function formatAuthorsWithHighlight(authorString: string): string {
+  if (!authorString) return '';
+  
+  // Split the string into individual authors
+  const authors = authorString.split(/\s+and\s+|,\s+and\s+|,\s+/);
+  
+  // Process each author
+  const processedAuthors = authors.map(author => {
+    const lowercaseAuthor = author.toLowerCase().trim();
+    
+    // If this is Pedro, make the Nascimento de Lima part bold
+    if (lowercaseAuthor.includes('pedro') && lowercaseAuthor.includes('nascimento de lima')) {
+      // Find the position of "Nascimento"
+      const index = author.toLowerCase().indexOf('nascimento');
+      if (index !== -1) {
+        const firstName = author.substring(0, index).trim();
+        const lastName = author.substring(index).trim();
+        return `${firstName} <strong>${lastName}</strong>`;
+      }
+      return `<strong>${author}</strong>`;
+    }
+    
+    return author.trim();
+  });
+  
+  // Join the authors with commas and "and" for the last one
+  if (processedAuthors.length === 1) {
+    return processedAuthors[0];
+  } else if (processedAuthors.length === 2) {
+    return `${processedAuthors[0]} and ${processedAuthors[1]}`;
+  } else {
+    const lastAuthor = processedAuthors.pop();
+    return `${processedAuthors.join(', ')}, and ${lastAuthor}`;
+  }
+}
+
+/**
  * Format authors to show only last names (except for Pedro Nascimento de Lima)
  * This creates a more compact display with focus on other co-authors
  */
