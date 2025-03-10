@@ -1,0 +1,10 @@
+.remark-slide-content.full-slide-fig{
+  padding: 0px 0px 0px 0px;
+  width: 100%;}
+  
+  
+.remark-slide-number {
+  right: 50%
+  color: grey; /* white */
+  opacity: 0.5; /* default: 0.5 */
+}

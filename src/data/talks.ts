@@ -56,6 +56,45 @@ const talks: Talk[] = [
     description: "This presentation explores the economic value of environmental surveillance systems (ESS) in pandemic response using COVID-19 as a case study. It demonstrates how ESS can provide early warning, help mitigate slow policy decisions, and deliver meaningful benefits even if pandemics are rare events.",
     pdfPresentation: "/presentations/2024.07.26-Value-of-Environmental-Surveillance-MIDAS-talk.pdf",
     relatedPublicationIds: ['nascimentodelimaValueEnvironmentalSurveillance2024']
+  },
+  {
+    id: 'crc-screening-robustness',
+    slug: 'colorectal-cancer-screening-robustness',
+    title: "Robustness of colorectal cancer screening: A Stress test of US colonoscopy screening guidelines",
+    date: new Date("2023-10-16"),
+    venue: "INFORMS Annual Meeting",
+    location: "Phoenix, AZ", // Inferred based on INFORMS 2023 location
+    type: "conference",
+    slideUrl: "/presentations/2023.10.16.INFORMS.html",
+    description: "This presentation demonstrates how colorectal cancer screening strategies are robust to a wide range of uncertainties, including different model specifications and colonoscopy sensitivity assumptions. The study uses Bayesian inference to quantify uncertainty around adenoma birth-cohort effects and evaluate the robustness of screening recommendations.",
+    talk_html: "/presentations/2023.10.16.INFORMS.html",
+    relatedPublicationIds: ['NascimentodeLima2022']
+  },
+  {
+    id: 'deep-uncertainty-101',
+    slug: 'deep-uncertainty-101-infectious-disease-modeling',
+    title: "Deep Uncertainty 101 For Infectious Disease Modelers: What it is, why you should care, and what we can do about it",
+    date: new Date("2023-01-28"),
+    venue: "MIDAS Webinar",
+    location: "Virtual",
+    type: "webinar",
+    slideUrl: "presentations/2023-01-27-deep-uncertainty-infectious-disease-modelers.pdf",
+    description: "An introduction to deep uncertainty concepts for infectious disease modeling, covering fundamentals of Robust Decision Making (RDM) methodology, its application to pandemic response planning, and how infectious disease modelers can incorporate these approaches to better inform policy decisions under conditions of deep uncertainty.",
+    pdfPresentation: "/presentations/2023-01-27-deep-uncertainty-infectious-disease-modelers.pdf",
+    relatedPublicationIds: ['NascimentodeLima2022', 'NascimentodeLima2021b', 'NascimentodeLima2021a']
+  },
+  {
+    id: 'reopening-california-covid-19-exit-strategies',
+    slug: 'reopening-california-covid-19-exit-strategies',
+    title: "Reopening California: Seeking Robust, Non-Dominated COVID-19 Exit Strategies",
+    date: new Date("2021-04-15"), // Approximate date for MIDAS Annual Conference 2021
+    venue: "MIDAS/CDC call",
+    location: "Virtual", // Inferred given the time period (during COVID-19)
+    type: "conference",
+    slideUrl: "presentations/2021-02-08-MIDAS-Call-Reopening-California.pdf", // If you have a public URL
+    description: "Presentation on using Robust Decision Making (RDM) approach to evaluate COVID-19 reopening strategies in California under deep uncertainty. The research stress-tests various policy approaches across different futures, comparing constant-caution, time-based, and vaccination-based strategies to find non-dominated solutions.",
+    pdfPresentation: "/presentations/2021-02-08-MIDAS-Call-Reopening-California.pdf",
+    relatedPublicationIds: ['NascimentodeLima2021a', 'NascimentodeLima2021b']
   }
 ];
 
