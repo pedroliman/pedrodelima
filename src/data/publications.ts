@@ -15,6 +15,16 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'optic-wheels',
+    title: `OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations`,
+    journal: 'RAND Tool',
+    year: 2025,
+    authors: `Joshua Eagan, Beth Ann Griffin, Max Griswold, Hanna Han, Pedro Nascimento de Lima, Seema Choksy Pessar, Rosalie Liccardo Pacula, Bradley D. Stein`,
+    doi: '10.7249/TLA3054-1',
+    code: 'https://github.com/randcorporation/optic-policy-wheels',
+    featured: false
+  },
+  {
     id: 'optic-package',
     title: `optic: Simulation Tool for Causal Inference Using Longitudinal Data`,
     journal: 'R Package',
