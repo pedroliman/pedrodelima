@@ -35,6 +35,16 @@ export const publications: Publication[] = [
     featured: false
   },
   {
+    id: 'r6sim',
+    title: `R6Sim: Encapsulated OOP base classes for simulation modeling studies in R`,
+    journal: 'R Package',
+    year: 2024,
+    authors: `Pedro Nascimento de Lima`,
+    url: 'https://randcorporation.github.io/R6Sim/',
+    code: 'https://github.com/RANDCorporation/R6Sim',
+    featured: false
+  },
+  {
     id: 'gerbil_package',
     title: `gerbil: Generalized Efficient Regression-Based Imputation with Latent Processes`,
     journal: 'R Package',
@@ -313,12 +323,32 @@ export const publications: Publication[] = [
     featured: false
   },
   {
+    id: 'covid_allegheny_tool',
+    title: `Vulnerability, Inequity, and COVID-19: A Portrait of the Pandemic in Allegheny County`,
+    journal: 'RAND Tool',
+    year: 2021,
+    authors: `Evan D. Peet, Linnea Warren May, Jordan R. Fischbach, Christine Campigotto, Tichakunda Mangono, Colleen M. McCullough, Tiffany L. Gary-Webb, Robert Gradeck, Jared Kohler, Maria Gardner, Pedro Nascimento de Lima, Jason Beery, Lindsay Coome, Bettina Hammer, Jeanne S. Ringel, Noble Maseru, Fred Brown, Dara Mendez`,
+    doi: '10.7249/TLA1080-1-v2',
+    url: 'https://www.rand.org/pubs/tools/TLA1080-1-v2.html',
+    featured: false
+  },
+  {
     id: 'Vardavas2020',
     title: `The Health and Economic Impacts of Nonpharmaceutical Interventions to Address COVID-19: A Decision Support Tool for State and Local Policymakers`,
     journal: 'RAND Tool',
     year: 2020,
     authors: `Vardavas, Raffaele and Strong, Aaron and Bouey, Jennifer and Welburn, Jonathan and Nascimento de Lima, Pedro and Baker, Lawrence and Zhu, Keren and Priest, Michelle and Hu, Lynn and Ringel, Jeanne`,
     doi: '10.7249/tla173-1',
+    featured: false
+  },
+  {
+    id: 'diet_tool',
+    title: `How Would a Better Diet Affect Health and Economic Outcomes in the United States?`,
+    journal: 'RAND Tool',
+    year: 2020,
+    authors: `Pedro Nascimento de Lima, PhuongGiang Nguyen, Patricia M. Herman, Roland Sturm`,
+    url: 'https://www.rand.org/pubs/tools/TL363.html',
+    doi: '10.7249/TL363',
     featured: false
   },
   {

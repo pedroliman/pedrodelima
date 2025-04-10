@@ -34,7 +34,7 @@ export type SiteConfig = {
 
 const siteConfig: SiteConfig = {
     title: 'Pedro Nascimento de Lima, PhD',
-    subtitle: 'Engineer at RAND Corporation and Professor at Pardee RAND Gradutate School',
+    subtitle: 'Engineer at RAND Corporation and Professor at RAND School of Public Policy',
     description: 'Personal website of Pedro Nascimento de Lima',
     image: {
         src: '/dante-preview.jpg',
