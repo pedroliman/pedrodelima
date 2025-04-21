@@ -55,7 +55,7 @@ const talks: Talk[] = [
     slideUrl: "/presentations/2024.07.26-Value-of-Environmental-Surveillance-MIDAS-talk.pdf",
     description: "This presentation explores the economic value of environmental surveillance systems (ESS) in pandemic response using COVID-19 as a case study. It demonstrates how ESS can provide early warning, help mitigate slow policy decisions, and deliver meaningful benefits even if pandemics are rare events.",
     pdfPresentation: "/presentations/2024.07.26-Value-of-Environmental-Surveillance-MIDAS-talk.pdf",
-    relatedPublicationIds: ['nascimentodelimaValueEnvironmentalSurveillance2024']
+    relatedPublicationIds: ['nascimentodelimaValueEnvironmentalSurveillance2024', 'nascimento_de_lima_case_2025']
   },
   {
     id: 'crc-screening-robustness',

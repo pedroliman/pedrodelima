@@ -15,6 +15,15 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'nascimento_de_lima_case_2025',
+    title: `The Case For Sustaining Wastewater Surveillance Capabilities In The US`,
+    journal: 'Health Affairs Forefront',
+    year: 2025,
+    authors: `Nascimento de Lima, Pedro and Williams, Adeline and Willis, Henry H. and Faherty, Laura J.`,
+    doi: '10.1377/forefront.20250417.144021',
+    featured: true
+  },
+  {
     id: 'optic-wheels',
     title: `OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations`,
     journal: 'RAND Tool',
