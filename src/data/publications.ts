@@ -15,6 +15,15 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'nascimento_de_lima_stress-testing_2025',
+    title: `Stress-testing US colorectal cancer screening guidelines: Decennial colonoscopy from age 45 is robust to natural history uncertainty and colonoscopy sensitivity assumptions`,
+    journal: 'Medical Decision Making',
+    year: 2025,
+    authors: `Nascimento de Lima, Pedro and Maerzluft, Christopher and Ozik, Jonathan and Collier, Nicholson and Rutter, Carolyn M.`,
+    doi: '10.1177/0272989X251334373',
+    featured: true
+  },
+  {
     id: 'nascimento_de_lima_case_2025',
     title: `The Case For Sustaining Wastewater Surveillance Capabilities In The US`,
     journal: 'Health Affairs Forefront',

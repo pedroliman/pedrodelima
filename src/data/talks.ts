@@ -29,7 +29,7 @@ const talks: Talk[] = [
     slideUrl: "/presentations/2024.11.25.DMDU-Health-Symposium.pdf",
     description: "Presentation on applying Robust Decision Making methods to health policy questions, covering colorectal cancer screening and pandemic response strategies.",
     pdfPresentation: "/presentations/2024.11.25.DMDU-Health-Symposium.pdf",
-    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'nascimentodelimaValueEnvironmentalSurveillance2024']
+    relatedPublicationIds: ['nascimentodelimaCharacteristicsCosteffectiveBlood2024', 'nascimentodelimaValueEnvironmentalSurveillance2024', 'nascimento_de_lima_stress-testing_2025']
   },
   {
     id: 'blood-test-crc-screening-2024',
@@ -68,7 +68,7 @@ const talks: Talk[] = [
     slideUrl: "/presentations/2023.10.16.INFORMS.html",
     description: "This presentation demonstrates how colorectal cancer screening strategies are robust to a wide range of uncertainties, including different model specifications and colonoscopy sensitivity assumptions. The study uses Bayesian inference to quantify uncertainty around adenoma birth-cohort effects and evaluate the robustness of screening recommendations.",
     talk_html: "/presentations/2023.10.16.INFORMS.html",
-    relatedPublicationIds: ['NascimentodeLima2022']
+    relatedPublicationIds: ['NascimentodeLima2022', 'nascimento_de_lima_stress-testing_2025']
   },
   {
     id: 'deep-uncertainty-101',
