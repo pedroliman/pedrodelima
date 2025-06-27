@@ -15,6 +15,24 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'harlass_benefits_2025',
+    title: `Benefits of colorectal cancer screening using FIT with varying positivity thresholds by age and sex`,
+    journal: 'JNCI: Journal of the National Cancer Institute',
+    year: 2025,
+    authors: `Harlass, Matthias and Knudsen, Amy B and Nieboer, Daan and van Duuren, Luuk A and Kuntz, Karen M and Rutter, Carolyn M and Nascimento de Lima, Pedro and Collier, Nicholson and Ozik, Jonathan and Hahn, Anne I and Alarid-Escudero, Fernando and Zauber, Ann G and Inadomi, John M and Meester, Reinier G S and Lansdorp Vogelaar, Iris`,
+    doi: '10.1093/jnci/djaf149',
+    featured: false
+  },
+  {
+    id: 'griswold_assessing_2025',
+    title: `Assessing Bias and Precision in State Policy Evaluations: A Comparative Analysis of Time-Varying Estimators Using Policy Simulations`,
+    journal: 'arXiv',
+    year: 2025,
+    authors: `Griswold, Max and Griffin, Beth Ann and Rubinstein, Max and Liu, Mincen and Schuler, Megan and Stone, Elizabeth and Lima, Pedro Nascimento de and Stein, Bradley D. and Stuart, Elizabeth A.`,
+    doi: '10.48550/arXiv.2503.20882',
+    featured: false
+  },
+  {
     id: 'nascimento_de_lima_stress-testing_2025',
     title: `Stress-testing US colorectal cancer screening guidelines: Decennial colonoscopy from age 45 is robust to natural history uncertainty and colonoscopy sensitivity assumptions`,
     journal: 'Medical Decision Making',
