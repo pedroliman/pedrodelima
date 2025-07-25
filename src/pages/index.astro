@@ -6,9 +6,17 @@ import RelatedTalks from '../components/RelatedTalks.astro';
 import siteConfig from '../data/site-config';
 import { publications } from '../data/publications';
 import { formatAuthorsLastNames } from '../utils/publication-utils';
+import citationCache from '../data/dimensions_citations_cache.json';
 
 // Filter publications to only show featured ones on the homepage
 const featuredPublications = publications.filter((pub) => pub.featured);
+
+// Sort by citation count (descending), fallback to 0 if not found
+const sortedFeatured = [...featuredPublications].sort((a, b) => {
+    const aCite = citationCache.citations[a.doi] ?? 0;
+    const bCite = citationCache.citations[b.doi] ?? 0;
+    return bCite - aCite;
+});
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
@@ -17,10 +25,22 @@ const featuredPublications = publications.filter((pub) => pub.featured);
         <h2 class="mb-6 text-xl font-serif italic sm:mb-8 sm:text-2xl">Featured Research</h2>
 
         {
-            featuredPublications.map((publication) => (
-                <div class="publication-item mb-4 border-b border-main/20 pb-4">
-                    <div class="publication-title font-medium mb-2">{publication.title}</div>
-                    <div class="text-base mb-1">
+            sortedFeatured.map((publication) => (
+                <div class="publication-item mb-4 border-b border-main/20 pb-4 relative">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1 min-w-0">
+                            <div class="publication-title font-medium mb-2 break-words">{publication.title}</div>
+                        </div>
+                        {publication.doi && (
+                            <span
+                                class="__dimensions_badge_embed__ ml-4 flex-shrink-0 self-start"
+                                data-doi={publication.doi}
+                                data-hide-zero-citations="true"
+                                data-style="small_circle"
+                            />
+                        )}
+                    </div>
+                    <div class="text-base mb-1 flex items-center gap-2">
                         {publication.doi ? (
                             <a
                                 href={`https://doi.org/${publication.doi}`}
@@ -33,7 +53,6 @@ const featuredPublications = publications.filter((pub) => pub.featured);
                         ) : (
                             <span class="italic">{publication.journal}</span>
                         )}
-
                         {publication.code && (
                             <>
                                 <span class="mx-2 text-main/50">|</span>
@@ -56,6 +75,25 @@ const featuredPublications = publications.filter((pub) => pub.featured);
                 </div>
             ))
         }
+        <script>
+            // Remove any existing badge script
+            document.querySelectorAll('script[src*="badge.dimensions.ai"]').forEach((s) => s.remove());
+            // Add the badge script after DOM is ready
+            function loadDimensionsBadge() {
+                if (!document.querySelector('script[src*="badge.dimensions.ai"]')) {
+                    const script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://badge.dimensions.ai/badge.js';
+                    script.charset = 'utf-8';
+                    document.body.appendChild(script);
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadDimensionsBadge);
+            } else {
+                loadDimensionsBadge();
+            }
+        </script>
 
         <div class="mt-6 sm:mt-8">
             <Button href="/research">View All Research</Button>
