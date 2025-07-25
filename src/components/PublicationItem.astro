@@ -66,5 +66,12 @@ const codeLink = code ? cleanText(code) : null;
         }
     </div>
 
+    <div class="flex items-center gap-4">
+        <span class="__dimensions_badge_embed__" data-doi={publication.doi} data-hide-zero-citations="true" data-style="small_rectangle"></span>
+        <div class="altmetric-embed" data-badge-type="donut" data-doi={publication.doi}></div>
+    </div>
+
     {showRelated && <RelatedTalks publicationId={publication.id} />}
 </div>
+
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>

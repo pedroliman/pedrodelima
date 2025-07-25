@@ -31,14 +31,6 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
                         <div class="flex-1 min-w-0">
                             <div class="publication-title font-medium mb-2 break-words">{publication.title}</div>
                         </div>
-                        {publication.doi && (
-                            <span
-                                class="__dimensions_badge_embed__ ml-4 flex-shrink-0 self-start"
-                                data-doi={publication.doi}
-                                data-hide-zero-citations="true"
-                                data-style="small_circle"
-                            />
-                        )}
                     </div>
                     <div class="text-base mb-1 flex items-center gap-2">
                         {publication.doi ? (
@@ -72,6 +64,12 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
                     <div class="mt-2">
                         <RelatedTalks publicationId={publication.id} />
                     </div>
+
+                    {/* Add Altmetric badge next to Dimensions badge */}
+                    <div class="flex items-center gap-4">
+                        <span class="__dimensions_badge_embed__" data-doi={publication.doi} data-hide-zero-citations="true" data-style="small_circle" />
+                        <div data-badge-type="donut" class="altmetric-embed" data-doi={publication.doi} />
+                    </div>
                 </div>
             ))
         }
@@ -99,4 +97,7 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
             <Button href="/research">View All Research</Button>
         </div>
     </div>
+
+    {/* Add Altmetric embed script globally */}
+    <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
 </BaseLayout>

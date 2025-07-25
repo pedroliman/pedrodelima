@@ -52,14 +52,15 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                                     <div class="flex-1 min-w-0">
                                         <div class="publication-title font-medium mb-1 leading-relaxed break-words">{publication.title}</div>
                                     </div>
-                                    {publication.doi && (
+                                    <div class="flex items-center gap-4">
                                         <span
-                                            class="__dimensions_badge_embed__ ml-4 flex-shrink-0 self-start"
+                                            class="__dimensions_badge_embed__"
                                             data-doi={publication.doi}
                                             data-hide-zero-citations="true"
                                             data-style="small_circle"
                                         />
-                                    )}
+                                        <div data-badge-type="donut" class="altmetric-embed" data-doi={publication.doi} />
+                                    </div>
                                 </div>
                                 <div class="text-base mb-2 flex items-center gap-2">
                                     {publication.doi && publication.doi.trim().length > 0 ? (
@@ -109,24 +110,7 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                 ))
             }
         </div>
-        <script>
-            // Remove any existing badge script
-            document.querySelectorAll('script[src*="badge.dimensions.ai"]').forEach((s) => s.remove());
-            // Add the badge script after DOM is ready
-            function loadDimensionsBadge() {
-                if (!document.querySelector('script[src*="badge.dimensions.ai"]')) {
-                    const script = document.createElement('script');
-                    script.async = true;
-                    script.src = 'https://badge.dimensions.ai/badge.js';
-                    script.charset = 'utf-8';
-                    document.body.appendChild(script);
-                }
-            }
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', loadDimensionsBadge);
-            } else {
-                loadDimensionsBadge();
-            }
-        </script>
+        <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+        <script type="text/javascript" src="https://badge.dimensions.ai/badge.js"></script>
     </section>
 </BaseLayout>
