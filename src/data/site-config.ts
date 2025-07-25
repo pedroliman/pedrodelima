@@ -34,7 +34,7 @@ export type SiteConfig = {
 
 const siteConfig: SiteConfig = {
     title: 'Pedro Nascimento de Lima, PhD',
-    subtitle: 'Engineer at RAND Corporation and Professor at RAND School of Public Policy',
+    subtitle: 'Researcher at RAND Corporation and Professor at RAND School of Public Policy',
     description: 'Personal website of Pedro Nascimento de Lima',
     image: {
         src: '/dante-preview.jpg',
@@ -96,7 +96,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         /*title: 'Hi There!',*/
-        text: "I’m an engineer at RAND Corporation, a non-partisan research institution dedicated to improving policy through research and analysis. <br /><br />Trained as an engineer and as policy researcher, I work across disciplines to inform our most challenging policy decisions with quantitative models and data - even when uncertainty is deep and consensus seems out of reach.",
+        text: "I’m an engineer at RAND, a non-partisan research institution dedicated to improving policy through research and analysis. <br /><br /> I spend most of my time doing research that can save lives or make us more secure - either by preventing cancer, mitigating the worst consequences of pandemics, or preventing AI from causing harm. <br /><br /> You can reach me at plima at rand dot org.",
         image: {
             src: '/hero.jpeg',
             alt: 'Pedro Nascimento de Lima'
