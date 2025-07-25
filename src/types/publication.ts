@@ -1,4 +1,6 @@
 export interface Publication {
+  id: string;
+  code?: string;
   title: string;
   authors: string[];
   year: number;

@@ -7,14 +7,15 @@ import siteConfig from '../data/site-config';
 import { publications } from '../data/publications';
 import { formatAuthorsLastNames } from '../utils/publication-utils';
 import citationCache from '../data/dimensions_citations_cache.json';
+import type { Publication } from '../types/publication';
 
 // Filter publications to only show featured ones on the homepage
 const featuredPublications = publications.filter((pub) => pub.featured);
 
 // Sort by citation count (descending), fallback to 0 if not found
 const sortedFeatured = [...featuredPublications].sort((a, b) => {
-    const aCite = citationCache.citations[a.doi] ?? 0;
-    const bCite = citationCache.citations[b.doi] ?? 0;
+    const aCite = a.doi ? ((citationCache.citations as Record<string, number>)[a.doi] ?? 0) : 0;
+    const bCite = b.doi ? ((citationCache.citations as Record<string, number>)[b.doi] ?? 0) : 0;
     return bCite - aCite;
 });
 ---
@@ -25,7 +26,7 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
         <h2 class="mb-6 text-xl font-serif italic sm:mb-8 sm:text-2xl">Featured Research</h2>
 
         {
-            sortedFeatured.map((publication) => (
+            sortedFeatured.map((publication: Publication) => (
                 <div class="publication-item mb-4 border-b border-main/20 pb-4 relative">
                     <div class="flex items-start justify-between">
                         <div class="flex-1 min-w-0">
@@ -59,7 +60,7 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
                             </>
                         )}
                     </div>
-                    <div class="text-sm text-main/75 mb-1">{publication.author && formatAuthorsLastNames(publication.author)}</div>
+                    <div class="text-sm text-main/75 mb-1">{publication.authors && formatAuthorsLastNames(publication.authors)}</div>
 
                     <div class="mt-2">
                         <RelatedTalks publicationId={publication.id} />
@@ -68,7 +69,9 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
                     {/* Add Altmetric badge next to Dimensions badge */}
                     <div class="flex items-center gap-4">
                         <span class="__dimensions_badge_embed__" data-doi={publication.doi} data-hide-zero-citations="true" data-style="small_circle" />
-                        <div data-badge-type="donut" class="altmetric-embed" data-doi={publication.doi} />
+                        <div class="altmetric-container" data-loaded>
+                            <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
+                        </div>
                     </div>
                 </div>
             ))
@@ -100,4 +103,46 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
 
     {/* Add Altmetric embed script globally */}
     <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+    <style>
+        .altmetric-container {
+            position: relative;
+            display: inline-block;
+            width: 64px;
+            height: 64px;
+        }
+
+        .altmetric-container::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            background-color: white;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
+
+        .altmetric-container .altmetric-embed[data-badge-type] {
+            position: relative;
+            z-index: 1;
+        }
+
+        .altmetric-container[data-loaded]::before {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </BaseLayout>
+
+<script>
+    import citationCache from '../data/dimensions_citations_cache.json';
+
+    const typedCitationCache: { citations: Record<string, number> } = citationCache;
+</script>

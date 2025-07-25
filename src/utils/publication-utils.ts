@@ -84,14 +84,14 @@ export function formatAuthors(authorString: string): string {
  */
 export function formatAuthorsWithHighlight(authorString: string): string {
   if (!authorString) return '';
-  
+
   // Split the string into individual authors
   const authors = authorString.split(/\s+and\s+|,\s+and\s+|,\s+/);
-  
+
   // Process each author
   const processedAuthors = authors.map(author => {
     const lowercaseAuthor = author.toLowerCase().trim();
-    
+
     // If this is Pedro, make the Nascimento de Lima part bold
     if (lowercaseAuthor.includes('pedro') && lowercaseAuthor.includes('nascimento de lima')) {
       // Find the position of "Nascimento"
@@ -103,10 +103,10 @@ export function formatAuthorsWithHighlight(authorString: string): string {
       }
       return `<strong>${author}</strong>`;
     }
-    
+
     return author.trim();
   });
-  
+
   // Join the authors with commas and "and" for the last one
   if (processedAuthors.length === 1) {
     return processedAuthors[0];
@@ -122,20 +122,14 @@ export function formatAuthorsWithHighlight(authorString: string): string {
  * Format authors to show only last names (except for Pedro Nascimento de Lima)
  * This creates a more compact display with focus on other co-authors
  */
-export function formatAuthorsLastNames(authorString: string): string {
-  if (!authorString) return '';
+export function formatAuthorsLastNames(authors: string | string[]): string {
+  if (!authors) return '';
 
-  // Special handling for the authors string in the format we have
-  // The format can be like "Author1 and Author2 and Author3" or "Author1, Author2, Author3"
-
-  // Split the string into individual authors
-  const authors = authorString.split(/\s+and\s+|,\s+and\s+|,\s+/);
-
-  // Filter out empty entries
-  const validAuthors = authors.filter(author => author.trim() !== '');
+  // Ensure authors is an array
+  const authorsArray = Array.isArray(authors) ? authors : [authors];
 
   // Process each author to get the last name unless it's Pedro
-  const processedAuthors = validAuthors.map(author => {
+  const processedAuthors = authorsArray.map(author => {
     const lowercaseAuthor = author.toLowerCase();
 
     // If this is Pedro, skip processing and return null (we'll filter it out)
