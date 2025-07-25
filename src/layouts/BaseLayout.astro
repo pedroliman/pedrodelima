@@ -32,5 +32,27 @@ const { showHeader = true, ...head } = Astro.props;
             </main>
             <Footer />
         </div>
+        <script>
+          function loadDimensionsBadge() {
+            document.querySelectorAll('script[src*="badge.dimensions.ai"]').forEach(s => s.remove());
+            if (!document.querySelector('script[src*="badge.dimensions.ai"]')) {
+              const script = document.createElement('script');
+              script.async = true;
+              script.src = "https://badge.dimensions.ai/badge.js";
+              script.charset = "utf-8";
+              document.body.appendChild(script);
+            } else {
+              if (window.__dimensions_embed_badge__ && typeof window.__dimensions_embed_badge__.init === 'function') {
+                window.__dimensions_embed_badge__.init();
+              }
+            }
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadDimensionsBadge);
+          } else {
+            loadDimensionsBadge();
+          }
+          window.addEventListener('astro:after-swap', loadDimensionsBadge);
+        </script>
     </body>
 </html>
