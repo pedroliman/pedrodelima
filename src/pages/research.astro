@@ -106,7 +106,7 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                                 </div>
                                 {/* Commenting out the code that displays authors */}
                                 {/* <div class="text-sm text-main/75">{publication.authors ? formatAuthorsLastNames(publication.authors) : ''}</div> */}
-                        
+
                                 {/* Import RelatedTalks and display them for each publication */}
                                 <div class="mt-2">
                                     <RelatedTalks publicationId={publication.id} />
@@ -151,8 +151,31 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
         }
 
         .altmetric-container[data-loaded]::before {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .altmetric-container[data-loaded][data-has-citations='true']::before {
             opacity: 1;
             visibility: visible;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.altmetric-container').forEach((container) => {
+                const badge = container.querySelector('.altmetric-embed');
+                const doi = badge?.getAttribute('data-doi');
+
+                // Check citation count from the citation cache
+                const citationCount = doi ? (typedCitationCache.citations[doi] ?? 0) : 0;
+
+                // Hide the container if there are no citations
+                if (citationCount === 0) {
+                    container.style.display = 'none';
+                } else {
+                    container.setAttribute('data-has-citations', 'true');
+                }
+            });
+        });
+    </script>
 </BaseLayout>
