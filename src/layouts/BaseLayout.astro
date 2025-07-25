@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import BaseHead, { type Props as HeadProps } from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -12,16 +11,26 @@ const { showHeader = true, ...head } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="antialiased break-words">
+<html lang="en" class="antialiased break-words" data-theme="dark" style="visibility: hidden;">
     <head>
         <BaseHead {...head} />
         <GoogleAnalytics />
         <script>
-            if (localStorage.theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
+            // Apply theme immediately to prevent blinking
+            (function () {
+                // Commented out the part that sets the theme based on localStorage
+                // if (localStorage.theme === 'dark') {
+                //     document.documentElement.classList.add('dark');
+                // } else {
+                //     document.documentElement.classList.remove('dark');
+                // }
+
+                // Set the theme to light by default
+                document.documentElement.classList.remove('dark');
+
+                document.documentElement.style.visibility = 'visible';
+            })();
         </script>
-        <ClientRouter />
     </head>
     <body class="bg-main text-main">
         <div class="flex flex-col min-h-screen px-4 md:px-8">
@@ -53,15 +62,38 @@ const { showHeader = true, ...head } = Astro.props;
                 }
             }
 
+            function initializeAltmetricBadges() {
+                const altmetricScript = document.querySelector('script[src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"]');
+                if (altmetricScript) {
+                    altmetricScript.remove();
+                }
+                const newScript = document.createElement('script');
+                newScript.type = 'text/javascript';
+                newScript.src = 'https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js';
+                document.body.appendChild(newScript);
+            }
+
             // Run on initial load
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initializeDimensionsBadges);
+                document.addEventListener('DOMContentLoaded', () => {
+                    initializeDimensionsBadges();
+                    initializeAltmetricBadges();
+                });
             } else {
                 initializeDimensionsBadges();
+                initializeAltmetricBadges();
             }
 
             // Run after Astro client-side navigation
-            window.addEventListener('astro:after-swap', initializeDimensionsBadges);
+            window.addEventListener('astro:after-swap', () => {
+                initializeDimensionsBadges();
+                initializeAltmetricBadges();
+            });
+
+            // Force a full page reload after Astro client-side navigation
+            window.addEventListener('astro:after-swap', () => {
+                window.location.reload();
+            });
         </script>
     </body>
 </html>

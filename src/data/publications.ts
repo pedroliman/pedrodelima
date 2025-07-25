@@ -39,7 +39,7 @@ export const publications: Publication[] = [
     year: 2025,
     authors: `Nascimento de Lima, Pedro and Maerzluft, Christopher and Ozik, Jonathan and Collier, Nicholson and Rutter, Carolyn M.`,
     doi: '10.1177/0272989X251334373',
-    featured: true
+    featured: false
   },
   {
     id: 'nascimento_de_lima_case_2025',
@@ -48,7 +48,7 @@ export const publications: Publication[] = [
     year: 2025,
     authors: `Nascimento de Lima, Pedro and Williams, Adeline and Willis, Henry H. and Faherty, Laura J.`,
     doi: '10.1377/forefront.20250417.144021',
-    featured: true
+    featured: false
   },
   {
     id: 'optic-wheels',
@@ -171,7 +171,7 @@ export const publications: Publication[] = [
     year: 2024,
     authors: `Pedro Nascimento de Lima and Van Den Puttelaar, Rosita and Knudsen, Amy B and Hahn, Anne I and Kuntz, Karen M and Ozik, Jonathan and Collier, Nicholson and Alarid-Escudero, Fernando and Zauber, Ann G and Inadomi, John M and Lansdorp-Vogelaar, Iris and Rutter, Carolyn M`,
     doi: '10.1093/jnci/djae124',
-    featured: true
+    featured: false
   },
   {
     id: 'nascimentodelimaValueEnvironmentalSurveillance2024',
@@ -180,7 +180,7 @@ export const publications: Publication[] = [
     year: 2024,
     authors: `Pedro Nascimento de Lima and Karr, Sarah and Lim, Jing Zhi and Vardavas, Raffaele and Roberts, Derek and Kessler, Abigail and Awan, Jalal and Faherty, Laura J. and Willis, Henry H.`,
     doi: '10.1038/s41598-024-79952-5',
-    featured: true,
+    featured: false,
     code: `https://github.com/RANDCorporation/value-of-env-surveillance`
   },
   {
@@ -199,7 +199,7 @@ export const publications: Publication[] = [
     year: 2024,
     authors: `David A. Lieberman and Aasma Shaukat and Folasade P. May and John M. Carethers and Iris Lansdorp-Vogelaar and Uri Ladabaum and Timothy R. Church and Anjelica Davis and Chyke A. Doubeni and John M. Inadomi and Richard C. Wender and Pedro Nascimento de Lima and Rosita van den Puttelaar`,
     doi: '10.1016/j.cgh.2024.01.034',
-    featured: false
+    featured: true
   },
   {
     id: 'Nowak2024.02.19.24303020',
@@ -319,7 +319,7 @@ export const publications: Publication[] = [
     year: 2021,
     authors: `Nascimento de Lima, Pedro and Lempert, Robert and Vardavas, Raffaele and Baker, Lawrence and Ringel, Jeanne and Rutter, Carolyn M and Ozik, Jonathan and Collier, Nicholson`,
     doi: '10.1371/journal.pone.0259166',
-    featured: false,
+    featured: true,
     code: `https://github.com/RANDCorporation/covid-19-reopening-california`
   },
   {
@@ -375,7 +375,7 @@ export const publications: Publication[] = [
     year: 2020,
     authors: `Vardavas, Raffaele and Strong, Aaron and Bouey, Jennifer and Welburn, Jonathan and Nascimento de Lima, Pedro and Baker, Lawrence and Zhu, Keren and Priest, Michelle and Hu, Lynn and Ringel, Jeanne`,
     doi: '10.7249/tla173-1',
-    featured: false
+    featured: true
   },
   {
     id: 'diet_tool',
