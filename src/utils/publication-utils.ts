@@ -122,47 +122,86 @@ export function formatAuthorsWithHighlight(authorString: string): string {
  * Format authors to show only last names (except for Pedro Nascimento de Lima)
  * This creates a more compact display with focus on other co-authors
  */
-export function formatAuthorsLastNames(authors: string | string[]): string {
+export function formatAuthorsLastNames(authors: string): string {
   if (!authors) return '';
 
-  // Ensure authors is an array
-  const authorsArray = Array.isArray(authors) ? authors : [authors];
+  // Split the authors string into individual authors using common delimiters
+  const authorsArray = authors.split(/\s+and\s+|,\s+and\s+|,\s+/);
 
-  // Process each author to get the last name unless it's Pedro
+  // Process each author to extract only the last name unless it's Pedro
   const processedAuthors = authorsArray.map(author => {
     const lowercaseAuthor = author.toLowerCase();
 
     // If this is Pedro, skip processing and return null (we'll filter it out)
-    if (lowercaseAuthor.includes('pedro') && lowercaseAuthor.includes('nascimento de lima')) {
+    if (lowercaseAuthor.includes('nascimento de lima') || lowercaseAuthor.includes('de lima') || lowercaseAuthor.includes('lima')) {
       return null;
     }
 
-    // Handle complex names with special care
-    if (lowercaseAuthor.includes('van den') || lowercaseAuthor.includes('de ')) {
-      // For Dutch or Portuguese/Spanish names
-      const parts = author.trim().split(/\s+/);
-      if (parts.length >= 3 && (parts[parts.length - 3].toLowerCase() === 'van' ||
-        parts[parts.length - 3].toLowerCase() === 'de')) {
-        return `${parts[parts.length - 3]} ${parts[parts.length - 2]} ${parts[parts.length - 1]}`;
-      } else if (parts.length >= 2 && parts[parts.length - 2].toLowerCase() === 'de') {
-        return `${parts[parts.length - 2]} ${parts[parts.length - 1]}`;
-      }
-    }
-
-    // Otherwise, get the last name
+    // Extract last name, ensuring multi-part last names are handled
     const parts = author.trim().split(/\s+/);
     if (parts.length === 0) return '';
 
-    // Return the last part, which should be the last name
+    // Handle cases where the last name might include multiple parts (e.g., "Van Den Puttelaar")
+    if (parts.length > 1 && /^[A-Z]/.test(parts[parts.length - 1]) && /^[A-Z]/.test(parts[parts.length - 2])) {
+      return `${parts[parts.length - 2]} ${parts[parts.length - 1]}`;
+    }
+
+    // Default to the last part as the last name
     return parts[parts.length - 1];
   });
 
-  // Filter out null values (Pedro) and join with commas
+  // Filter out null values (Pedro)
   const filteredAuthors = processedAuthors.filter(name => name !== null);
 
   if (filteredAuthors.length === 0) {
     return '';
+  } else if (filteredAuthors.length <= 4) {
+    // If there are 4 or fewer authors, show all with "and" before the last
+    const lastAuthor = filteredAuthors.pop();
+    return `with ${filteredAuthors.join(', ')}${filteredAuthors.length > 0 ? ', and ' : ''}${lastAuthor}`;
+  } else {
+    // Show the first three authors, "others," and the last author
+    const firstThree = filteredAuthors.slice(0, 3);
+    const lastAuthor = filteredAuthors[filteredAuthors.length - 1];
+    return `with ${firstThree.join(', ')}, others and ${lastAuthor}`;
   }
+}
 
-  return filteredAuthors.join(', ');
+/**
+ * Format authors according to APA citation style
+ * Lists all authors if there are 20 or fewer, and uses ellipses for more than 20 authors
+ */
+export function formatAuthorsCitationStyle(authors: string): string {
+  if (!authors) return '';
+
+  // Split the authors string into individual authors using common delimiters
+  const authorsArray = authors.split(/\s+and\s+|,\s+and\s+|,\s+/);
+
+  // Filter out the user's name (Pedro Nascimento de Lima)
+  const filteredAuthors = authorsArray.filter(author => {
+    const lowercaseAuthor = author.toLowerCase();
+    return !(
+      lowercaseAuthor.includes('nascimento de lima') ||
+      lowercaseAuthor.includes('de lima') ||
+      lowercaseAuthor.includes('lima')
+    );
+  });
+
+  // Format according to APA style
+  if (filteredAuthors.length <= 20) {
+    // List all authors with commas, and use "&" before the last author
+    if (filteredAuthors.length === 1) {
+      return `with ${filteredAuthors[0]}`;
+    } else if (filteredAuthors.length === 2) {
+      return `with ${filteredAuthors[0]} & ${filteredAuthors[1]}`;
+    } else {
+      const lastAuthor = filteredAuthors.pop();
+      return `with ${filteredAuthors.join(', ')}, & ${lastAuthor}`;
+    }
+  } else {
+    // List the first 19 authors, followed by "...", and then the last author
+    const firstNineteen = filteredAuthors.slice(0, 19);
+    const lastAuthor = filteredAuthors[filteredAuthors.length - 1];
+    return `with ${firstNineteen.join(', ')}, ..., & ${lastAuthor}`;
+  }
 }

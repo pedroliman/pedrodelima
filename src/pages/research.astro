@@ -50,7 +50,7 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                     <div class="year-section mb-10">
                         <h3 class="text-xl font-serif font-medium mb-4">{year}</h3>
 
-                        {publicationsByYear[year].map((publication: Publication) => (
+                        {publicationsByYear[year].map((publication, index) => (
                             <div class="publication-item mb-6 border-b border-main/20 pb-6">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1 min-w-0">
@@ -104,8 +104,9 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                                         </>
                                     )}
                                 </div>
-                                <div class="text-sm text-main/75">{publication.authors ? formatAuthorsLastNames(publication.authors) : ''}</div>
-
+                                {/* Commenting out the code that displays authors */}
+                                {/* <div class="text-sm text-main/75">{publication.authors ? formatAuthorsLastNames(publication.authors) : ''}</div> */}
+                        
                                 {/* Import RelatedTalks and display them for each publication */}
                                 <div class="mt-2">
                                     <RelatedTalks publicationId={publication.id} />
