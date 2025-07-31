@@ -15,6 +15,15 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'nascimento_de_lima_triple-effect_2025',
+    title: `The triple-effect of colorectal cancer screening: reducing deaths, government spending and mortality disparities`,
+    journal: 'JNCI: Journal of the National Cancer Institute',
+    year: 2025,
+    authors: `Nascimento De Lima, Pedro and Bartholomew, Lillian and May, Folasade P and Coronado, Gloria D and Rutter, Carolyn M`,
+    doi: '10.1093/jnci/djaf202',
+    featured: true
+  },
+  {
     id: 'harlass_benefits_2025',
     title: `Benefits of colorectal cancer screening using FIT with varying positivity thresholds by age and sex`,
     journal: 'JNCI: Journal of the National Cancer Institute',
