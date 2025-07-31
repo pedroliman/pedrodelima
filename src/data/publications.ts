@@ -441,4 +441,58 @@ export const publications: Publication[] = [
     url: 'https://www.unisinos.br/editora/pesquisa-operacional-programacao-linear-passo-a-passo',
     featured: false
   },
+  {
+    id: 'santos_simulacao_2016',
+    title: `Simulação de Carregamento de Caminhões em uma Indústria Metalúrgica`,
+    journal: 'Anais do I SIGEPRO - Simpósio Gaúcho de Engenharia de Produção',
+    year: 2016,
+    authors: `Santos, A. S. and Nascimento de Lima, Pedro and Wunsch, G. and Brasil, J. E. S.`,
+    doi: null,
+    featured: false
+  },
+  {
+    id: 'nascimentodelima_ergonomia_2015',
+    title: `Ergonomia e Segurança no Setor Aeronáutico: A contribuição do Diagnóstico Participativo de Riscos em um ambiente de Manutenção de Aeronaves`,
+    journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
+    year: 2015,
+    authors: `Nascimento de Lima, Pedro and Vieira, D. C. and Tegner, M. G. and Heck, I. and Luz, F. R.`,
+    doi: null,
+    featured: false
+  },
+  {
+    id: 'machado_proposicao_2015',
+    title: `Proposição de uma Abordagem Sistêmica para identificar ações alavancadoras para o aumento da Cooperação Interdepartamental`,
+    journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
+    year: 2015,
+    authors: `Machado, M. S. and Rodrigues, L. H. and Nascimento de Lima, Pedro and Morandi, M. I. W. M.`,
+    doi: null,
+    featured: false
+  },
+  {
+    id: 'nascimentodelima_lean_2015',
+    title: `Lean Office na prática: Proposição e Aplicação de Método à luz do Gerenciamento de Processos`,
+    journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
+    year: 2015,
+    authors: `Nascimento de Lima, Pedro and Tegner, M. G. and Corcini Neto, S. L. H. and Veit, D. R.`,
+    doi: null,
+    featured: false
+  },
+  {
+    id: 'nascimentodelima_minimizando_2015',
+    title: `Minimizando Custos de Manutenção: Uma alternativa para o Nivelamento de Recursos de um Cronograma de Manutenção Preventiva utilizando Programação Linear e a Engenharia de Confiabilidade`,
+    journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
+    year: 2015,
+    authors: `Nascimento de Lima, Pedro and Calderaro, D. R. and Goldmeyer, D. B. and Rodrigues, L. H. and Morandi, M. I. W. M.`,
+    doi: null,
+    featured: false
+  },
+  {
+    id: 'nascimentodelima_melhora_2015',
+    title: `O que Melhora a Operação do Serviço de uma Pequena Empresa? Ferramentas para a Melhoria de Operações de Serviço e aplicação em seis empresas de São Leopoldo - RS no contexto do Projeto Negócio a Negócio Etapa 3`,
+    journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
+    year: 2015,
+    authors: `Nascimento de Lima, Pedro and Tegner, M. G.`,
+    doi: null,
+    featured: false
+  },
 ];
