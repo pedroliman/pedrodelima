@@ -1,0 +1,60 @@
+---
+interface Props {
+    repository: {
+        id: string;
+        title: string;
+        code: string;
+        description?: string;
+        lastUpdated?: string;
+        version?: string;
+        stars?: number;
+        forks?: number;
+    };
+    class?: string;
+}
+
+const { repository, class: className } = Astro.props;
+
+// Extract repository info from GitHub URL
+function parseGitHubUrl(url: string) {
+    const match = url.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+    if (match) {
+        return {
+            owner: match[1],
+            repo: match[2].replace(/\.git$/, '')
+        };
+    }
+    return null;
+}
+
+const githubInfo = parseGitHubUrl(repository.code);
+---
+
+<div class:list={['code-entry mb-6 border-b border-main/20 pb-6', className]}>
+    {
+        githubInfo && (
+            <div>
+                {/* First line: repository name and version */}
+                <div class="text-lg font-medium mb-2">
+                    <a href={repository.code} target="_blank" rel="noopener noreferrer" class="text-main hover:underline hover:underline-offset-2">
+                        {githubInfo.owner.toLowerCase()}/{githubInfo.repo.toLowerCase()}
+                    </a>
+                    {repository.version && <span class="ml-2 text-sm text-main/70">@ {repository.version}</span>}
+                </div>
+
+                {/* Second line: stars, fork, title */}
+                <div class="flex items-center gap-4 text-sm">
+                    {repository.stars !== undefined && repository.stars > 0 && (
+                        <a href={`${repository.code}/stargazers`} target="_blank" rel="noopener noreferrer" class="text-main/70 hover:underline">
+                            ⭐ {repository.stars}
+                        </a>
+                    )}
+                    <a href={`${repository.code}/fork`} target="_blank" rel="noopener noreferrer" class="text-main/70 hover:underline">
+                        fork
+                    </a>
+                    <span class="text-main/60 ml-2">{repository.title}</span>
+                </div>
+            </div>
+        )
+    }
+</div>

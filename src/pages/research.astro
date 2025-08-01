@@ -10,8 +10,11 @@ import type { Publication } from '../types/publication';
 // Explicitly type the citationCache object to resolve the type issue
 const typedCitationCache: { citations: Record<string, number> } = citationCache;
 
+// Filter out code-only repositories from research page
+const researchPublications = publications.filter((pub) => !pub.codeOnly);
+
 // Sort by year (desc), then by citation count (desc) within each year
-const sortedPublications = [...publications].sort((a, b) => {
+const sortedPublications = [...researchPublications].sort((a, b) => {
     const yearDiff = parseInt(b.year) - parseInt(a.year);
     if (yearDiff !== 0) return yearDiff;
     const aCite = a.doi ? (typedCitationCache.citations[a.doi] ?? 0) : 0;

@@ -50,6 +50,10 @@ const siteConfig: SiteConfig = {
             href: '/research'
         },
         {
+            text: 'Code',
+            href: '/code'
+        },
+        {
             text: 'Talks',
             href: '/talks'
         },

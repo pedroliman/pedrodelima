@@ -1,0 +1,119 @@
+{
+  "lastUpdated": "2025-08-01T13:51:17.869Z",
+  "repositories": [
+    {
+      "id": "pedrodelima",
+      "owner": "pedroliman",
+      "repo": "pedrodelima",
+      "title": "My personal website",
+      "description": "GitHub Repository (2024)",
+      "lastUpdated": "2025-07-31T22:15:08Z",
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/pedroliman/pedrodelima"
+    },
+    {
+      "id": "r6sim",
+      "owner": "RANDCorporation",
+      "repo": "R6Sim",
+      "title": "R6Sim: Encapsulated OOP base classes for simulation modeling studies in R",
+      "description": "R6 encapsulated OOP base classes for simulation modeling studies in R",
+      "lastUpdated": "2025-07-29T18:51:53Z",
+      "stars": 0,
+      "forks": 0,
+      "version": "v.1.1.0",
+      "url": "https://github.com/RANDCorporation/R6Sim"
+    },
+    {
+      "id": "optic-package",
+      "owner": "randcorporation",
+      "repo": "optic",
+      "title": "optic: Simulation Tool for Causal Inference Using Longitudinal Data",
+      "description": "optic: Simulation Tool for Causal Inference Using Longitudinal Data",
+      "lastUpdated": "2025-07-25T14:44:04Z",
+      "stars": 9,
+      "forks": 1,
+      "version": "v1.0.2",
+      "url": "https://github.com/RANDCorporation/optic"
+    },
+    {
+      "id": "optic-wheels",
+      "owner": "randcorporation",
+      "repo": "optic-policy-wheels",
+      "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
+      "description": "Code used to create policy wheel data visualizations as seen in OPTIC publications",
+      "lastUpdated": "2025-03-05T14:44:31Z",
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/RANDCorporation/optic-policy-wheels"
+    },
+    {
+      "id": "nascimentodelimaValueEnvironmentalSurveillance2024",
+      "owner": "RANDCorporation",
+      "repo": "value-of-env-surveillance",
+      "title": "The Value of Environmental Surveillance for Pandemic Response",
+      "description": "Scientific Reports: The Value of Environmental Surveillance for Pandemic Response",
+      "lastUpdated": "2024-09-06T18:21:46Z",
+      "stars": 3,
+      "forks": 1,
+      "version": "v0.1.0",
+      "url": "https://github.com/RANDCorporation/value-of-env-surveillance"
+    },
+    {
+      "id": "doi:10.1177/0272989X241255618",
+      "owner": "NCI-CISNET-Colorectal",
+      "repo": "baycann_cisnet_crc",
+      "title": "Emulator-Based Bayesian Calibration of the CISNET Colorectal Cancer Models",
+      "description": "Medical Decision Making (2024)",
+      "lastUpdated": "2024-09-06T07:37:43Z",
+      "stars": 4,
+      "forks": 0,
+      "url": "https://github.com/NCI-CISNET-Colorectal/baycann_cisnet_crc"
+    },
+    {
+      "id": "NascimentodeLima2023",
+      "owner": "c-rutter",
+      "repo": "unequal-recovery-covid-19",
+      "title": "Projected long-term effects of colorectal cancer screening disruptions following the COVID-19 pandemic",
+      "description": "eLife: Projected long-term effects of colorectal cancer screening disruptions following the COVID-19 pandemic",
+      "lastUpdated": "2023-04-20T18:43:09Z",
+      "stars": 1,
+      "forks": 0,
+      "version": "v1.0.0.eLife",
+      "url": "https://github.com/c-rutter/unequal-recovery-covid-19"
+    },
+    {
+      "id": "NascimentodeLima2023AMS",
+      "owner": "RANDCorporation",
+      "repo": "racial-wealth-gap",
+      "title": "Modeling America's Racial Wealth Disparities: Mathematical Models Help Chart Pathways for Closing Racial Wealth Gaps",
+      "description": "RAND Report: Overcoming Compound Racial Inequity",
+      "lastUpdated": "2023-01-18T18:34:13Z",
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/RANDCorporation/racial-wealth-gap"
+    },
+    {
+      "id": "Welburn2022",
+      "owner": "RANDCorporation",
+      "repo": "racial-wealth-gap",
+      "title": "Overcoming Compound Racial Inequity: Policies and Costs for Closing the Black-White Wealth Gap",
+      "description": "RAND Report: Overcoming Compound Racial Inequity",
+      "lastUpdated": "2023-01-18T18:34:13Z",
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/RANDCorporation/racial-wealth-gap"
+    },
+    {
+      "id": "NascimentodeLima2021a",
+      "owner": "RANDCorporation",
+      "repo": "covid-19-reopening-california",
+      "title": "Reopening California: Seeking robust, non-dominated COVID-19 exit strategies",
+      "description": "PLOS One paper: Reopening California: Seeking Robust, Non-Dominated COVID-19 Exit Strategies",
+      "lastUpdated": "2021-08-20T07:16:38Z",
+      "stars": 5,
+      "forks": 0,
+      "url": "https://github.com/RANDCorporation/covid-19-reopening-california"
+    }
+  ]
+}

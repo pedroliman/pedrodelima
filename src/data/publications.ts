@@ -1,12 +1,14 @@
 export interface Publication {
+  id: string;
   title: string;
   journal: string;
   doi?: string;
   url?: string;
-  author: string;
-  year: string;
+  authors: string;
+  year: string | number;
   featured: boolean;
   code?: string;
+  codeOnly?: boolean; // New flag for code-only repositories
 }
 
 /**
@@ -14,6 +16,16 @@ export interface Publication {
  * featured flag controls whether it appears on the homepage
  */
 export const publications: Publication[] = [
+  {
+    id: 'pedrodelima',
+    title: 'My personal website',
+    journal: 'GitHub Repository',
+    year: 2024,
+    authors: 'Pedro Nascimento de Lima',
+    code: 'https://github.com/pedroliman/pedrodelima',
+    codeOnly: true,  // This is the key flag
+    featured: false
+  },
   {
     id: 'nascimento_de_lima_triple-effect_2025',
     title: `The triple-effect of colorectal cancer screening: reducing deaths, government spending and mortality disparities`,
@@ -494,5 +506,5 @@ export const publications: Publication[] = [
     authors: `Nascimento de Lima, Pedro and Tegner, M. G.`,
     doi: null,
     featured: false
-  },
+  }
 ];

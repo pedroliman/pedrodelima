@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CodeEntry from '../components/CodeEntry.astro';
+import codeMetadata from '../data/code-metadata.json';
+import { publications } from '../data/publications';
+
+// Build a map of publication id to publication
+const pubMap = Object.fromEntries(publications.filter((pub) => pub.code).map((pub) => [pub.id, pub]));
+
+// Merge metadata with publication info
+const allRepositories = codeMetadata.repositories
+    .map((meta) => {
+        const pub = pubMap[meta.id];
+        if (!pub) return null;
+        return {
+            id: meta.id,
+            title: pub.title,
+            code: pub.code,
+            lastUpdated: meta.lastUpdated,
+            version: meta.version,
+            stars: meta.stars
+            // forks: meta.forks, // not used in display
+        };
+    })
+    .filter(Boolean)
+    .sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
+
+// Add any code-only publications not in metadata (e.g. non-GitHub)
+publications
+    .filter((pub) => pub.codeOnly && pub.code && !allRepositories.find((r) => r.id === pub.id))
+    .forEach((pub) => {
+        allRepositories.push({
+            id: pub.id,
+            title: pub.title,
+            code: pub.code,
+            lastUpdated: new Date().toISOString(),
+            version: undefined,
+            stars: 0
+        });
+    });
+---
+
+<BaseLayout
+    title="Code Repositories"
+    description="View code repositories and software packages associated with my research publications and projects."
+    showHeader={false}
+>
+    <section class="mb-16 sm:mb-24">
+        <h1 class="mb-6 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Code Repositories</h1>
+        <p class="mb-10 text-lg leading-relaxed">Below you'll find code repositories associated with my research and projects.</p>
+
+        <div class="repositories">
+            {allRepositories.map((repository) => <CodeEntry repository={repository} />)}
+        </div>
+
+        {
+            allRepositories.length === 0 && (
+                <div class="text-center py-12">
+                    <p class="text-main/70">No code repositories found.</p>
+                </div>
+            )
+        }
+    </section>
+</BaseLayout>
