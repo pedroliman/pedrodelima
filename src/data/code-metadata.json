@@ -1,6 +1,13 @@
 {
-  "lastUpdated": "2025-08-11T03:37:47.199Z",
+  "lastUpdated": "2025-08-18T03:36:45.793Z",
   "repositories": [
+    {
+      "id": "pedrodelima",
+      "stars": 0,
+      "forks": 0,
+      "lastUpdated": "2025-08-11T03:37:47Z",
+      "url": "https://github.com/pedroliman/pedrodelima"
+    },
     {
       "id": "r6sim",
       "stars": 0,
@@ -8,13 +15,6 @@
       "lastUpdated": "2025-08-04T16:32:36Z",
       "version": "v.1.1.0",
       "url": "https://github.com/RANDCorporation/R6Sim"
-    },
-    {
-      "id": "pedrodelima",
-      "stars": 0,
-      "forks": 0,
-      "lastUpdated": "2025-08-04T03:44:04Z",
-      "url": "https://github.com/pedroliman/pedrodelima"
     },
     {
       "id": "optic-package",
@@ -42,7 +42,7 @@
     {
       "id": "doi:10.1177/0272989X241255618",
       "stars": 4,
-      "forks": 0,
+      "forks": 1,
       "lastUpdated": "2024-09-06T07:37:43Z",
       "url": "https://github.com/NCI-CISNET-Colorectal/baycann_cisnet_crc"
     },
