@@ -1,19 +1,19 @@
 {
-  "lastUpdated": "2025-08-25T03:29:07.923Z",
+  "lastUpdated": "2025-09-01T03:33:34.418Z",
   "repositories": [
     {
       "id": "NascimentodeLima2021a",
       "stars": 0,
       "forks": 0,
-      "lastUpdated": "2025-08-25T03:29:07.823Z",
+      "lastUpdated": "2025-09-01T03:33:34.318Z",
       "url": "https://github.com/RANDCorporation/covid-19-reopening-california"
     },
     {
-      "id": "Welburn2022",
+      "id": "pedrodelima",
       "stars": 0,
       "forks": 0,
-      "lastUpdated": "2025-08-25T03:29:07.666Z",
-      "url": "https://github.com/RANDCorporation/racial-wealth-gap"
+      "lastUpdated": "2025-08-25T03:29:07Z",
+      "url": "https://github.com/pedroliman/pedrodelima"
     },
     {
       "id": "r6sim",
@@ -22,13 +22,6 @@
       "lastUpdated": "2025-08-19T18:59:41Z",
       "version": "v.1.1.0",
       "url": "https://github.com/RANDCorporation/R6Sim"
-    },
-    {
-      "id": "pedrodelima",
-      "stars": 0,
-      "forks": 0,
-      "lastUpdated": "2025-08-18T03:36:45Z",
-      "url": "https://github.com/pedroliman/pedrodelima"
     },
     {
       "id": "optic-package",
@@ -44,6 +37,13 @@
       "forks": 0,
       "lastUpdated": "2025-03-05T14:44:31Z",
       "url": "https://github.com/RANDCorporation/optic-policy-wheels"
+    },
+    {
+      "id": "Welburn2022",
+      "stars": 1,
+      "forks": 0,
+      "lastUpdated": "2025-02-14T13:55:26Z",
+      "url": "https://github.com/RANDCorporation/racial-wealth-gap"
     },
     {
       "id": "nascimentodelimaValueEnvironmentalSurveillance2024",
