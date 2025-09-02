@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAugmentedPublications } from '../../data/publication-provider';
+import type { Publication } from '../../data/publications';
+import { slugify } from '../../utils/common-utils';
+
+export async function getStaticPaths() {
+  const publications = await getAugmentedPublications();
+  return publications.map(pub => ({
+    params: { slug: slugify(pub.id) },
+  }));
+}
+
+const { slug } = Astro.params;
+const publications = await getAugmentedPublications();
+const publication = publications.find(p => slugify(p.id) === slug);
+
+if (!publication) {
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not Found'
+  });
+}
+
+const pageTitle = publication.title;
+
+import siteConfig from '../../data/site-config';
+---
+
+<BaseLayout title={pageTitle} description={publication.abstract || ''}>
+  <article class="prose prose-lg mx-auto">
+    <h1>{publication.title}</h1>
+
+    <div id="citation-placeholder"></div>
+
+    {publication.abstract && (
+      <section>
+        <h2>Abstract</h2>
+        <p>{publication.abstract}</p>
+      </section>
+    )}
+
+    <div class="mt-8 flex flex-wrap gap-4">
+      {publication.url && <a href={publication.url} class="text-lg font-medium text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Full Paper</a>}
+      {publication.code && <a href={publication.code} class="text-lg font-medium text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">Code</a>}
+    </div>
+
+    <div class="mt-8 flex items-center gap-4">
+      {publication.doi && (
+        <>
+          <span
+            class="__dimensions_badge_embed__"
+            data-doi={publication.doi}
+            data-hide-zero-citations="true"
+            data-style="small_circle"
+          />
+          <div class="altmetric-container" data-loaded>
+            <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
+          </div>
+        </>
+      )}
+    </div>
+
+    {publication.bibtex && (
+      <section class="mt-8">
+        <h2>Citation</h2>
+        <div class="flex gap-4">
+          <button id="copy-bibtex" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Copy BibTeX</button>
+          <button id="download-bibtex" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Download .bib</button>
+        </div>
+        <pre class="mt-4 p-4 bg-gray-100 rounded overflow-x-auto"><code>{publication.bibtex}</code></pre>
+      </section>
+    )}
+
+  </article>
+
+  <script is:inline src="https://cdn.jsdelivr.net/npm/citation-js@0.7.20/build/citation.js"></script>
+  <script is:inline type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script is:inline type="text/javascript" src="https://badge.dimensions.ai/badge.js"></script>
+
+  <script define:vars={{ bibtex: publication.bibtex, title: publication.title, citationStyle: siteConfig.citationStyle }}>
+    if (bibtex) {
+      const Cite = window.Cite;
+      const citation = new Cite(bibtex);
+      const formatted = citation.format('bibliography', {
+        format: 'html',
+        template: citationStyle || 'apa',
+        lang: 'en-US'
+      });
+      document.getElementById('citation-placeholder').innerHTML = formatted;
+    }
+
+    const copyBtn = document.getElementById('copy-bibtex');
+    copyBtn?.addEventListener('click', () => {
+      navigator.clipboard.writeText(bibtex).then(() => {
+        alert('BibTeX copied to clipboard!');
+      }, () => {
+        alert('Failed to copy BibTeX.');
+      });
+    });
+
+    const downloadBtn = document.getElementById('download-bibtex');
+    downloadBtn?.addEventListener('click', () => {
+      const blob = new Blob([bibtex], { type: 'application/x-bibtex' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${title.toLowerCase().replace(/\s+/g, '_')}.bib`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</BaseLayout>

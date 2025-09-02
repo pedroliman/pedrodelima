@@ -9,6 +9,8 @@ export interface Publication {
   featured: boolean;
   code?: string;
   codeOnly?: boolean; // New flag for code-only repositories
+  abstract?: string;
+  bibtex?: string;
 }
 
 /**
