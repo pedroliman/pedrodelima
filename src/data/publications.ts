@@ -108,7 +108,7 @@ export const publications: Publication[] = [
     year: 2023,
     authors: 'Michael Robbins [aut, cre], Max Griswold [ctb], Pedro Nascimento de Lima',
     url: 'https://cran.r-project.org/web/packages/gerbil/index.html',
-    doi: '',
+    doi: undefined,
     code: 'https://cran.r-project.org/web/packages/gerbil/index.html',
     featured: false
   },
@@ -459,7 +459,7 @@ export const publications: Publication[] = [
     journal: 'Anais do I SIGEPRO - Simpósio Gaúcho de Engenharia de Produção',
     year: 2016,
     authors: `Santos, A. S. and Nascimento de Lima, Pedro and Wunsch, G. and Brasil, J. E. S.`,
-    doi: null,
+    doi: undefined,
     featured: false
   },
   {
@@ -468,7 +468,7 @@ export const publications: Publication[] = [
     journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
     year: 2015,
     authors: `Nascimento de Lima, Pedro and Vieira, D. C. and Tegner, M. G. and Heck, I. and Luz, F. R.`,
-    doi: null,
+    doi: undefined,
     featured: false
   },
   {
@@ -477,7 +477,7 @@ export const publications: Publication[] = [
     journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
     year: 2015,
     authors: `Machado, M. S. and Rodrigues, L. H. and Nascimento de Lima, Pedro and Morandi, M. I. W. M.`,
-    doi: null,
+    doi: undefined,
     featured: false
   },
   {
@@ -486,7 +486,7 @@ export const publications: Publication[] = [
     journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
     year: 2015,
     authors: `Nascimento de Lima, Pedro and Tegner, M. G. and Corcini Neto, S. L. H. and Veit, D. R.`,
-    doi: null,
+    doi: undefined,
     featured: false
   },
   {
@@ -495,7 +495,7 @@ export const publications: Publication[] = [
     journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
     year: 2015,
     authors: `Nascimento de Lima, Pedro and Calderaro, D. R. and Goldmeyer, D. B. and Rodrigues, L. H. and Morandi, M. I. W. M.`,
-    doi: null,
+    doi: undefined,
     featured: false
   },
   {
@@ -504,7 +504,17 @@ export const publications: Publication[] = [
     journal: 'XXXV - Encontro Nacional de Engenharia de Produção - ENEGEP',
     year: 2015,
     authors: `Nascimento de Lima, Pedro and Tegner, M. G.`,
-    doi: null,
+    doi: undefined,
+    featured: false
+  },
+  {
+    id: 'issaka_modeled_2025',
+    title: 'Modeled Cost-Effectiveness of a Rideshare Program to Facilitate Colonoscopy Completion',
+    journal: 'JAMA Network Open',
+    year: 2025,
+    authors: 'Issaka, Rachel B. and Matrajt, Laura and Nascimento de Lima, Pedro and Rutter, Carolyn M.',
+    doi: '10.1001/jamanetworkopen.2025.30515',
+    url: 'https://doi.org/10.1001/jamanetworkopen.2025.30515',
     featured: false
   }
 ];
