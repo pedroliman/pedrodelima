@@ -6,6 +6,7 @@ import { getAugmentedPublications } from '../data/publication-provider';
 import RelatedTalks from '../components/RelatedTalks.astro';
 import citationCache from '../data/dimensions_citations_cache.json';
 import type { Publication } from '../data/publications';
+import { slugify } from '../utils/common-utils';
 
 // Explicitly type the citationCache object to resolve the type issue
 const typedCitationCache: { citations: Record<string, number> } = citationCache;
@@ -59,7 +60,7 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                             <div class="publication-item mb-6 border-b border-main/20 pb-6">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1 min-w-0">
-                                        <a href={`/publications/${publication.id}`} class="publication-title font-medium mb-1 leading-relaxed break-words hover:underline">
+                                        <a href={`/publications/${slugify(publication.id)}`} class="publication-title font-medium mb-1 leading-relaxed break-words hover:underline">
                                             {publication.title}
                                         </a>
                                     </div>
