@@ -37,6 +37,9 @@ const publicationsByYear = sortedPublications.reduce(
 
 // Get unique years in descending order
 const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+
+// Calculate running publication number across years
+let publicationNumber = 1;
 ---
 
 <BaseLayout
@@ -57,7 +60,9 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
                             <div class="publication-item mb-6 border-b border-main/20 pb-6">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1 min-w-0">
-                                        <div class="publication-title font-medium mb-1 leading-relaxed break-words">{publication.title}</div>
+                                        <div class="publication-title font-medium mb-1 leading-relaxed break-words">
+                                            {publicationNumber++}. {publication.title}
+                                        </div>
                                     </div>
                                     <div class="flex items-center gap-4">
                                         <span

@@ -17,6 +17,16 @@ export interface Publication {
  */
 export const publications: Publication[] = [
   {
+    id: 'issaka_modeled_2025',
+    title: 'Modeled Cost-Effectiveness of a Rideshare Program to Facilitate Colonoscopy Completion',
+    journal: 'JAMA Network Open',
+    year: 2025,
+    authors: 'Issaka, Rachel B. and Matrajt, Laura and Nascimento de Lima, Pedro and Rutter, Carolyn M.',
+    doi: '10.1001/jamanetworkopen.2025.30515',
+    url: 'https://doi.org/10.1001/jamanetworkopen.2025.30515',
+    featured: false
+  },
+  {
     id: 'pedrodelima',
     title: 'My personal website',
     journal: 'GitHub Repository',
@@ -505,16 +515,6 @@ export const publications: Publication[] = [
     year: 2015,
     authors: `Nascimento de Lima, Pedro and Tegner, M. G.`,
     doi: undefined,
-    featured: false
-  },
-  {
-    id: 'issaka_modeled_2025',
-    title: 'Modeled Cost-Effectiveness of a Rideshare Program to Facilitate Colonoscopy Completion',
-    journal: 'JAMA Network Open',
-    year: 2025,
-    authors: 'Issaka, Rachel B. and Matrajt, Laura and Nascimento de Lima, Pedro and Rutter, Carolyn M.',
-    doi: '10.1001/jamanetworkopen.2025.30515',
-    url: 'https://doi.org/10.1001/jamanetworkopen.2025.30515',
     featured: false
   }
 ];
