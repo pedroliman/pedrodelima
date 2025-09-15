@@ -8,15 +8,15 @@
       type="text"
       id="search-input"
       placeholder="Search publications or topics..."
-      class="w-full px-4 py-2 pr-10 border border-main/20 rounded-lg focus:outline-none focus:border-main/40 focus:ring-1 focus:ring-main/20"
+      class="w-full h-10 px-4 pr-10 text-sm bg-white/90 border border-gray-300 rounded-lg focus:outline-none focus:bg-white focus:border-gray-400 focus:ring-2 focus:ring-blue-500/20 transition-all"
       autocomplete="off"
     />
     <button
       id="search-button"
-      class="absolute right-2 top-1/2 transform -translate-y-1/2 text-main/60 hover:text-main"
+      class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
       type="button"
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
       </svg>
     </button>
@@ -25,7 +25,7 @@
   <!-- Search Results Dropdown -->
   <div 
     id="search-results" 
-    class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-main/20 rounded-lg shadow-lg hidden"
+    class="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-xl hidden"
   >
     <div id="search-results-content">
       <!-- Results will be populated by JavaScript -->
@@ -50,16 +50,21 @@
   // Load publications data on page load
   async function loadData() {
     try {
-      // We'll fetch the data from a JSON endpoint instead
+      console.log('Loading publications data...');
       const response = await fetch('/api/publications.json');
+      console.log('Response status:', response.status);
       if (response.ok) {
         publications = await response.json();
+        console.log('Loaded publications:', publications.length);
         // Collect all unique tags
         publications.forEach(pub => {
           if (pub.tags) {
             pub.tags.forEach(tag => allTags.add(tag));
           }
         });
+        console.log('Loaded tags:', allTags.size);
+      } else {
+        console.error('Failed to load publications, status:', response.status);
       }
     } catch (error) {
       console.error('Failed to load publications:', error);
@@ -150,12 +155,12 @@
     let html = '';
 
     if (results.publications.length > 0) {
-      html += '<div class="p-2 border-b border-main/10"><h3 class="font-medium text-sm text-main/80 mb-2">Publications</h3>';
+      html += '<div class="p-3 border-b border-gray-100"><h3 class="font-semibold text-xs uppercase tracking-wide text-gray-500 mb-3">Publications</h3>';
       results.publications.forEach(pub => {
         html += `
-          <a href="/publications/${slugify(pub.id)}" class="block p-2 hover:bg-main/5 rounded transition-colors">
-            <div class="font-medium text-sm leading-tight mb-1">${pub.title}</div>
-            <div class="text-xs text-main/60">${pub.journal} • ${pub.year}</div>
+          <a href="/publications/${slugify(pub.id)}" class="block p-2 hover:bg-gray-50 rounded-md transition-colors">
+            <div class="font-medium text-sm leading-tight mb-1 text-gray-900">${pub.title}</div>
+            <div class="text-xs text-gray-500">${pub.journal} • ${pub.year}</div>
           </a>
         `;
       });
@@ -163,13 +168,13 @@
     }
 
     if (results.tags.length > 0) {
-      html += '<div class="p-2"><h3 class="font-medium text-sm text-main/80 mb-2">Topics</h3>';
+      html += '<div class="p-3"><h3 class="font-semibold text-xs uppercase tracking-wide text-gray-500 mb-3">Topics</h3>';
       results.tags.forEach(({ tag, publicationCount }) => {
         html += `
-          <a href="/tags/${slugify(tag)}" class="block p-2 hover:bg-main/5 rounded transition-colors">
+          <a href="/tags/${slugify(tag)}" class="block p-2 hover:bg-gray-50 rounded-md transition-colors">
             <div class="flex justify-between items-center">
-              <span class="text-sm">${tag}</span>
-              <span class="text-xs text-main/60">${publicationCount} publication${publicationCount !== 1 ? 's' : ''}</span>
+              <span class="text-sm text-gray-900">${tag}</span>
+              <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">${publicationCount}</span>
             </div>
           </a>
         `;
@@ -178,7 +183,7 @@
     }
 
     if (results.publications.length === 0 && results.tags.length === 0) {
-      html = '<div class="p-4 text-sm text-main/60 text-center">No results found</div>';
+      html = '<div class="p-4 text-sm text-gray-500 text-center">No results found</div>';
     }
 
     container.innerHTML = html;
@@ -186,24 +191,33 @@
 
   // Initialize search functionality
   document.addEventListener('DOMContentLoaded', async () => {
+    console.log('DOM loaded, initializing search...');
     await loadData();
     
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
     const searchButton = document.getElementById('search-button');
     
-    if (!searchInput || !searchResults || !searchButton) return;
+    console.log('Search elements:', { searchInput, searchResults, searchButton });
+    
+    if (!searchInput || !searchResults || !searchButton) {
+      console.error('Missing search elements');
+      return;
+    }
 
     let searchTimeout;
 
     // Search input handler
     searchInput.addEventListener('input', (e) => {
       const query = e.target.value.trim();
+      console.log('Search query:', query);
       
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
         if (query.length >= 2) {
+          console.log('Searching for:', query);
           const results = searchContent(query);
+          console.log('Search results:', results);
           renderSearchResults(results);
           searchResults.classList.remove('hidden');
         } else {
@@ -229,15 +243,18 @@
     // Handle search button click
     searchButton.addEventListener('click', () => {
       const query = searchInput.value.trim();
+      console.log('Search button clicked with query:', query);
       if (query) {
-        // Navigate to research page with search query (implement this later if needed)
-        window.location.href = `/research?q=${encodeURIComponent(query)}`;
+        const searchUrl = `/search?q=${encodeURIComponent(query)}`;
+        console.log('Navigating to:', searchUrl);
+        window.location.href = searchUrl;
       }
     });
 
     // Handle Enter key
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
+        console.log('Enter key pressed');
         e.preventDefault();
         searchButton.click();
       }

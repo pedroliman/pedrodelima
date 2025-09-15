@@ -47,17 +47,17 @@ const years = Object.keys(publicationsByYear).sort((a, b) => parseInt(b) - parse
     description="Explore my research publications, focusing on policy analysis, decision making under uncertainty, and interdisciplinary approaches to solving complex policy problems."
 >
     <section class="mb-16 sm:mb-24">
-        <h1 class="mb-6 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Research</h1>
+        <h1 class="mb-8 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Research</h1>
 
         <!-- Publications from data file, grouped by year -->
         <div class="publications">
             {
                 years.map((year) => (
-                    <div class="year-section mb-10">
-                        <h3 class="text-xl font-serif font-medium mb-4">{year}</h3>
+                    <div class="year-section mb-12">
+                        <h3 class="text-2xl font-serif font-medium mb-6">{year}</h3>
 
                         {publicationsByYear[year].map((publication, index) => (
-                            <div class="publication-item mb-6 border-b border-main/20 pb-6">
+                            <div class="publication-item mb-8 border-b border-main/10 pb-8">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1 min-w-0">
                                         <a href={`/publications/${slugify(publication.id)}`} class="publication-title font-medium mb-1 leading-relaxed break-words hover:underline">

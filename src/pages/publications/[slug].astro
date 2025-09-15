@@ -28,15 +28,15 @@ import siteConfig from '../../data/site-config';
 ---
 
 <BaseLayout title={pageTitle} description={publication.abstract || ''}>
-  <article class="prose prose-lg mx-auto">
-    <h1>{publication.title}</h1>
+  <article class="mb-16 sm:mb-20">
+    <h1 class="text-3xl leading-tight font-serif font-medium sm:text-4xl sm:leading-tight mb-8">{publication.title}</h1>
 
     <div id="citation-placeholder"></div>
 
     {publication.abstract && (
-      <section>
-        <h2>Abstract</h2>
-        <p>{publication.abstract}</p>
+      <section class="mb-8">
+        <h2 class="text-xl font-medium mb-4">Abstract</h2>
+        <p class="text-lg leading-relaxed text-main/85">{publication.abstract}</p>
       </section>
     )}
 
