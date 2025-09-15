@@ -11,6 +11,7 @@ export interface Publication {
   codeOnly?: boolean; // New flag for code-only repositories
   abstract?: string;
   bibtex?: string;
+  tags?: string[]; // SEO-optimized tags for search and categorization
 }
 
 /**
@@ -35,7 +36,8 @@ export const publications: Publication[] = [
     year: 2025,
     authors: `Nascimento De Lima, Pedro and Bartholomew, Lillian and May, Folasade P and Coronado, Gloria D and Rutter, Carolyn M`,
     doi: '10.1093/jnci/djaf202',
-    featured: true
+    featured: true,
+    tags: ['colorectal cancer', 'cancer screening', 'health disparities', 'mortality reduction', 'cost effectiveness', 'public health', 'health economics', 'preventive care', 'healthcare policy', 'cancer prevention', 'health equity', 'medical decision making']
   },
   {
     id: 'harlass_benefits_2025',
@@ -62,7 +64,8 @@ export const publications: Publication[] = [
     year: 2025,
     authors: `Nascimento de Lima, Pedro and Maerzluft, Christopher and Ozik, Jonathan and Collier, Nicholson and Rutter, Carolyn M.`,
     doi: '10.1177/0272989X251334373',
-    featured: false
+    featured: false,
+    tags: ['colorectal cancer', 'colonoscopy', 'screening guidelines', 'stress testing', 'uncertainty analysis', 'medical decision making', 'robust decision making', 'cancer prevention', 'age 45 screening', 'sensitivity analysis', 'clinical guidelines', 'screening policy']
   },
   {
     id: 'nascimento_de_lima_case_2025',
@@ -71,7 +74,8 @@ export const publications: Publication[] = [
     year: 2025,
     authors: `Nascimento de Lima, Pedro and Williams, Adeline and Willis, Henry H. and Faherty, Laura J.`,
     doi: '10.1377/forefront.20250417.144021',
-    featured: false
+    featured: false,
+    tags: ['wastewater surveillance', 'environmental surveillance', 'public health surveillance', 'pandemic preparedness', 'infectious disease', 'public health infrastructure', 'surveillance systems', 'health policy', 'disease monitoring', 'epidemiological surveillance', 'community health']
   },
   {
     id: 'optic-wheels',
@@ -91,7 +95,8 @@ export const publications: Publication[] = [
     authors: `Beth Ann Griffin, Pedro Nascimento de Lima, Max Griswold, Adam Scherling, Joseph D. Pane, Geoffrey E. Grimm`,
     doi: '10.7249/TLA1975-2',
     code: 'https://github.com/randcorporation/optic/',
-    featured: false
+    featured: false,
+    tags: ['causal inference', 'longitudinal data', 'simulation modeling', 'R package', 'statistical software', 'policy analysis', 'treatment effects', 'observational data', 'confounding', 'statistical methods', 'data analysis', 'econometrics']
   },
   {
     id: 'r6sim',
@@ -101,7 +106,8 @@ export const publications: Publication[] = [
     authors: `Pedro Nascimento de Lima`,
     url: 'https://randcorporation.github.io/R6Sim/',
     code: 'https://github.com/RANDCorporation/R6Sim',
-    featured: false
+    featured: false,
+    tags: ['simulation modeling', 'R package', 'object oriented programming', 'OOP', 'R6 classes', 'statistical software', 'Monte Carlo simulation', 'modeling framework', 'software development', 'computational tools', 'statistical modeling']
   },
   {
     id: 'gerbil_package',
@@ -139,7 +145,8 @@ export const publications: Publication[] = [
     year: 2025,
     authors: `Pedro Nascimento de Lima and Matrajt, Laura and Coronado, Gloria and Escaron, Anne L. and Rutter, Carolyn M.`,
     doi: '10.1001/jamanetworkopen.2024.54938',
-    featured: true
+    featured: true,
+    tags: ['colorectal cancer', 'cancer screening', 'cost effectiveness', 'community health', 'noninvasive screening', 'health economics', 'preventive medicine', 'population health', 'healthcare access', 'screening programs', 'primary care', 'early detection']
   },
   {
     id: 'hotton_frontiers_2025',
@@ -204,7 +211,8 @@ export const publications: Publication[] = [
     authors: `Pedro Nascimento de Lima and Karr, Sarah and Lim, Jing Zhi and Vardavas, Raffaele and Roberts, Derek and Kessler, Abigail and Awan, Jalal and Faherty, Laura J. and Willis, Henry H.`,
     doi: '10.1038/s41598-024-79952-5',
     featured: false,
-    code: `https://github.com/RANDCorporation/value-of-env-surveillance`
+    code: `https://github.com/RANDCorporation/value-of-env-surveillance`,
+    tags: ['environmental surveillance', 'pandemic response', 'wastewater surveillance', 'public health', 'infectious disease', 'surveillance systems', 'decision analysis', 'value of information', 'COVID-19', 'outbreak detection', 'disease monitoring', 'epidemiology']
   },
   {
     id: 'VANDENPUTTELAAR2024',
@@ -213,7 +221,8 @@ export const publications: Publication[] = [
     year: 2024,
     authors: `Rosita van den Puttelaar and Pedro Nascimento de Lima and Amy B. Knudsen and Carolyn M. Rutter and Karen M. Kuntz and Lucie de Jonge and Fernando Alarid Escudero and David Lieberman and Ann G. Zauber and Anne I. Hahn and John M. Inadomi and Iris Lansdorp-Vogelaar`,
     doi: '10.1053/j.gastro.2024.02.012',
-    featured: true
+    featured: true,
+    tags: ['colorectal cancer', 'blood test', 'liquid biopsy', 'cancer screening', 'Medicare', 'Medicaid', 'cost effectiveness', 'biomarkers', 'diagnostic testing', 'health policy', 'coverage decisions', 'preventive care', 'gastroenterology', 'early detection']
   },
   {
     id: 'LIEBERMAN2024',
@@ -222,7 +231,8 @@ export const publications: Publication[] = [
     year: 2024,
     authors: `David A. Lieberman and Aasma Shaukat and Folasade P. May and John M. Carethers and Iris Lansdorp-Vogelaar and Uri Ladabaum and Timothy R. Church and Anjelica Davis and Chyke A. Doubeni and John M. Inadomi and Richard C. Wender and Pedro Nascimento de Lima and Rosita van den Puttelaar`,
     doi: '10.1016/j.cgh.2024.01.034',
-    featured: true
+    featured: true,
+    tags: ['liquid biopsy', 'colorectal cancer', 'cancer screening', 'average risk', 'biomarkers', 'circulating tumor DNA', 'early detection', 'preventive medicine', 'gastroenterology', 'clinical guidelines', 'screening guidelines', 'non-invasive testing']
   },
   {
     id: 'Nowak2024.02.19.24303020',
@@ -333,7 +343,8 @@ export const publications: Publication[] = [
     authors: `Welburn, Jonathan W. and Nascimento de Lima, Pedro and Kumar, Krishna B. and Osoba, Osonde A. and Lamb, Jonathan`,
     doi: '10.7249/RRA1259-2',
     featured: false,
-    code: `https://github.com/RANDCorporation/racial-wealth-gap`
+    code: `https://github.com/RANDCorporation/racial-wealth-gap`,
+    tags: ['racial wealth gap', 'economic inequality', 'social equity', 'wealth disparities', 'policy analysis', 'economic policy', 'racial inequality', 'intergenerational wealth', 'social justice', 'economic modeling', 'inequality research', 'demographic economics']
   },
   {
     id: 'NascimentodeLima2021a',
@@ -343,7 +354,8 @@ export const publications: Publication[] = [
     authors: `Nascimento de Lima, Pedro and Lempert, Robert and Vardavas, Raffaele and Baker, Lawrence and Ringel, Jeanne and Rutter, Carolyn M and Ozik, Jonathan and Collier, Nicholson`,
     doi: '10.1371/journal.pone.0259166',
     featured: true,
-    code: `https://github.com/RANDCorporation/covid-19-reopening-california`
+    code: `https://github.com/RANDCorporation/covid-19-reopening-california`,
+    tags: ['COVID-19', 'pandemic response', 'public health policy', 'robust decision making', 'California', 'reopening strategies', 'uncertainty analysis', 'epidemiology', 'policy modeling', 'decision science', 'health economics', 'simulation modeling']
   },
   {
     id: 'Rutter2021',
@@ -398,7 +410,8 @@ export const publications: Publication[] = [
     year: 2020,
     authors: `Vardavas, Raffaele and Strong, Aaron and Bouey, Jennifer and Welburn, Jonathan and Nascimento de Lima, Pedro and Baker, Lawrence and Zhu, Keren and Priest, Michelle and Hu, Lynn and Ringel, Jeanne`,
     doi: '10.7249/tla173-1',
-    featured: true
+    featured: true,
+    tags: ['COVID-19', 'nonpharmaceutical interventions', 'public health policy', 'decision support', 'health economics', 'pandemic response', 'policy analysis', 'simulation modeling', 'state policy', 'local government', 'health impact assessment', 'economic impact']
   },
   {
     id: 'diet_tool',

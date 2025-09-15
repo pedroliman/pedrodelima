@@ -1,5 +1,6 @@
 ---
 import NavLink from './NavLink.astro';
+import SearchBox from './SearchBox.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import siteConfig from '../data/site-config';
 
@@ -18,7 +19,7 @@ const navLinks = siteConfig.headerNavLinks || [];
                 >
                     <span class="menu-toggle-icon w-6 h-px relative bg-current" />
                 </button>
-                <ul id="menu-items" class="menu flex gap-6">
+                <ul id="menu-items" class="menu flex gap-6 items-center">
                     {navLinks.map((link) => (
                         <li class="py-1">
                             <NavLink
@@ -29,6 +30,11 @@ const navLinks = siteConfig.headerNavLinks || [];
                             </NavLink>
                         </li>
                     ))}
+                    <li class="py-1 ml-4 hidden md:block">
+                        <div class="w-64">
+                            <SearchBox />
+                        </div>
+                    </li>
                 </ul>
             </div>
         )

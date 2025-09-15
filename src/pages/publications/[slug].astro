@@ -45,6 +45,23 @@ import siteConfig from '../../data/site-config';
       {publication.code && <a href={publication.code} class="text-lg font-medium text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">Code</a>}
     </div>
 
+    {/* Tags section */}
+    {publication.tags && publication.tags.length > 0 && (
+      <section class="mt-8">
+        <h2 class="text-xl font-medium mb-4">Topics</h2>
+        <div class="flex flex-wrap gap-2">
+          {publication.tags.map((tag) => (
+            <a
+              href={`/tags/${slugify(tag)}`}
+              class="inline-block px-3 py-1.5 text-sm bg-main/10 text-main/80 rounded-md hover:bg-main/20 transition-colors"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     <div class="mt-8 flex items-center gap-4">
       {publication.doi && (
         <>
