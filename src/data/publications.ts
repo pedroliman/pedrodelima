@@ -30,6 +30,42 @@ export const publications: Publication[] = [
     featured: false
   },
   {
+    id: 'nascimento_de_lima_compass_2025',
+    title: 'COMPASS: A Framework for Navigating Systemic Risks',
+    journal: 'RAND Working Paper',
+    year: 2025,
+    authors: 'Nascimento de Lima, Pedro and Dolan, Flannery C. and McDonald, Tim and Patel, Karishma V. and Boudreaux, Benjamin and Garber, Chandra and Dion, Leah and Mann, Sean and Welburn, Jonathan W.',
+    url: 'https://www.rand.org/pubs/working_papers/WRA3888-1.html',
+    doi: '10.7249/WRA3888-1',
+    featured: false,
+    abstract: 'COMPASS (Comprehensive Mapping Protocol for Anticipating and Adapting to Systemic Shocks) is a framework designed to help analysts and senior policymakers navigate systemic risks from disruptions, such as artificial intelligence adoption, pandemics, or natural disasters. It guides users through five steps to consider disruptors, primary and secondary system impacts, affected actors, relevant outcomes and policy objectives, and effective policy responses.',
+    tags: ['artificial intelligence', 'complex systems analysis', 'emerging technologies', 'systemic risk', 'risk assessment', 'policy analysis', 'decision support']
+  },
+  {
+    id: 'welburn_future_2025',
+    title: 'The Future of Artificial Intelligence Policy Is the Future of Competing Demands',
+    journal: 'RAND Visualization',
+    year: 2025,
+    authors: 'Welburn, Jonathan W. and Garber, Chandra and Dion, Leah and Nascimento de Lima, Pedro and Nergui, Anujin and Buenaventura, Maya and Nygaard, Vegard M.',
+    url: 'https://www.rand.org/pubs/visualizations/DVA3888-1.html',
+    doi: '10.7249/DVA3888-1',
+    featured: false,
+    abstract: 'To address the potential for transformative technological change brought about by increasingly widespread adoption of artificial intelligence (AI) technologies, researchers involved in the RAND Social and Economic Policy Rethink Initiative developed a volume of work on the opportunities and challenges presented by AI adoption. This visualization provides an overview of that research and outlines the policy stakes of adopting AI technologies.',
+    tags: ['artificial intelligence', 'banking and financial services', 'data visualization', 'economic policy', 'energy and environment', 'health care technology', 'labor markets', 'science and technology']
+  },
+  {
+    id: 'welburn_rethinking_2025',
+    title: 'Rethinking Social and Economic Policy in the Age of General-Purpose Artificial Intelligence: Navigating the Cascading Impacts of AI Adoption',
+    journal: 'RAND Research Report',
+    year: 2025,
+    authors: 'Welburn, Jonathan W. and Buenaventura, Maya and Nygaard, Vegard M. and Garber, Chandra and Dion, Leah and Nascimento de Lima, Pedro and Shenk, Anton and Nergui, Anujin and Price, Carter C. and Boudreaux, Benjamin and Cibralic, Beba and Mignano, Jim and Mann, Sean and Dolan, Flannery C. and Patel, Karishma V.',
+    url: 'https://www.rand.org/pubs/research_reports/RRA3888-2.html',
+    doi: '10.7249/RRA3888-2',
+    featured: false,
+    abstract: 'The authors synthesize findings related to artificial intelligence (AI) and examine sectoral trends in AI adoption, focusing on four key sectors while highlighting the profound uncertainty that surrounds the future trajectory of AI capability advancements. They examine the inherent trade-offs and tensions of AI adoption through both legal and macroeconomic lenses and discuss considerations for adequate policy responses.',
+    tags: ['artificial intelligence', 'banking and financial services', 'economic policy', 'energy and environment', 'health care technology', 'research', 'science and technology legislation', 'social equity', 'technology']
+  },
+  {
     id: 'nascimento_de_lima_triple-effect_2025',
     title: `The triple-effect of colorectal cancer screening: reducing deaths, government spending and mortality disparities`,
     journal: 'JNCI: Journal of the National Cancer Institute',
@@ -169,7 +205,7 @@ Colonoscopy screening starting at age 50 y with a 10-y interval consistently und
     year: 2025,
     authors: `Pedro Nascimento de Lima and Matrajt, Laura and Coronado, Gloria and Escaron, Anne L. and Rutter, Carolyn M.`,
     doi: '10.1001/jamanetworkopen.2024.54938',
-    featured: true,
+    featured: false,
     abstract: `Importance
               Several noninvasive tests for colorectal cancer screening are available, but their effectiveness in settings with low adherence to screening and follow-up colonoscopy is not well documented.
 
@@ -324,7 +360,7 @@ Even with higher screening uptake, triennial blood-based screening, with the CMS
     year: 2024,
     authors: `David A. Lieberman and Aasma Shaukat and Folasade P. May and John M. Carethers and Iris Lansdorp-Vogelaar and Uri Ladabaum and Timothy R. Church and Anjelica Davis and Chyke A. Doubeni and John M. Inadomi and Richard C. Wender and Pedro Nascimento de Lima and Rosita van den Puttelaar`,
     doi: '10.1016/j.cgh.2024.01.034',
-    featured: true,
+    featured: false,
     tags: ['liquid biopsy', 'colorectal cancer', 'cancer screening', 'average risk', 'biomarkers', 'circulating tumor DNA', 'early detection', 'preventive medicine', 'gastroenterology', 'clinical guidelines', 'screening guidelines', 'non-invasive testing'],
     abstract: `The American Gastroenterological Association convened a workshop to summarize the evidence on emerging blood tests for CRC screening. This paper reports those findings and provides consensus statements from the workshop's expert panel.`
   },
@@ -476,7 +512,7 @@ Conclusions: In our simulation study, no single method consistently outperformed
     year: 2021,
     authors: `Nascimento de Lima, Pedro and Lempert, Robert and Vardavas, Raffaele and Baker, Lawrence and Ringel, Jeanne and Rutter, Carolyn M and Ozik, Jonathan and Collier, Nicholson`,
     doi: '10.1371/journal.pone.0259166',
-    featured: true,
+    featured: false,
     code: `https://github.com/RANDCorporation/covid-19-reopening-california`,
     abstract: `The COVID-19 pandemic required significant public health interventions from local governments. Although nonpharmaceutical interventions often were implemented as decision rules, few studies evaluated the robustness of those reopening plans under a wide range of uncertainties. This paper uses the Robust Decision Making approach to stress-test 78 alternative reopening strategies, using California as an example. This study uniquely considers a wide range of uncertainties and demonstrates that seemingly sensible reopening plans can lead to both unnecessary COVID-19 deaths and days of interventions. We find that plans using fixed COVID-19 case thresholds might be less effective than strategies with time-varying reopening thresholds. While we use California as an example, our results are particularly relevant for jurisdictions where vaccination roll-out has been slower. The approach used in this paper could also prove useful for other public health policy problems in which policymakers need to make robust decisions in the face of deep uncertainty.`,
     tags: ['COVID-19', 'pandemic response', 'public health policy', 'robust decision making', 'California', 'reopening strategies', 'uncertainty analysis', 'epidemiology', 'policy modeling', 'decision science', 'health economics', 'simulation modeling']
