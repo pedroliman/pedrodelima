@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAugmentedPublications } from '../../data/publication-provider';
+import { slugify } from '../../utils/common-utils';
+import RelatedTalks from '../../components/RelatedTalks.astro';
+import citationCache from '../../data/dimensions_citations_cache.json';
+import type { Publication } from '../../data/publications';
+
+// Explicitly type the citationCache object to resolve the type issue
+const typedCitationCache: { citations: Record<string, number> } = citationCache;
+
+export async function getStaticPaths() {
+  const publications = await getAugmentedPublications();
+  
+  // Collect all unique tags from all publications
+  const allTags = new Set<string>();
+  publications.forEach(pub => {
+    if (pub.tags) {
+      pub.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+  
+  // Create paths for each tag
+  return Array.from(allTags).map(tag => ({
+    params: { slug: slugify(tag) },
+    props: { tag }
+  }));
+}
+
+const { slug } = Astro.params;
+const { tag } = Astro.props;
+
+const publications = await getAugmentedPublications();
+
+// Find all publications with this tag
+const taggedPublications = publications.filter(pub => 
+  pub.tags && pub.tags.includes(tag)
+);
+
+// Sort by year (desc), then by citation count (desc) within each year
+const sortedPublications = [...taggedPublications].sort((a, b) => {
+  const yearDiff = parseInt(b.year.toString()) - parseInt(a.year.toString());
+  if (yearDiff !== 0) return yearDiff;
+  const aCite = a.doi ? (typedCitationCache.citations[a.doi] ?? 0) : 0;
+  const bCite = b.doi ? (typedCitationCache.citations[b.doi] ?? 0) : 0;
+  return bCite - aCite;
+});
+
+const pageTitle = `Research on ${tag}`;
+const pageDescription = `Explore ${sortedPublications.length} research publications related to ${tag}, including studies on policy analysis, decision making, and interdisciplinary approaches.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="mb-16 sm:mb-24">
+    <div class="mb-8">
+      <a href="/research" class="text-sm text-main/75 hover:text-main transition-colors">
+        ← Back to Research
+      </a>
+    </div>
+    
+    <h1 class="mb-8 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">
+      Research on <span class="text-main/80">{tag}</span>
+    </h1>
+    
+    <p class="mb-8 text-lg text-main/75">
+      {sortedPublications.length} publication{sortedPublications.length !== 1 ? 's' : ''} tagged with "{tag}"
+    </p>
+
+    <div class="publications">
+      {sortedPublications.map((publication) => (
+        <div class="publication-item mb-8 border-b border-main/10 pb-8">
+          <div class="flex items-start justify-between">
+            <div class="flex-1 min-w-0">
+              <a 
+                href={`/publications/${slugify(publication.id)}`} 
+                class="publication-title font-medium mb-1 leading-relaxed break-words hover:underline"
+              >
+                {publication.title}
+              </a>
+            </div>
+            <div class="flex items-center gap-4">
+              <span
+                class="__dimensions_badge_embed__"
+                data-doi={publication.doi}
+                data-hide-zero-citations="true"
+                data-style="small_circle"
+              />
+              <div class="altmetric-container" data-loaded>
+                <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-base mb-2 flex items-center gap-2">
+            {publication.doi && publication.doi.trim().length > 0 ? (
+              <a
+                href={`https://doi.org/${publication.doi}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+              >
+                {publication.journal}
+              </a>
+            ) : publication.url && publication.url.trim().length > 0 ? (
+              <a
+                href={publication.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
+              >
+                {publication.journal}
+              </a>
+            ) : (
+              <span class="italic">{publication.journal}</span>
+            )}
+            <span class="mx-2 text-main/50">•</span>
+            <span class="text-main/75">{publication.year}</span>
+            {publication.code && (
+              <>
+                <span class="mx-2 text-main/50">|</span>
+                <a
+                  href={publication.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 hover:bg-green-200 dark:hover:bg-green-800"
+                >
+                  Code
+                </a>
+              </>
+            )}
+          </div>
+
+          {/* Display other tags for this publication */}
+          {publication.tags && publication.tags.length > 1 && (
+            <div class="mt-2 mb-2">
+              <div class="flex flex-wrap gap-1">
+                {publication.tags.filter(t => t !== tag).slice(0, 5).map((otherTag) => (
+                  <a
+                    href={`/tags/${slugify(otherTag)}`}
+                    class="inline-block px-2 py-1 text-xs bg-main/10 text-main/80 rounded hover:bg-main/20 transition-colors"
+                  >
+                    {otherTag}
+                  </a>
+                ))}
+                {publication.tags.filter(t => t !== tag).length > 5 && (
+                  <span class="text-xs text-main/60">+{publication.tags.filter(t => t !== tag).length - 5} more</span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Related Talks */}
+          <div class="mt-2">
+            <RelatedTalks publicationId={publication.id} />
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {sortedPublications.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-main/75 mb-4">No publications found with this tag.</p>
+        <a href="/research" class="text-main hover:underline">Browse all research</a>
+      </div>
+    )}
+  </section>
+
+  {/* Scripts for badges */}
+  <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script type="text/javascript" src="https://badge.dimensions.ai/badge.js"></script>
+
+  <style>
+    .altmetric-container {
+      position: relative;
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+    }
+
+    .altmetric-container::before {
+      content: '';
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background-color: white;
+      border-radius: 50%;
+      z-index: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .altmetric-container .altmetric-embed[data-badge-type] {
+      position: relative;
+      z-index: 1;
+    }
+
+    .altmetric-container[data-loaded]::before {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .altmetric-container[data-loaded][data-has-citations='true']::before {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+
+  <script>
+    import citationCache from '../../data/dimensions_citations_cache.json';
+    const typedCitationCache: { citations: Record<string, number> } = citationCache;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.altmetric-container').forEach((container) => {
+        const badge = container.querySelector('.altmetric-embed');
+        const doi = badge?.getAttribute('data-doi');
+
+        // Check citation count from the citation cache
+        const citationCount = doi ? (typedCitationCache.citations[doi] ?? 0) : 0;
+
+        // Hide the container if there are no citations
+        if (citationCount === 0) {
+          container.style.display = 'none';
+        } else {
+          container.setAttribute('data-has-citations', 'true');
+        }
+      });
+    });
+  </script>
+</BaseLayout>

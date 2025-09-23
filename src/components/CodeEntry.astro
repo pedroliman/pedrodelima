@@ -42,17 +42,9 @@ const githubInfo = parseGitHubUrl(repository.code);
                     {repository.version && <span class="ml-2 text-sm text-main/70">@ {repository.version}</span>}
                 </div>
 
-                {/* Second line: stars, fork, title */}
-                <div class="flex items-center gap-4 text-sm">
-                    {repository.stars !== undefined && repository.stars > 0 && (
-                        <a href={`${repository.code}/stargazers`} target="_blank" rel="noopener noreferrer" class="text-main/70 hover:underline">
-                            ⭐ {repository.stars}
-                        </a>
-                    )}
-                    <a href={`${repository.code}/fork`} target="_blank" rel="noopener noreferrer" class="text-main/70 hover:underline">
-                        fork
-                    </a>
-                    <span class="text-main/60 ml-2">{repository.title}</span>
+                {/* Second line: title */}
+                <div class="text-sm">
+                    <span class="text-main/60">{repository.title}</span>
                 </div>
             </div>
         )

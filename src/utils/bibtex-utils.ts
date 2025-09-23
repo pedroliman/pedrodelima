@@ -18,6 +18,7 @@ export function parseBibTeX(content: string): Publication[] {
       // Get citation key
       const keyMatch = entry.match(/\{\s*([^,]+)\s*,/);
       if (!keyMatch) continue;
+      const id = keyMatch[1];
       
       // Extract year - critical field
       let yearMatch = entry.match(/year\s*=\s*\{(\d{4})\}/i) || 
@@ -55,14 +56,22 @@ export function parseBibTeX(content: string): Publication[] {
       
       // Create publication object with required fields
       const publication: Publication = {
+        id: id,
         title: title.trim(),
         authors: authors,
         year: parseInt(yearMatch[1]),
-        type
+        type,
+        bibtex: `@${entry.trim()}`
       };
       
       // Additional fields - all optional
       
+      // Abstract
+      const abstractText = entry.match(/abstract\s*=\s*(\{[^}]*\}|\[[^\]]*\]|"[^"]*")/i);
+      if (abstractText) {
+        publication.abstract = abstractText[1].replace(/^\{|\}$|^"|"$|\[|\]/g, '');
+      }
+
       // Journal
       const journalText = entry.match(/journal\s*=\s*(\{[^}]*\}|\[[^\]]*\]|"[^"]*")/i);
       if (journalText) {
@@ -167,4 +176,27 @@ export async function loadPublications(filePath: string): Promise<Publication[]>
 // Function to get recent publications
 export function getRecentPublications(publications: Publication[], count: number): Publication[] {
   return publications.slice(0, count);
+}
+
+// Function to clean bibtex entry for display
+export function cleanBibtexForDisplay(bibtex: string): string {
+  if (!bibtex) return '';
+
+  let cleanedBibtex = bibtex;
+
+  // Remove file field lines
+  cleanedBibtex = cleanedBibtex.replace(/^\s*file\s*=\s*\{[^}]*\},?\s*$/gm, '');
+
+  // Remove abstract field lines (can be multi-line)
+  cleanedBibtex = cleanedBibtex.replace(/^\s*abstract\s*=\s*\{[\s\S]*?\},?\s*$/gm, '');
+
+  // Replace \textbf{{Nascimento de Lima}} with {Nascimento de Lima}
+  cleanedBibtex = cleanedBibtex.replace(/\\textbf\{\{([^}]*)\}\}/g, '{$1}');
+
+  // Clean up any trailing commas or empty lines that might result from field removal
+  cleanedBibtex = cleanedBibtex.replace(/,\s*\n\s*\}/g, '\n}');
+  cleanedBibtex = cleanedBibtex.replace(/,\s*,/g, ',');
+  cleanedBibtex = cleanedBibtex.replace(/\n\s*\n\s*\n/g, '\n\n');
+
+  return cleanedBibtex.trim();
 }

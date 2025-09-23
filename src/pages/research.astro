@@ -2,16 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import { formatAuthorsLastNames } from '../utils/publication-utils';
-import { publications } from '../data/publications';
+import { getAugmentedPublications } from '../data/publication-provider';
 import RelatedTalks from '../components/RelatedTalks.astro';
 import citationCache from '../data/dimensions_citations_cache.json';
-import type { Publication } from '../types/publication';
+import type { Publication } from '../data/publications';
+import { slugify } from '../utils/common-utils';
 
 // Explicitly type the citationCache object to resolve the type issue
 const typedCitationCache: { citations: Record<string, number> } = citationCache;
 
+const allPublications = await getAugmentedPublications();
+
 // Filter out code-only repositories from research page
-const researchPublications = publications.filter((pub) => !pub.codeOnly);
+const researchPublications = allPublications.filter((pub) => !pub.codeOnly);
 
 // Sort by year (desc), then by citation count (desc) within each year
 const sortedPublications = [...researchPublications].sort((a, b) => {
@@ -47,22 +50,22 @@ let publicationNumber = 1;
     description="Explore my research publications, focusing on policy analysis, decision making under uncertainty, and interdisciplinary approaches to solving complex policy problems."
 >
     <section class="mb-16 sm:mb-24">
-        <h1 class="mb-6 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Research</h1>
+        <h1 class="mb-8 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Research</h1>
 
         <!-- Publications from data file, grouped by year -->
         <div class="publications">
             {
                 years.map((year) => (
-                    <div class="year-section mb-10">
-                        <h3 class="text-xl font-serif font-medium mb-4">{year}</h3>
+                    <div class="year-section mb-12">
+                        <h3 class="text-2xl font-serif font-medium mb-6">{year}</h3>
 
                         {publicationsByYear[year].map((publication, index) => (
-                            <div class="publication-item mb-6 border-b border-main/20 pb-6">
+                            <div class="publication-item mb-8 border-b border-main/10 pb-8">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1 min-w-0">
-                                        <div class="publication-title font-medium mb-1 leading-relaxed break-words">
-                                            {publicationNumber++}. {publication.title}
-                                        </div>
+                                        <a href={`/publications/${slugify(publication.id)}`} class="publication-title font-medium mb-1 leading-relaxed break-words hover:underline">
+                                            {publication.title}
+                                        </a>
                                     </div>
                                     <div class="flex items-center gap-4">
                                         <span
@@ -77,27 +80,7 @@ let publicationNumber = 1;
                                     </div>
                                 </div>
                                 <div class="text-base mb-2 flex items-center gap-2">
-                                    {publication.doi && publication.doi.trim().length > 0 ? (
-                                        <a
-                                            href={`https://doi.org/${publication.doi}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
-                                        >
-                                            {publication.journal}
-                                        </a>
-                                    ) : publication.url && publication.url.trim().length > 0 ? (
-                                        <a
-                                            href={publication.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
-                                        >
-                                            {publication.journal}
-                                        </a>
-                                    ) : (
-                                        <span class="italic">{publication.journal}</span>
-                                    )}
+                                    <span class="italic">{publication.journal}</span>
                                     {publication.code && (
                                         <>
                                             <span class="mx-2 text-main/50">|</span>

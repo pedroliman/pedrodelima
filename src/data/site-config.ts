@@ -30,6 +30,7 @@ export type SiteConfig = {
     hero?: Hero;
     postsPerPage?: number;
     projectsPerPage?: number;
+    citationStyle?: string;
 };
 
 const siteConfig: SiteConfig = {
@@ -114,7 +115,8 @@ const siteConfig: SiteConfig = {
     },
     // Newsletter subscription has been removed
     postsPerPage: 8,
-    projectsPerPage: 8
+    projectsPerPage: 8,
+    citationStyle: 'apa'
 };
 
 export default siteConfig;

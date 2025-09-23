@@ -3,10 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import TalkItem from '../../components/TalkItem.astro';
 import PdfViewer from '../../components/PdfViewer.astro';
 import HtmlViewer from '../../components/HtmlViewer.astro';
-import PublicationItem from '../../components/PublicationItem.astro';
 import Button from '../../components/Button.astro';
+import RelatedTalks from '../../components/RelatedTalks.astro';
 import talks from '../../data/talks';
-import { publications } from '../../data/publications';
+import { getAugmentedPublications } from '../../data/publication-provider';
+import { slugify } from '../../utils/common-utils';
+import citationCache from '../../data/dimensions_citations_cache.json';
 
 export function getStaticPaths() {
     return talks.map((talk) => ({
@@ -18,8 +20,14 @@ export function getStaticPaths() {
 const { talk } = Astro.props;
 const { title, description, pdfPresentation, talk_html, relatedPublicationIds } = talk;
 
+// Get augmented publications
+const allPublications = await getAugmentedPublications();
+
 // Get related publications if any
-const relatedPublications = relatedPublicationIds ? publications.filter((pub) => relatedPublicationIds.includes(pub.id)) : [];
+const relatedPublications = relatedPublicationIds ? allPublications.filter((pub) => relatedPublicationIds.includes(pub.id)) : [];
+
+// Explicitly type the citationCache object
+const typedCitationCache: { citations: Record<string, number> } = citationCache;
 ---
 
 <BaseLayout title={title} description={description || `Details, slides, and recording for ${title}`}>
@@ -50,9 +58,110 @@ const relatedPublications = relatedPublicationIds ? publications.filter((pub) =>
                 <h2 class="text-2xl font-serif font-medium mb-6">Related Publications</h2>
 
                 {relatedPublications.map((publication) => (
-                    <PublicationItem publication={publication} showRelated={false} />
+                    <div class="publication-item mb-8 border-b border-main/10 pb-8">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1 min-w-0">
+                                <a href={`/publications/${slugify(publication.id)}`} class="publication-title font-medium mb-1 leading-relaxed break-words hover:underline">
+                                    {publication.title}
+                                </a>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span
+                                    class="__dimensions_badge_embed__"
+                                    data-doi={publication.doi}
+                                    data-hide-zero-citations="true"
+                                    data-style="small_circle"
+                                />
+                                <div class="altmetric-container" data-loaded>
+                                    <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-base mb-2 flex items-center gap-2">
+                            <span class="italic">{publication.journal}</span>
+                            {publication.code && (
+                                <>
+                                    <span class="mx-2 text-main/50">|</span>
+                                    <a
+                                        href={publication.code}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 hover:bg-green-200 dark:hover:bg-green-800"
+                                    >
+                                        Code
+                                    </a>
+                                </>
+                            )}
+                        </div>
+                        <div class="mt-2">
+                            <RelatedTalks publicationId={publication.id} />
+                        </div>
+                    </div>
                 ))}
             </div>
         )
     }
 </BaseLayout>
+
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+<script type="text/javascript" src="https://badge.dimensions.ai/badge.js"></script>
+
+<style>
+    .altmetric-container {
+        position: relative;
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+    }
+
+    .altmetric-container::before {
+        content: '';
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        background-color: white;
+        border-radius: 50%;
+        z-index: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    .altmetric-container .altmetric-embed[data-badge-type] {
+        position: relative;
+        z-index: 1;
+    }
+
+    .altmetric-container[data-loaded]::before {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .altmetric-container[data-loaded][data-has-citations='true']::before {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
+
+<script define:vars={{ typedCitationCache }}>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.altmetric-container').forEach((container) => {
+            const badge = container.querySelector('.altmetric-embed');
+            const doi = badge?.getAttribute('data-doi');
+
+            // Check citation count from the citation cache
+            const citationCount = doi ? (typedCitationCache.citations[doi] ?? 0) : 0;
+
+            // Hide the container if there are no citations
+            if (citationCount === 0) {
+                container.style.display = 'none';
+            } else {
+                container.setAttribute('data-has-citations', 'true');
+            }
+        });
+    });
+</script>

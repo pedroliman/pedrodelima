@@ -15,4 +15,5 @@ export interface Publication {
   abstract?: string;
   keywords?: string[];
   type: 'article' | 'inproceedings' | 'book' | 'techreport' | 'phdthesis' | 'mastersthesis' | 'misc' | string;
+  bibtex?: string;
 }

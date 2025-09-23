@@ -19,6 +19,9 @@
 ## Project Structure
 - `src/content/` - MDX content for blog, pages, projects
 - `src/data/` - Configuration and site data
-- `src/utils/` - Utility functions 
+- `src/utils/` - Utility functions
 - `public/` - Static assets (images, etc.)
 - `src/pages/` - Astro pages and routing
+
+## TODO: Fix search functionality
+The search bar component (SearchBox.astro) has been temporarily removed from the navigation (Nav.astro) due to JavaScript functionality issues. The component exists and the API endpoint (/api/publications.json) works correctly, but the event handling for form submission and navigation is not working properly. Need to debug and fix the search functionality later.

@@ -1,0 +1,306 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAugmentedPublications } from '../data/publication-provider';
+import { slugify } from '../utils/common-utils';
+import RelatedTalks from '../components/RelatedTalks.astro';
+import citationCache from '../data/dimensions_citations_cache.json';
+
+// Explicitly type the citationCache object to resolve the type issue
+const typedCitationCache: { citations: Record<string, number> } = citationCache;
+
+// Get search query from URL params
+const url = new URL(Astro.request.url);
+const query = url.searchParams.get('q') || '';
+
+const publications = await getAugmentedPublications();
+
+// Search function (same as SearchBox component)
+function searchContent(searchQuery: string) {
+  if (!searchQuery || searchQuery.length < 2) {
+    return { publications: [], tags: [] };
+  }
+
+  const queryLower = searchQuery.toLowerCase();
+  const matchedPublications = [];
+  const allTags = new Set<string>();
+
+  // Collect all unique tags
+  publications.forEach(pub => {
+    if (pub.tags) {
+      pub.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+
+  // Search publications
+  publications.forEach(pub => {
+    let score = 0;
+    let reasons = [];
+
+    // Title match (highest priority)
+    if (pub.title.toLowerCase().includes(queryLower)) {
+      score += 10;
+      reasons.push('title');
+    }
+
+    // Abstract match
+    if (pub.abstract && pub.abstract.toLowerCase().includes(queryLower)) {
+      score += 5;
+      reasons.push('abstract');
+    }
+
+    // Journal match
+    if (pub.journal.toLowerCase().includes(queryLower)) {
+      score += 3;
+      reasons.push('journal');
+    }
+
+    // Authors match
+    if (pub.authors.toLowerCase().includes(queryLower)) {
+      score += 2;
+      reasons.push('authors');
+    }
+
+    // Tags match
+    if (pub.tags) {
+      pub.tags.forEach(tag => {
+        if (tag.toLowerCase().includes(queryLower)) {
+          score += 4;
+          reasons.push('tags');
+        }
+      });
+    }
+
+    if (score > 0) {
+      matchedPublications.push({ ...pub, searchScore: score, matchReasons: reasons });
+    }
+  });
+
+  // Search tags
+  const matchedTags = [];
+  Array.from(allTags).forEach(tag => {
+    if (tag.toLowerCase().includes(queryLower)) {
+      const tagPublicationCount = publications.filter(pub => 
+        pub.tags && pub.tags.includes(tag)
+      ).length;
+      matchedTags.push({ tag, publicationCount: tagPublicationCount });
+    }
+  });
+
+  // Sort publications by search score (descending)
+  matchedPublications.sort((a, b) => b.searchScore - a.searchScore);
+
+  // Sort tags by publication count (descending)
+  matchedTags.sort((a, b) => b.publicationCount - a.publicationCount);
+
+  return {
+    publications: matchedPublications,
+    tags: matchedTags
+  };
+}
+
+const results = query ? searchContent(query) : { publications: [], tags: [] };
+
+const pageTitle = query ? `Search results for "${query}"` : 'Search';
+const pageDescription = query 
+  ? `Found ${results.publications.length} publications and ${results.tags.length} topics matching "${query}"`
+  : 'Search publications and topics';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="mb-16 sm:mb-20">
+    <div class="mb-8">
+      <a href="/" class="text-sm text-main/75 hover:text-main transition-colors">
+        ← Back to Home
+      </a>
+    </div>
+    
+    <h1 class="mb-8 text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">
+      {query ? `Search results for "${query}"` : 'Search'}
+    </h1>
+
+    {query && (
+      <div class="mb-8 text-lg text-main/75">
+        Found {results.publications.length} publication{results.publications.length !== 1 ? 's' : ''} and {results.tags.length} topic{results.tags.length !== 1 ? 's' : ''}
+      </div>
+    )}
+
+    {!query && (
+      <div class="mb-8">
+        <p class="text-lg text-main/75 mb-4">Use the search box in the navigation to find publications and topics.</p>
+        <a href="/research" class="text-main hover:underline">Browse all research →</a>
+      </div>
+    )}
+
+    {query && results.tags.length > 0 && (
+      <div class="mb-12">
+        <h2 class="text-xl font-serif font-medium mb-6">Matching Topics</h2>
+        <div class="flex flex-wrap gap-2">
+          {results.tags.map(({ tag, publicationCount }) => (
+            <a
+              href={`/tags/${slugify(tag)}`}
+              class="inline-flex items-center gap-2 px-4 py-2 bg-main/5 hover:bg-main/10 rounded-lg transition-colors"
+            >
+              <span class="font-medium">{tag}</span>
+              <span class="text-xs text-main/60 bg-main/10 px-2 py-1 rounded-full">
+                {publicationCount}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {query && results.publications.length > 0 && (
+      <div class="publications">
+        <h2 class="text-xl font-serif font-medium mb-6">Publications</h2>
+        
+        {results.publications.map((publication) => (
+          <div class="publication-item mb-8 border-b border-main/10 pb-8">
+            <div class="flex items-start justify-between">
+              <div class="flex-1 min-w-0">
+                <a 
+                  href={`/publications/${slugify(publication.id)}`} 
+                  class="publication-title font-medium mb-2 leading-relaxed break-words hover:underline block"
+                >
+                  {publication.title}
+                </a>
+              </div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="__dimensions_badge_embed__"
+                  data-doi={publication.doi}
+                  data-hide-zero-citations="true"
+                  data-style="small_circle"
+                />
+                <div class="altmetric-container" data-loaded>
+                  <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-base mb-2 flex items-center gap-2">
+              <span class="italic">{publication.journal}</span>
+              <span class="mx-2 text-main/50">•</span>
+              <span class="text-main/75">{publication.year}</span>
+              {publication.code && (
+                <>
+                  <span class="mx-2 text-main/50">|</span>
+                  <a
+                    href={publication.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 hover:bg-green-200 dark:hover:bg-green-800"
+                  >
+                    Code
+                  </a>
+                </>
+              )}
+            </div>
+
+            {/* Display tags for this publication */}
+            {publication.tags && publication.tags.length > 0 && (
+              <div class="mt-3 mb-3">
+                <div class="flex flex-wrap gap-1">
+                  {publication.tags.slice(0, 6).map((tag) => (
+                    <a
+                      href={`/tags/${slugify(tag)}`}
+                      class="inline-block px-2 py-1 text-xs bg-main/10 text-main/80 rounded hover:bg-main/20 transition-colors"
+                    >
+                      {tag}
+                    </a>
+                  ))}
+                  {publication.tags.length > 6 && (
+                    <span class="text-xs text-main/60 px-2 py-1">+{publication.tags.length - 6} more</span>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Related Talks */}
+            <div class="mt-2">
+              <RelatedTalks publicationId={publication.id} />
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {query && results.publications.length === 0 && results.tags.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-main/75 mb-4">No results found for "{query}".</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/research" class="text-main hover:underline">Browse all research</a>
+          <span class="hidden sm:inline text-main/50">•</span>
+          <a href="/" class="text-main hover:underline">Go to homepage</a>
+        </div>
+      </div>
+    )}
+  </section>
+
+  {/* Scripts for badges */}
+  <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script type="text/javascript" src="https://badge.dimensions.ai/badge.js"></script>
+
+  <style>
+    .altmetric-container {
+      position: relative;
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+    }
+
+    .altmetric-container::before {
+      content: '';
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background-color: white;
+      border-radius: 50%;
+      z-index: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .altmetric-container .altmetric-embed[data-badge-type] {
+      position: relative;
+      z-index: 1;
+    }
+
+    .altmetric-container[data-loaded]::before {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .altmetric-container[data-loaded][data-has-citations='true']::before {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+
+  <script>
+    import citationCache from '../data/dimensions_citations_cache.json';
+    const typedCitationCache: { citations: Record<string, number> } = citationCache;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.altmetric-container').forEach((container) => {
+        const badge = container.querySelector('.altmetric-embed');
+        const doi = badge?.getAttribute('data-doi');
+
+        // Check citation count from the citation cache
+        const citationCount = doi ? (typedCitationCache.citations[doi] ?? 0) : 0;
+
+        // Hide the container if there are no citations
+        if (citationCount === 0) {
+          container.style.display = 'none';
+        } else {
+          container.setAttribute('data-has-citations', 'true');
+        }
+      });
+    });
+  </script>
+</BaseLayout>

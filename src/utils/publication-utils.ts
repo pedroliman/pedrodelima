@@ -205,3 +205,33 @@ export function formatAuthorsCitationStyle(authors: string): string {
     return `with ${firstNineteen.join(', ')}, ..., & ${lastAuthor}`;
   }
 }
+
+/**
+ * Format authors for publication page display
+ * Converts bibtex format to readable format with full names
+ * Example: "Nascimento De Lima, Pedro and Bartholomew, Lillian" becomes "Pedro Nascimento De Lima; Lillian Bartholomew"
+ */
+export function formatAuthorsForPublication(authors: string): string {
+  if (!authors) return '';
+
+  // Split the authors string by 'and' to get individual authors
+  const authorsArray = authors.split(/\s+and\s+/);
+
+  // Process each author to format as "First Last"
+  const formattedAuthors = authorsArray.map(author => {
+    const trimmedAuthor = author.trim();
+
+    // Check if author is in "Last, First" format or "First Last" format
+    if (trimmedAuthor.includes(',')) {
+      // In "Last, First" format, convert to "First Last"
+      const [lastName, firstName] = trimmedAuthor.split(',').map(part => part.trim());
+      return `${firstName} ${lastName}`;
+    } else {
+      // Already in "First Last" format
+      return trimmedAuthor;
+    }
+  });
+
+  // Join with semicolons
+  return formattedAuthors.join('; ');
+}
