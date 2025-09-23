@@ -16,7 +16,6 @@ export async function getAugmentedPublications(): Promise<Publication[]> {
     if (bibPub) {
       return {
         ...basePub,
-        abstract: bibPub.abstract,
         bibtex: bibPub.bibtex,
       };
     }

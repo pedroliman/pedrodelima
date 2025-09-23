@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAugmentedPublications } from '../../data/publication-provider';
 import type { Publication } from '../../data/publications';
 import { slugify } from '../../utils/common-utils';
+import { formatAuthorsForPublication } from '../../utils/publication-utils';
+import { cleanBibtexForDisplay } from '../../utils/bibtex-utils';
 
 export async function getStaticPaths() {
   const publications = await getAugmentedPublications();
@@ -23,6 +25,7 @@ if (!publication) {
 }
 
 const pageTitle = publication.title;
+const cleanedBibtex = publication.bibtex ? cleanBibtexForDisplay(publication.bibtex) : null;
 
 import siteConfig from '../../data/site-config';
 ---
@@ -30,6 +33,12 @@ import siteConfig from '../../data/site-config';
 <BaseLayout title={pageTitle} description={publication.abstract || ''}>
   <article class="mb-16 sm:mb-20">
     <h1 class="text-3xl leading-tight font-serif font-medium sm:text-4xl sm:leading-tight mb-8">{publication.title}</h1>
+
+    {publication.authors && (
+      <section class="mb-6">
+        <p class="text-lg text-main/80">{formatAuthorsForPublication(publication.authors)}</p>
+      </section>
+    )}
 
     <div id="citation-placeholder"></div>
 
@@ -78,14 +87,14 @@ import siteConfig from '../../data/site-config';
       )}
     </div>
 
-    {publication.bibtex && (
+    {cleanedBibtex && (
       <section class="mt-8">
         <h2>Citation</h2>
         <div class="flex gap-4">
           <button id="copy-bibtex" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Copy BibTeX</button>
           <button id="download-bibtex" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Download .bib</button>
         </div>
-        <pre class="mt-4 p-4 bg-gray-100 rounded overflow-x-auto"><code>{publication.bibtex}</code></pre>
+        <pre class="mt-4 p-4 bg-gray-100 rounded overflow-x-auto"><code>{cleanedBibtex}</code></pre>
       </section>
     )}
 
@@ -95,38 +104,67 @@ import siteConfig from '../../data/site-config';
   <script is:inline type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
   <script is:inline type="text/javascript" src="https://badge.dimensions.ai/badge.js"></script>
 
-  <script define:vars={{ bibtex: publication.bibtex, title: publication.title, citationStyle: siteConfig.citationStyle }}>
-    if (bibtex) {
-      const Cite = window.Cite;
-      const citation = new Cite(bibtex);
-      const formatted = citation.format('bibliography', {
-        format: 'html',
-        template: citationStyle || 'apa',
-        lang: 'en-US'
-      });
-      document.getElementById('citation-placeholder').innerHTML = formatted;
-    }
+  <script define:vars={{ bibtex: cleanedBibtex, title: publication.title, citationStyle: siteConfig.citationStyle }}>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Format citation if bibtex is available
+      if (bibtex && window.Cite) {
+        try {
+          const citation = new window.Cite(bibtex);
+          const formatted = citation.format('bibliography', {
+            format: 'html',
+            template: citationStyle || 'apa',
+            lang: 'en-US'
+          });
+          const placeholder = document.getElementById('citation-placeholder');
+          if (placeholder) {
+            placeholder.innerHTML = formatted;
+          }
+        } catch (error) {
+          console.error('Error formatting citation:', error);
+        }
+      }
 
-    const copyBtn = document.getElementById('copy-bibtex');
-    copyBtn?.addEventListener('click', () => {
-      navigator.clipboard.writeText(bibtex).then(() => {
-        alert('BibTeX copied to clipboard!');
-      }, () => {
-        alert('Failed to copy BibTeX.');
-      });
-    });
+      // Copy BibTeX functionality
+      const copyBtn = document.getElementById('copy-bibtex');
+      if (copyBtn && bibtex) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(bibtex);
+            // Show success feedback
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            copyBtn.classList.add('bg-green-200');
+            setTimeout(() => {
+              copyBtn.textContent = originalText;
+              copyBtn.classList.remove('bg-green-200');
+            }, 2000);
+          } catch (error) {
+            console.error('Failed to copy BibTeX:', error);
+            alert('Failed to copy BibTeX. Please select and copy manually.');
+          }
+        });
+      }
 
-    const downloadBtn = document.getElementById('download-bibtex');
-    downloadBtn?.addEventListener('click', () => {
-      const blob = new Blob([bibtex], { type: 'application/x-bibtex' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${title.toLowerCase().replace(/\s+/g, '_')}.bib`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      // Download BibTeX functionality
+      const downloadBtn = document.getElementById('download-bibtex');
+      if (downloadBtn && bibtex) {
+        downloadBtn.addEventListener('click', () => {
+          try {
+            const blob = new Blob([bibtex], { type: 'application/x-bibtex' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_-]/g, '')}.bib`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          } catch (error) {
+            console.error('Failed to download BibTeX:', error);
+            alert('Failed to download BibTeX.');
+          }
+        });
+      }
     });
   </script>
 </BaseLayout>
