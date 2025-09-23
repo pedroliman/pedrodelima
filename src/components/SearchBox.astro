@@ -3,7 +3,7 @@
 ---
 
 <div class="search-box-container">
-  <div class="relative">
+  <form class="relative" onsubmit="return false;">
     <input
       type="text"
       id="search-input"
@@ -14,17 +14,17 @@
     <button
       id="search-button"
       class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
-      type="button"
+      type="submit"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
       </svg>
     </button>
-  </div>
-  
+  </form>
+
   <!-- Search Results Dropdown -->
-  <div 
-    id="search-results" 
+  <div
+    id="search-results"
     class="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-xl hidden"
   >
     <div id="search-results-content">
@@ -65,9 +65,13 @@
         console.log('Loaded tags:', allTags.size);
       } else {
         console.error('Failed to load publications, status:', response.status);
+        // Fallback: try to continue without data
+        publications = [];
       }
     } catch (error) {
       console.error('Failed to load publications:', error);
+      // Fallback: try to continue without data
+      publications = [];
     }
   }
 
@@ -193,16 +197,42 @@
   document.addEventListener('DOMContentLoaded', async () => {
     console.log('DOM loaded, initializing search...');
     await loadData();
-    
+
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
     const searchButton = document.getElementById('search-button');
-    
-    console.log('Search elements:', { searchInput, searchResults, searchButton });
-    
+    const searchForm = searchInput?.closest('form');
+
+    console.log('Search elements:', { searchInput, searchResults, searchButton, searchForm });
+    console.log('Publications loaded:', publications.length);
+
     if (!searchInput || !searchResults || !searchButton) {
       console.error('Missing search elements');
       return;
+    }
+
+    // Test initial functionality
+    if (publications.length === 0) {
+      console.warn('No publications loaded - search functionality may be limited');
+    }
+
+    // Function to perform search navigation
+    function performSearch() {
+      const query = searchInput.value.trim();
+      console.log('Performing search with query:', query);
+      if (query) {
+        const searchUrl = `/search?q=${encodeURIComponent(query)}`;
+        console.log('Navigating to:', searchUrl);
+        window.location.href = searchUrl;
+      } else {
+        console.log('Empty query, showing feedback');
+        // Visual feedback for empty search
+        searchInput.focus();
+        searchInput.style.borderColor = '#ef4444';
+        setTimeout(() => {
+          searchInput.style.borderColor = '';
+        }, 1000);
+      }
     }
 
     let searchTimeout;
@@ -211,8 +241,18 @@
     searchInput.addEventListener('input', (e) => {
       const query = e.target.value.trim();
       console.log('Search query:', query);
-      
+
       clearTimeout(searchTimeout);
+
+      // Show immediate feedback for short queries
+      if (query.length === 1) {
+        const container = document.getElementById('search-results-content');
+        if (container) {
+          container.innerHTML = '<div class="p-4 text-sm text-gray-500 text-center">Type at least 2 characters to search...</div>';
+          searchResults.classList.remove('hidden');
+        }
+      }
+
       searchTimeout = setTimeout(() => {
         if (query.length >= 2) {
           console.log('Searching for:', query);
@@ -220,10 +260,10 @@
           console.log('Search results:', results);
           renderSearchResults(results);
           searchResults.classList.remove('hidden');
-        } else {
+        } else if (query.length === 0) {
           searchResults.classList.add('hidden');
         }
-      }, 300);
+      }, 200);
     });
 
     // Hide results when clicking outside
@@ -240,15 +280,20 @@
       }
     });
 
+    // Handle form submit
+    if (searchForm) {
+      searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('Form submitted');
+        performSearch();
+      });
+    }
+
     // Handle search button click
-    searchButton.addEventListener('click', () => {
-      const query = searchInput.value.trim();
-      console.log('Search button clicked with query:', query);
-      if (query) {
-        const searchUrl = `/search?q=${encodeURIComponent(query)}`;
-        console.log('Navigating to:', searchUrl);
-        window.location.href = searchUrl;
-      }
+    searchButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Search button clicked');
+      performSearch();
     });
 
     // Handle Enter key
@@ -256,7 +301,8 @@
       if (e.key === 'Enter') {
         console.log('Enter key pressed');
         e.preventDefault();
-        searchButton.click();
+        e.stopPropagation();
+        performSearch();
       }
     });
   });

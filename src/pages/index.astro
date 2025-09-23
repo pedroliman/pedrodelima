@@ -43,18 +43,7 @@ const sortedFeatured = [...featuredPublications].sort((a, b) => {
                         </div>
                     </div>
                     <div class="text-base mb-1 flex items-center gap-2">
-                        {publication.doi ? (
-                            <a
-                                href={`https://doi.org/${publication.doi}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="italic text-main underline decoration-dashed hover:decoration-solid underline-offset-2 decoration-1"
-                            >
-                                {publication.journal}
-                            </a>
-                        ) : (
-                            <span class="italic">{publication.journal}</span>
-                        )}
+                        <span class="italic">{publication.journal}</span>
                         {publication.code && (
                             <>
                                 <span class="mx-2 text-main/50">|</span>

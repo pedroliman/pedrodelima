@@ -101,7 +101,7 @@ Colonoscopy screening starting at age 50 y with a 10-y interval consistently und
     title: `OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations`,
     journal: 'RAND Tool',
     year: 2025,
-    authors: `Joshua Eagan, Beth Ann Griffin, Max Griswold, Hanna Han, Pedro Nascimento de Lima, Seema Choksy Pessar, Rosalie Liccardo Pacula, Bradley D. Stein`,
+    authors: `Eagan, Joshua and Beth Ann Griffin and Max Griswold and Hanna Han and Pedro Nascimento de Lima and Seema Choksy Pessar and Rosalie Liccardo Pacula and Bradley D. Stein`,
     doi: '10.7249/TLA3054-1',
     code: 'https://github.com/randcorporation/optic-policy-wheels',
     featured: false,

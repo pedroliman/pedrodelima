@@ -5,6 +5,8 @@ import type { Publication } from '../../data/publications';
 import { slugify } from '../../utils/common-utils';
 import { formatAuthorsForPublication } from '../../utils/publication-utils';
 import { cleanBibtexForDisplay } from '../../utils/bibtex-utils';
+import RelatedTalks from '../../components/RelatedTalks.astro';
+import talks from '../../data/talks';
 
 export async function getStaticPaths() {
   const publications = await getAugmentedPublications();
@@ -16,6 +18,9 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const publications = await getAugmentedPublications();
 const publication = publications.find(p => slugify(p.id) === slug);
+
+// Check if there are related talks for this publication
+const hasRelatedTalks = publication ? talks.some(talk => talk.relatedPublicationIds && talk.relatedPublicationIds.includes(publication.id)) : false;
 
 if (!publication) {
   return new Response(null, {
@@ -32,7 +37,24 @@ import siteConfig from '../../data/site-config';
 
 <BaseLayout title={pageTitle} description={publication.abstract || ''}>
   <article class="mb-16 sm:mb-20">
-    <h1 class="text-3xl leading-tight font-serif font-medium sm:text-4xl sm:leading-tight mb-8">{publication.title}</h1>
+    <h1 class="text-3xl leading-tight font-serif font-medium sm:text-4xl sm:leading-tight mb-8">
+      {(publication.url || publication.doi) ? (
+        <a
+          href={publication.url || `https://doi.org/${publication.doi}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-main hover:text-main/80 transition-colors inline-flex items-center gap-2"
+        >
+          {publication.title}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+            <path d="M7 17L17 7"></path>
+            <path d="M7 7h10v10"></path>
+          </svg>
+        </a>
+      ) : (
+        publication.title
+      )}
+    </h1>
 
     {publication.authors && (
       <section class="mb-6">
@@ -49,10 +71,42 @@ import siteConfig from '../../data/site-config';
       </section>
     )}
 
-    <div class="mt-8 flex flex-wrap gap-4">
-      {publication.url && <a href={publication.url} class="text-lg font-medium text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Full Paper</a>}
-      {publication.code && <a href={publication.code} class="text-lg font-medium text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">Code</a>}
-    </div>
+
+    {/* Code Repository section */}
+    {publication.code && (
+      <section class="mt-8">
+        <h2 class="text-xl font-medium mb-4">Code Repository</h2>
+        <a href={publication.code} class="text-lg font-medium text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          View Source Code →
+        </a>
+      </section>
+    )}
+
+    {/* Related Talks section */}
+    {hasRelatedTalks && (
+      <section class="mt-8">
+        <h2 class="text-xl font-medium mb-4">Related Talks</h2>
+        <RelatedTalks publicationId={publication.id} />
+      </section>
+    )}
+
+    {/* Publication Impact Statistics section */}
+    {publication.doi && (
+      <section class="mt-8">
+        <h2 class="text-xl font-medium mb-4">Publication Impact Statistics</h2>
+        <div class="flex items-center gap-4">
+          <span
+            class="__dimensions_badge_embed__"
+            data-doi={publication.doi}
+            data-hide-zero-citations="true"
+            data-style="small_circle"
+          />
+          <div class="altmetric-container" data-loaded>
+            <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
+          </div>
+        </div>
+      </section>
+    )}
 
     {/* Tags section */}
     {publication.tags && publication.tags.length > 0 && (
@@ -70,22 +124,6 @@ import siteConfig from '../../data/site-config';
         </div>
       </section>
     )}
-
-    <div class="mt-8 flex items-center gap-4">
-      {publication.doi && (
-        <>
-          <span
-            class="__dimensions_badge_embed__"
-            data-doi={publication.doi}
-            data-hide-zero-citations="true"
-            data-style="small_circle"
-          />
-          <div class="altmetric-container" data-loaded>
-            <span class="altmetric-embed" data-doi={publication.doi} data-badge-type="donut" />
-          </div>
-        </>
-      )}
-    </div>
 
     {cleanedBibtex && (
       <section class="mt-8">
