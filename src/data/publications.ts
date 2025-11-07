@@ -47,7 +47,7 @@ export const publications: Publication[] = [
     authors: 'Nascimento de Lima, Pedro and Dolan, Flannery C. and McDonald, Tim and Patel, Karishma V. and Boudreaux, Benjamin and Garber, Chandra and Dion, Leah and Mann, Sean and Welburn, Jonathan W.',
     url: 'https://www.rand.org/pubs/working_papers/WRA3888-1.html',
     doi: '10.7249/WRA3888-1',
-    featured: false,
+    featured: true,
     abstract: 'COMPASS (Comprehensive Mapping Protocol for Anticipating and Adapting to Systemic Shocks) is a framework designed to help analysts and senior policymakers navigate systemic risks from disruptions, such as artificial intelligence adoption, pandemics, or natural disasters. It guides users through five steps to consider disruptors, primary and secondary system impacts, affected actors, relevant outcomes and policy objectives, and effective policy responses.',
     tags: ['artificial intelligence', 'complex systems analysis', 'emerging technologies', 'systemic risk', 'risk assessment', 'policy analysis', 'decision support']
   },
@@ -324,7 +324,7 @@ Colonoscopy screening starting at age 50 y with a 10-y interval consistently und
     doi: '10.1093/jnci/djae124',
     featured: false,
     abstract: `Blood-based biomarker tests can potentially change the landscape of colorectal cancer (CRC) screening. We characterize the conditions under which blood test screening would be as effective and cost-effective as annual fecal immunochemical testing or decennial colonoscopy. We used the 3 Cancer Information and Surveillance Modeling Network–Colon models to compare scenarios of no screening, annual fecal immunochemical testing, decennial colonoscopy, and a blood test meeting Centers for Medicare & Medicaid (CMS) coverage criteria (74% CRC sensitivity and 90% specificity). We varied the sensitivity to detect CRC (74%-92%), advanced adenomas (10%-50%), screening interval (1-3 years), and test cost ($25-$500). Primary outcomes included quality-adjusted life-years (QALY) gained from screening and costs for a US average-risk cohort of individuals aged 45 years. Annual fecal immunochemical testing yielded 125-163 QALY gained per 1000 at a cost of $3811-$5384 per person, whereas colonoscopy yielded 132-177 QALY gained at a cost of $5375-$7031 per person. A blood test with 92% CRC sensitivity and 50% advanced adenoma sensitivity yielded 117-162 QALY gained if used every 3 years and 133-173 QALY gained if used every year but would not be cost-effective if priced above $125 per test. Blood tests that only meet CMS coverage requirements should not be recommended to patients who would otherwise undergo screening by colonoscopy or fecal immunochemical testing because of lower benefit. Blood tests need higher advanced adenoma sensitivity (above 40%) and lower costs (below $125) to be cost-effective.`,
-    tags: ['colorectal cancer', 'blood test', 'liquid biopsy', 'cancer screening', 'cost effectiveness', 'health economics', 'preventive medicine', 'population health', 'healthcare access', 'screening programs', 'early detection']
+    tags: ['colorectal cancer', 'blood test', 'liquid biopsy', 'cancer screening', 'cost effectiveness', 'health economics', 'preventive medicine', 'population health', 'healthcare access', 'screening programs', 'early detection', 'robust decision making']
   },
   {
     id: 'nascimentodelimaValueEnvironmentalSurveillance2024',
@@ -501,7 +501,7 @@ Conclusions: In our simulation study, no single method consistently outperformed
     doi: '10.7249/RGSDA2531-1',
     featured: false,
     abstract: `The COVID-19 pandemic demonstrated the value of modeling to inform health policy. Models were used to provide situational awareness and inform mitigation policies. However, uncertainty surrounding the longevity of vaccine and infection-induced immunity, the emergence and characteristics of SARS‐CoV‐2 variant strains, and behavioral responses to policy interventions prevent modelers from providing more than a few weeks of model-based foresight. Under those conditions, policymakers have options to control the pandemic, but deep uncertainties deny the prediction of their long-term effects. Robust Decision Making (RDM) is a set of methods and tools designed to inform decisions under conditions of deep uncertainty. This dissertation presents three papers exploring the utility of RDM for supporting health policy decisions. The first paper discusses how public health decision-makers may benefit from RDM, using pandemic response policies as a motivating example. The second paper presents a stress test of California's COVID-19 reopening strategy, demonstrating that adaptive reopening plans are superior to non-adaptive ones. The third evaluates the robustness of colorectal cancer screening strategies to uncertainties surrounding the natural history of the disease. Finally, this dissertation reflects on the broader applicability of RDM to health policy decision-analytic problems and reflects on future research directions.`,
-    tags: ['Robust Decision Making', 'health policy', 'COVID-19', 'pandemic response', 'colorectal cancer', 'decision analysis', 'uncertainty analysis', 'public health', 'policy modeling']
+    tags: ['robust decision making', 'health policy', 'COVID-19', 'pandemic response', 'colorectal cancer', 'decision analysis', 'uncertainty analysis', 'public health', 'policy modeling']
   },
   {
     id: 'Welburn2022',
@@ -545,7 +545,8 @@ Conclusions: In our simulation study, no single method consistently outperformed
     year: 2021,
     authors: `Nascimento de Lima, Pedro and Vardavas, Raffaele and Baker, Lawrence and Ringel, Jeanne and Lempert, Robert J. and Rutter, Carolyn M and Ozik, Jonathan`,
     doi: '10.7249/PEA1080-1',
-    featured: false
+    featured: false,
+    tags: ['COVID-19', 'pandemic response', 'public health policy', 'robust decision making', 'California', 'reopening strategies', 'uncertainty analysis', 'epidemiology', 'policy modeling', 'decision science', 'health economics', 'simulation modeling']
   },
   {
     id: 'Vardavas2021a',
